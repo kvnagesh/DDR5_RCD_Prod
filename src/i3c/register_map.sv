@@ -4,8 +4,8 @@
 //              Provides memory-mapped register interface for configuration
 //              and status monitoring
 //============================================================================
-
-module register_map (
+module register_map 
+(
     // Clock and Reset
     input  logic        clk,
     input  logic        rst_n,
@@ -38,63 +38,113 @@ module register_map (
     input  logic [7:0]  int_status,
     output logic        int_clear
 );
-
     //========================================================================
     // Register Address Map Definitions
     //========================================================================
-    // Control and Configuration Registers
-    localparam ADDR_CTRL_REG        = 8'h00;  // Control register
-    localparam ADDR_STATUS_REG      = 8'h04;  // Status register
-    localparam ADDR_STATIC_ADDR     = 8'h08;  // Static address
-    localparam ADDR_DYNAMIC_ADDR    = 8'h0C;  // Dynamic address (RO)
-    localparam ADDR_CONFIG          = 8'h10;  // Configuration register
-    
-    // Interrupt Registers
-    localparam ADDR_INT_ENABLE      = 8'h20;  // Interrupt enable
-    localparam ADDR_INT_MASK        = 8'h24;  // Interrupt mask
-    localparam ADDR_INT_STATUS      = 8'h28;  // Interrupt status (RO)
-    localparam ADDR_INT_CLEAR       = 8'h2C;  // Interrupt clear (WO)
-    
-    // Data Registers
-    localparam ADDR_TX_DATA         = 8'h40;  // Transmit data FIFO
-    localparam ADDR_RX_DATA         = 8'h44;  // Receive data FIFO (RO)
-    localparam ADDR_FIFO_STATUS     = 8'h48;  // FIFO status (RO)
-    
-    // Feature Registers
-    localparam ADDR_FEATURE_REG     = 8'hF0;  // Feature support (RO)
-    localparam ADDR_VERSION_REG     = 8'hFC;  // Version register (RO)
+    localparam logic [7:0] ADDR_CTRL_REG      = 8'h00;  // Control register
+    localparam logic [7:0] ADDR_CONFIG        = 8'h04;  // Configuration register
+    localparam logic [7:0] ADDR_STATIC_ADDR   = 8'h08;  // Static address register
+    localparam logic [7:0] ADDR_DYNAMIC_ADDR  = 8'h0C;  // Dynamic address (read-only)
+    localparam logic [7:0] ADDR_INT_ENABLE    = 8'h10;  // Interrupt enable
+    localparam logic [7:0] ADDR_INT_MASK      = 8'h14;  // Interrupt mask
+    localparam logic [7:0] ADDR_INT_STATUS    = 8'h18;  // Interrupt status (read-only)
+    localparam logic [7:0] ADDR_INT_CLEAR     = 8'h1C;  // Interrupt clear (write-only)
+    localparam logic [7:0] ADDR_ERROR_STATUS  = 8'h20;  // Error status (read-only)
+    localparam logic [7:0] ADDR_BUS_STATUS    = 8'h24;  // Bus status (read-only)
+    localparam logic [7:0] ADDR_FIFO_STATUS   = 8'h28;  // FIFO level (read-only)
     
     //========================================================================
-    // Internal Register Storage
+    // Internal Register Declarations
     //========================================================================
-    logic [7:0] ctrl_reg;
-    logic [7:0] config_reg;
-    logic [7:0] static_addr_reg;
-    logic [7:0] int_enable_reg;
-    logic [7:0] int_mask_reg;
+    logic [7:0] ctrl_reg;           // Control register
+    logic [7:0] config_reg;         // Configuration register
+    logic [7:0] static_addr_reg;    // Static address register
+    logic [7:0] int_enable_reg;     // Interrupt enable register
+    logic [7:0] int_mask_reg;       // Interrupt mask register
+    logic       int_clear_reg;      // Interrupt clear strobe
+    logic       write_error;        // Flag for invalid write attempts
     
     //========================================================================
     // Register Write Logic
     //========================================================================
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            // TODO: Implement register reset values
+            // Reset all writable registers to default values
             ctrl_reg        <= 8'h00;
             config_reg      <= 8'h00;
             static_addr_reg <= 8'h00;
             int_enable_reg  <= 8'h00;
-            int_mask_reg    <= 8'hFF;
-        end else if (reg_write) begin
-            // TODO: Implement register write logic based on reg_addr
-            case (reg_addr)
-                ADDR_CTRL_REG:    ctrl_reg        <= reg_wdata;
-                ADDR_CONFIG:      config_reg      <= reg_wdata;
-                ADDR_STATIC_ADDR: static_addr_reg <= reg_wdata;
-                ADDR_INT_ENABLE:  int_enable_reg  <= reg_wdata;
-                ADDR_INT_MASK:    int_mask_reg    <= reg_wdata;
-                // Add more register write cases
-                default: ; // No operation for unmapped addresses
-            endcase
+            int_mask_reg    <= 8'hFF;  // Mask all interrupts by default
+            int_clear_reg   <= 1'b0;
+            write_error     <= 1'b0;
+        end else begin
+            // Clear single-cycle strobes
+            int_clear_reg <= 1'b0;
+            write_error   <= 1'b0;
+            
+            if (reg_write) begin
+                //====================================================================
+                // Register Write Logic Implementation
+                // - Writes to appropriate register based on reg_addr
+                // - Implements write protection for read-only registers
+                // - Flags attempts to write invalid/read-only addresses
+                //====================================================================
+                case (reg_addr)
+                    // Writable Registers
+                    ADDR_CTRL_REG: begin
+                        // Control Register - Enable bits and operational control
+                        // [0]: enable_slave, [1]: enable_ibi, [2]: enable_hot_join
+                        ctrl_reg <= reg_wdata;
+                    end
+                    
+                    ADDR_CONFIG: begin
+                        // Configuration Register - Speed mode and other config
+                        // [1:0]: speed_mode (00=SDR, 01=HDR-DDR, 10=HDR-TSP, 11=Reserved)
+                        config_reg <= reg_wdata;
+                    end
+                    
+                    ADDR_STATIC_ADDR: begin
+                        // Static Address Register - 7-bit I3C static address
+                        // [6:0]: static_address, [7]: reserved (must be 0)
+                        static_addr_reg <= {1'b0, reg_wdata[6:0]};
+                    end
+                    
+                    ADDR_INT_ENABLE: begin
+                        // Interrupt Enable Register - Per-interrupt enable bits
+                        int_enable_reg <= reg_wdata;
+                    end
+                    
+                    ADDR_INT_MASK: begin
+                        // Interrupt Mask Register - Per-interrupt mask bits
+                        // 1 = masked (disabled), 0 = unmasked (enabled)
+                        int_mask_reg <= reg_wdata;
+                    end
+                    
+                    ADDR_INT_CLEAR: begin
+                        // Interrupt Clear Register - Write-only strobe register
+                        // Writing any value generates clear pulse for specified interrupts
+                        int_clear_reg <= 1'b1;
+                    end
+                    
+                    // Read-Only Registers - Flag error on write attempts
+                    ADDR_DYNAMIC_ADDR,
+                    ADDR_INT_STATUS,
+                    ADDR_ERROR_STATUS,
+                    ADDR_BUS_STATUS,
+                    ADDR_FIFO_STATUS: begin
+                        // These registers are read-only (hardware-updated)
+                        // Attempting to write generates an error flag
+                        write_error <= 1'b1;
+                    end
+                    
+                    // Invalid/Unmapped Addresses
+                    default: begin
+                        // Access to unmapped register address
+                        // Set error flag but don't modify any registers
+                        write_error <= 1'b1;
+                    end
+                endcase
+            end
         end
     end
     
@@ -114,6 +164,8 @@ module register_map (
                 ADDR_INT_ENABLE:     reg_rdata = int_enable_reg;
                 ADDR_INT_MASK:       reg_rdata = int_mask_reg;
                 ADDR_INT_STATUS:     reg_rdata = int_status;
+                ADDR_ERROR_STATUS:   reg_rdata = {4'h0, error_status};
+                ADDR_BUS_STATUS:     reg_rdata = {6'h00, dynamic_addr_valid, bus_available};
                 ADDR_FIFO_STATUS:    reg_rdata = fifo_level;
                 // Add more register read cases
                 default:             reg_rdata = 8'h00;
@@ -132,11 +184,11 @@ module register_map (
     assign static_address  = static_addr_reg[6:0];
     assign int_enable      = int_enable_reg[0];
     assign int_mask        = int_mask_reg;
+    assign int_clear       = int_clear_reg;
     
     //========================================================================
     // Acknowledge Generation
     //========================================================================
     // TODO: Implement register access acknowledge
     assign reg_ack = reg_read | reg_write;
-
 endmodule
