@@ -8,15 +8,12 @@ module timing_checker (
     // Clock and Reset
     input  logic        clk,
     input  logic        rst_n,
-    
     // I3C Bus Signals
     input  logic        scl,           // Serial Clock
     input  logic        sda,           // Serial Data
-    
     // Mode Configuration
     input  logic [1:0]  speed_mode,    // 0: SDR, 1: HDR-DDR, 2: HDR-TSP
     input  logic        enable_check,
-    
     // Timing Violation Outputs
     output logic        setup_violation,
     output logic        hold_violation,
@@ -25,12 +22,10 @@ module timing_checker (
     output logic        start_setup_violation,
     output logic        stop_setup_violation,
     output logic        spike_detected,
-    
     // Timing Measurement Outputs
     output logic [15:0] scl_period_ns,
     output logic [15:0] sda_setup_time_ns,
     output logic [15:0] sda_hold_time_ns,
-    
     // Violation Counter
     output logic [7:0]  violation_count
 );
@@ -44,32 +39,26 @@ module timing_checker (
     localparam TSCL_HIGH_SDR_MIN    = 41;   // SCL high period (min)
     localparam TSTART_SETUP_MIN     = 260;  // START setup time (min)
     localparam TSTOP_SETUP_MIN      = 260;  // STOP setup time (min)
-    
     // I3C HDR-DDR Mode Timing Requirements
     localparam TSETUP_DDR_MIN       = 2;    // SDA setup time (min)
     localparam THOLD_DDR_MIN        = 2;    // SDA hold time (min)
-    
+    localparam TSCL_LOW_DDR_MIN     = 100;  // Example HDR-DDR values
+    localparam TSCL_HIGH_DDR_MIN    = 50;   // Example HDR-DDR values
     // Spike Filter Parameters
     localparam SPIKE_FILTER_NS      = 50;   // Spike filter width
-    
+
     //========================================================================
     // Internal Signals
     //========================================================================
-    logic [15:0] scl_low_count;
-    logic [15:0] scl_high_count;
-    logic [15:0] sda_stable_count;
+    logic [15:0] scl_low_count, scl_high_count, scl_period_count;
+    logic [15:0] sda_stable_count, sda_hold_count;
     logic        scl_prev, sda_prev;
-    logic        scl_rising, scl_falling;
-    logic        sda_change;
-    logic        start_condition;
-    logic        stop_condition;
-    
-    // Timing threshold registers (configurable based on mode)
-    logic [15:0] tsetup_min;
-    logic [15:0] thold_min;
-    logic [15:0] tscl_low_min;
-    logic [15:0] tscl_high_min;
-    
+    logic        scl_rising, scl_falling, sda_change;
+    logic        start_condition, stop_condition;
+    logic        scl_glitch, sda_glitch;
+    logic [15:0] tsetup_min, thold_min, tscl_low_min, tscl_high_min;
+    logic        crossing_detected;
+
     //========================================================================
     // Edge Detection
     //========================================================================
@@ -82,17 +71,21 @@ module timing_checker (
             sda_prev <= sda;
         end
     end
-    
     assign scl_rising  = scl & ~scl_prev;
     assign scl_falling = ~scl & scl_prev;
     assign sda_change  = sda ^ sda_prev;
-    
     //========================================================================
     // START and STOP Condition Detection
     //========================================================================
-    // TODO: Implement START condition detection (SDA falling while SCL high)
-    // TODO: Implement STOP condition detection (SDA rising while SCL high)
-    
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            start_condition <= 1'b0;
+            stop_condition  <= 1'b0;
+        end else begin
+            start_condition <= (sda_prev && ~sda && scl);
+            stop_condition  <= (~sda_prev && sda && scl);
+        end
+    end
     //========================================================================
     // Timing Threshold Configuration
     //========================================================================
@@ -107,8 +100,8 @@ module timing_checker (
             2'b01: begin  // HDR-DDR Mode
                 tsetup_min    = TSETUP_DDR_MIN;
                 thold_min     = THOLD_DDR_MIN;
-                tscl_low_min  = 16'd100;  // TODO: Update with spec values
-                tscl_high_min = 16'd50;
+                tscl_low_min  = TSCL_LOW_DDR_MIN;
+                tscl_high_min = TSCL_HIGH_DDR_MIN;
             end
             default: begin
                 tsetup_min    = TSETUP_SDR_MIN;
@@ -118,100 +111,84 @@ module timing_checker (
             end
         endcase
     end
-    
     //========================================================================
-    // SCL Period Measurement
+    // SCL Period, Low & High Measurement
     //========================================================================
-    // TODO: Implement SCL low time measurement
-    // TODO: Implement SCL high time measurement
-    // TODO: Calculate SCL period
-    
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            scl_high_count    <= 16'd0;
+            scl_low_count     <= 16'd0;
+            scl_period_count  <= 16'd0;
+        end else begin
+            // SCL period counting
+            scl_period_count <= scl_period_count + 1;
+            if (scl_rising || scl_falling) scl_period_count <= 16'd0;
+            scl_period_ns <= scl_period_count;
+            // SCL low counting
+            if (~scl)       scl_low_count  <= scl_low_count + 1;
+            else            scl_low_count  <= 16'd0;
+            // SCL high counting
+            if (scl)        scl_high_count <= scl_high_count + 1;
+            else            scl_high_count <= 16'd0;
+        end
+    end
+    //========================================================================
+    // SCL Pulse Width Checkers
+    //========================================================================
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            scl_low_violation  <= 1'b0;
+            scl_high_violation <= 1'b0;
+        end else begin
+            if (enable_check && scl_rising && scl_low_count < tscl_low_min)
+                scl_low_violation <= 1'b1;
+            else
+                scl_low_violation <= 1'b0;
+            if (enable_check && scl_falling && scl_high_count < tscl_high_min)
+                scl_high_violation <= 1'b1;
+            else
+                scl_high_violation <= 1'b0;
+        end
+    end
     //========================================================================
     // SDA Setup Time Checker
     //========================================================================
-    // Implementation: Check setup time of I3C signals
-    // Purpose: Ensures SDA signal is stable for minimum required time before
-    //          SCL rising edge, as per I3C specification timing requirements.
-    //
-    // RTL Design Notes:
-    // - Counts clock cycles while SDA remains stable (no transitions)
-    // - Captures this count when SCL rising edge is detected
-    // - Compares measured setup time against minimum requirement (mode-dependent)
-    // - Asserts setup_violation error signal on timing violation
-    // - Synthesizable for FPGA/ASIC implementation
-    //
-    // Verification Notes:
-    // - Monitor sda_stable_count to verify correct counting behavior
-    // - Inject setup violations by forcing SDA changes close to SCL rising edge
-    // - Verify setup_violation assertion occurs within one clock cycle
-    // - Test across different speed_mode configurations (SDR, HDR-DDR)
-    // - Check enable_check gating functionality
-    // - Use SVA assertions to verify timing relationships
-    
-    // Counter to measure time SDA has been stable
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             sda_stable_count <= 16'd0;
         end else begin
             if (sda_change) begin
-                // Reset counter when SDA changes
                 sda_stable_count <= 16'd0;
             end else if (!scl_rising) begin
-                // Increment counter while SDA is stable and no SCL rising edge
-                // Prevent overflow
-                if (sda_stable_count != 16'hFFFF) begin
+                if (sda_stable_count != 16'hFFFF)
                     sda_stable_count <= sda_stable_count + 16'd1;
-                end
             end
-            // If scl_rising occurs, hold the count for comparison
         end
     end
-    
-    // Capture setup time measurement on SCL rising edge
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             sda_setup_time_ns <= 16'd0;
         end else begin
-            if (scl_rising) begin
-                // Capture the stable count as the measured setup time
+            if (scl_rising)
                 sda_setup_time_ns <= sda_stable_count;
-            end
         end
     end
-    
-    // Setup time violation checker with error signal assertion
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             setup_violation <= 1'b0;
         end else begin
             if (enable_check && scl_rising) begin
-                // Check if measured setup time meets minimum requirement
-                if (sda_stable_count < tsetup_min) begin
-                    setup_violation <= 1'b1;  // Assert error signal
-                end else begin
-                    setup_violation <= 1'b0;
-                end
+                setup_violation <= (sda_stable_count < tsetup_min);
             end else begin
                 setup_violation <= 1'b0;
             end
         end
     end
-    
-    // SystemVerilog Assertion for Setup Time Verification
-    // This assertion provides formal verification capability
-    // Can be used in simulation and formal tools
     assert property (@(posedge clk) disable iff (!rst_n || !enable_check)
         (scl_rising |-> (sda_stable_count >= tsetup_min))
-    ) else begin
-        $error("[TIMING_VIOLATION] SDA Setup Time Violation Detected! Measured: %0d ns, Required: %0d ns",
-               sda_stable_count, tsetup_min);
-    end
-    
-    // Coverage for different setup time scenarios (for verification)
+    ) else $error("[TIMING_VIOLATION] SDA Setup Time Violation: %0d ns < %0d ns", sda_stable_count, tsetup_min);
     covergroup setup_time_cg @(posedge clk);
         option.per_instance = 1;
-        
-        // Cover setup time ranges
         setup_time: coverpoint sda_setup_time_ns {
             bins zero        = {0};
             bins minimal     = {[1:2]};
@@ -219,46 +196,104 @@ module timing_checker (
             bins comfortable = {[11:50]};
             bins large       = {[51:$]};
         }
-        
-        // Cover different speed modes
         speed: coverpoint speed_mode {
             bins sdr     = {2'b00};
             bins hdr_ddr = {2'b01};
             bins others  = default;
         }
-        
-        // Cross coverage: setup time vs speed mode
         setup_x_speed: cross setup_time, speed;
     endgroup
-    
     setup_time_cg setup_cg_inst = new();
-    
     //========================================================================
     // SDA Hold Time Checker
     //========================================================================
-    // TODO: Measure time from SCL falling to SDA change
-    // TODO: Compare with minimum hold time requirement
-    // TODO: Assert hold_violation if timing not met
-    
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            sda_hold_count <= 16'd0;
+        end else begin
+            if (scl_falling)  sda_hold_count <= 16'd0;
+            else if (!sda_change && ~scl) begin
+                if (sda_hold_count != 16'hFFFF)
+                    sda_hold_count <= sda_hold_count + 16'd1;
+            end
+        end
+    end
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            sda_hold_time_ns <= 16'd0;
+        end else begin
+            if (sda_change && ~scl)
+                sda_hold_time_ns <= sda_hold_count;
+        end
+    end
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            hold_violation <= 1'b0;
+        end else begin
+            if (enable_check && sda_change && ~scl)
+                hold_violation <= (sda_hold_count < thold_min);
+            else
+                hold_violation <= 1'b0;
+        end
+    end
+    assert property (@(posedge clk) disable iff (!rst_n || !enable_check)
+        (sda_change && ~scl |-> (sda_hold_count >= thold_min))
+    ) else $error("[TIMING_VIOLATION] SDA Hold Time Violation: %0d ns < %0d ns", sda_hold_count, thold_min);
+    covergroup hold_time_cg @(posedge clk);
+        option.per_instance = 1;
+        hold_time: coverpoint sda_hold_time_ns {
+            bins zero      = {0};
+            bins minimal   = {[1:2]};
+            bins adequate  = {[3:10]};
+            bins comfortable={[11:50]};
+            bins large     = {[51:$]};
+        }
+        speed: coverpoint speed_mode {
+            bins sdr     = {2'b00};
+            bins hdr_ddr = {2'b01};
+            bins others  = default;
+        }
+        hold_x_speed: cross hold_time, speed;
+    endgroup
+    hold_time_cg hold_cg_inst = new();
     //========================================================================
-    // SCL Low/High Time Checker
+    // Clock Domain Crossing Detection
     //========================================================================
-    // TODO: Check SCL low period against minimum
-    // TODO: Check SCL high period against minimum
-    // TODO: Assert violations if requirements not met
-    
+    // For illustration, assume crossing_detected is set externally or by integration -- placeholder here
+    assign crossing_detected = 1'b0; // TODO: add integration logic if needed
     //========================================================================
-    // START/STOP Setup Time Checker
+    // START/STOP Setup Time Checker (illustrative; spec may require more logic)
     //========================================================================
-    // TODO: Check START condition setup time
-    // TODO: Check STOP condition setup time
-    
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            start_setup_violation <= 1'b0;
+            stop_setup_violation  <= 1'b0;
+        end else begin
+            if (enable_check && start_condition)
+                start_setup_violation <= (sda_stable_count < TSTART_SETUP_MIN);
+            else
+                start_setup_violation <= 1'b0;
+            if (enable_check && stop_condition)
+                stop_setup_violation  <= (sda_stable_count < TSTOP_SETUP_MIN);
+            else
+                stop_setup_violation  <= 1'b0;
+        end
+    end
     //========================================================================
-    // Spike Filter
+    // Simple Spike Filter (glitch detection)
     //========================================================================
-    // TODO: Implement spike detection on SCL and SDA
-    // TODO: Filter out pulses shorter than SPIKE_FILTER_NS
-    
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            scl_glitch <= 1'b0;
+            sda_glitch <= 1'b0;
+            spike_detected <= 1'b0;
+        end else begin
+            scl_glitch <= (scl_rising && (scl_high_count < SPIKE_FILTER_NS)) ||
+                          (scl_falling && (scl_low_count < SPIKE_FILTER_NS));
+            sda_glitch <= sda_change && (sda_stable_count < SPIKE_FILTER_NS);
+            spike_detected <= scl_glitch || sda_glitch;
+        end
+    end
     //========================================================================
     // Violation Counter
     //========================================================================
@@ -267,12 +302,10 @@ module timing_checker (
             violation_count <= 8'h00;
         end else if (enable_check) begin
             // Increment counter on any violation
-            if (setup_violation || hold_violation || scl_low_violation || 
+            if (setup_violation || hold_violation || scl_low_violation ||
                 scl_high_violation || start_setup_violation || stop_setup_violation) begin
-                // Implement counter saturation at 8'hFF
-                if (violation_count != 8'hFF) begin
+                if (violation_count != 8'hFF)
                     violation_count <= violation_count + 8'd1;
-                end
             end
         end
     end
