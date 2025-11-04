@@ -4,7 +4,6 @@
 //              Monitors and validates I3C bus timing parameters to ensure
 //              compliance with I3C specification requirements
 //============================================================================
-
 module timing_checker (
     // Clock and Reset
     input  logic        clk,
@@ -35,7 +34,6 @@ module timing_checker (
     // Violation Counter
     output logic [7:0]  violation_count
 );
-
     //========================================================================
     // Timing Parameter Definitions (in ns)
     //========================================================================
@@ -131,9 +129,109 @@ module timing_checker (
     //========================================================================
     // SDA Setup Time Checker
     //========================================================================
-    // TODO: Measure time from SDA stable to SCL rising edge
-    // TODO: Compare with minimum setup time requirement
-    // TODO: Assert setup_violation if timing not met
+    // Implementation: Check setup time of I3C signals
+    // Purpose: Ensures SDA signal is stable for minimum required time before
+    //          SCL rising edge, as per I3C specification timing requirements.
+    //
+    // RTL Design Notes:
+    // - Counts clock cycles while SDA remains stable (no transitions)
+    // - Captures this count when SCL rising edge is detected
+    // - Compares measured setup time against minimum requirement (mode-dependent)
+    // - Asserts setup_violation error signal on timing violation
+    // - Synthesizable for FPGA/ASIC implementation
+    //
+    // Verification Notes:
+    // - Monitor sda_stable_count to verify correct counting behavior
+    // - Inject setup violations by forcing SDA changes close to SCL rising edge
+    // - Verify setup_violation assertion occurs within one clock cycle
+    // - Test across different speed_mode configurations (SDR, HDR-DDR)
+    // - Check enable_check gating functionality
+    // - Use SVA assertions to verify timing relationships
+    
+    // Counter to measure time SDA has been stable
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            sda_stable_count <= 16'd0;
+        end else begin
+            if (sda_change) begin
+                // Reset counter when SDA changes
+                sda_stable_count <= 16'd0;
+            end else if (!scl_rising) begin
+                // Increment counter while SDA is stable and no SCL rising edge
+                // Prevent overflow
+                if (sda_stable_count != 16'hFFFF) begin
+                    sda_stable_count <= sda_stable_count + 16'd1;
+                end
+            end
+            // If scl_rising occurs, hold the count for comparison
+        end
+    end
+    
+    // Capture setup time measurement on SCL rising edge
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            sda_setup_time_ns <= 16'd0;
+        end else begin
+            if (scl_rising) begin
+                // Capture the stable count as the measured setup time
+                sda_setup_time_ns <= sda_stable_count;
+            end
+        end
+    end
+    
+    // Setup time violation checker with error signal assertion
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            setup_violation <= 1'b0;
+        end else begin
+            if (enable_check && scl_rising) begin
+                // Check if measured setup time meets minimum requirement
+                if (sda_stable_count < tsetup_min) begin
+                    setup_violation <= 1'b1;  // Assert error signal
+                end else begin
+                    setup_violation <= 1'b0;
+                end
+            end else begin
+                setup_violation <= 1'b0;
+            end
+        end
+    end
+    
+    // SystemVerilog Assertion for Setup Time Verification
+    // This assertion provides formal verification capability
+    // Can be used in simulation and formal tools
+    assert property (@(posedge clk) disable iff (!rst_n || !enable_check)
+        (scl_rising |-> (sda_stable_count >= tsetup_min))
+    ) else begin
+        $error("[TIMING_VIOLATION] SDA Setup Time Violation Detected! Measured: %0d ns, Required: %0d ns",
+               sda_stable_count, tsetup_min);
+    end
+    
+    // Coverage for different setup time scenarios (for verification)
+    covergroup setup_time_cg @(posedge clk);
+        option.per_instance = 1;
+        
+        // Cover setup time ranges
+        setup_time: coverpoint sda_setup_time_ns {
+            bins zero        = {0};
+            bins minimal     = {[1:2]};
+            bins adequate    = {[3:10]};
+            bins comfortable = {[11:50]};
+            bins large       = {[51:$]};
+        }
+        
+        // Cover different speed modes
+        speed: coverpoint speed_mode {
+            bins sdr     = {2'b00};
+            bins hdr_ddr = {2'b01};
+            bins others  = default;
+        }
+        
+        // Cross coverage: setup time vs speed mode
+        setup_x_speed: cross setup_time, speed;
+    endgroup
+    
+    setup_time_cg setup_cg_inst = new();
     
     //========================================================================
     // SDA Hold Time Checker
@@ -168,9 +266,14 @@ module timing_checker (
         if (!rst_n) begin
             violation_count <= 8'h00;
         end else if (enable_check) begin
-            // TODO: Increment counter on any violation
-            // TODO: Implement counter saturation at 8'hFF
+            // Increment counter on any violation
+            if (setup_violation || hold_violation || scl_low_violation || 
+                scl_high_violation || start_setup_violation || stop_setup_violation) begin
+                // Implement counter saturation at 8'hFF
+                if (violation_count != 8'hFF) begin
+                    violation_count <= violation_count + 8'd1;
+                end
+            end
         end
     end
-
 endmodule
