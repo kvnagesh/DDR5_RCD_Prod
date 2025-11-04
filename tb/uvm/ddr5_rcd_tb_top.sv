@@ -1,7 +1,7 @@
 //==============================================================================
 // File: ddr5_rcd_tb_top.sv
 // Description: UVM Testbench Top Module for DDR5 RCD Verification
-// Author: Auto-generated skeleton
+// Author: Production Implementation
 // Date: 2025-11-04
 //==============================================================================
 
@@ -12,7 +12,7 @@
 import uvm_pkg::*;
 
 // Import DDR5 RCD UVM environment package
-// import ddr5_rcd_pkg::*;
+import ddr5_rcd_pkg::*;
 
 module ddr5_rcd_tb_top;
 
@@ -23,174 +23,254 @@ module ddr5_rcd_tb_top;
   logic rst_n;
   
   // Clock parameters
-  parameter CLK_PERIOD = 10;  // 100MHz clock
-  parameter RST_DURATION = 100; // Reset duration in ns
-
+  parameter CLK_PERIOD = 10;       // 100MHz clock
+  parameter RST_DURATION = 100;    // Reset duration in ns
+  parameter DDR_CLK_PERIOD = 0.625; // 1600MHz DDR5 clock
+  
   //============================================================================
   // Interface Instantiations
   //============================================================================
-  // TODO: Instantiate DUT interfaces here
-  // Example:
-  // ddr5_rcd_if dut_if(.clk(clk), .rst_n(rst_n));
+  
+  // CA (Command/Address) Interface
+  ddr5_rcd_ca_if ca_if(
+    .clk(clk),
+    .rst_n(rst_n)
+  );
+  
+  // DQ (Data) Interface
+  ddr5_rcd_dq_if dq_if(
+    .clk(clk),
+    .rst_n(rst_n)
+  );
+  
+  // Control Interface
+  ddr5_rcd_ctrl_if ctrl_if(
+    .clk(clk),
+    .rst_n(rst_n)
+  );
+  
+  // I2C/I3C Configuration Interface
+  ddr5_rcd_i2c_if i2c_if(
+    .clk(clk),
+    .rst_n(rst_n)
+  );
   
   //============================================================================
   // DUT Instantiation
   //============================================================================
-  // TODO: Instantiate the Design Under Test (DUT)
-  // Example:
-  // ddr5_rcd_top dut (
-  //   .clk(clk),
-  //   .rst_n(rst_n)
-  //   // Connect other DUT ports
-  // );
-
+  
+  ddr5_rcd_top dut (
+    .clk_i(clk),
+    .rst_n_i(rst_n),
+    
+    // CA interface connections
+    .ca_valid_i(ca_if.ca_valid),
+    .ca_cmd_i(ca_if.ca_cmd),
+    .ca_addr_i(ca_if.ca_addr),
+    .ca_cs_i(ca_if.ca_cs),
+    .ca_cke_i(ca_if.ca_cke),
+    .ca_odt_i(ca_if.ca_odt),
+    
+    // DQ interface connections
+    .dq_valid_o(dq_if.dq_valid),
+    .dq_data_o(dq_if.dq_data),
+    .dq_mask_o(dq_if.dq_mask),
+    .dq_strobe_o(dq_if.dq_strobe),
+    
+    // Control interface connections
+    .parity_err_o(ctrl_if.parity_err),
+    .alert_n_o(ctrl_if.alert_n),
+    .qca_valid_o(ctrl_if.qca_valid),
+    .qcs_valid_o(ctrl_if.qcs_valid),
+    
+    // I2C interface connections
+    .scl_i(i2c_if.scl),
+    .sda_io(i2c_if.sda)
+  );
+  
   //============================================================================
   // Clock Generation
   //============================================================================
+  
+  // System clock generation
   initial begin
     clk = 0;
     forever #(CLK_PERIOD/2) clk = ~clk;
   end
-
+  
   //============================================================================
   // Reset Generation
   //============================================================================
+  
   initial begin
     rst_n = 0;
-    #RST_DURATION;
+    repeat(10) @(posedge clk);
     rst_n = 1;
-    `uvm_info("TB_TOP", "Reset released", UVM_LOW)
+    `uvm_info("TB_TOP", "Reset de-asserted", UVM_MEDIUM)
   end
-
+  
   //============================================================================
-  // UVM Configuration and Test Start
+  // UVM Test Configuration and Execution
   //============================================================================
+  
   initial begin
-    // Set interfaces in config_db for UVM environment access
-    // uvm_config_db#(virtual ddr5_rcd_if)::set(null, "*", "dut_vif", dut_if);
+    // Configure UVM database with virtual interfaces
+    uvm_config_db#(virtual ddr5_rcd_ca_if)::set(null, "uvm_test_top", "ca_vif", ca_if);
+    uvm_config_db#(virtual ddr5_rcd_dq_if)::set(null, "uvm_test_top", "dq_vif", dq_if);
+    uvm_config_db#(virtual ddr5_rcd_ctrl_if)::set(null, "uvm_test_top", "ctrl_vif", ctrl_if);
+    uvm_config_db#(virtual ddr5_rcd_i2c_if)::set(null, "uvm_test_top", "i2c_vif", i2c_if);
     
-    // Enable waveform dumping
-    $dumpfile("ddr5_rcd_tb.vcd");
-    $dumpvars(0, ddr5_rcd_tb_top);
+    // Set global timeout
+    uvm_top.set_timeout(100ms);
+    
+    // Enable UVM command line processor
+    uvm_cmdline_processor clp;
+    clp = uvm_cmdline_processor::get_inst();
+    
+    // Dump waveforms if enabled
+    if (clp.get_arg_value("+UVM_DUMP_VCD=", dump_file)) begin
+      $dumpfile(dump_file);
+      $dumpvars(0, ddr5_rcd_tb_top);
+    end
     
     // Run the test
     run_test();
   end
-
+  
+  //============================================================================
+  // Watchdog Timer
+  //============================================================================
+  
+  initial begin
+    #10ms;
+    `uvm_fatal("TB_TOP", "Watchdog timeout - simulation hung")
+  end
+  
+  //============================================================================
+  // Protocol Assertions Binding
+  //============================================================================
+  
+  bind ddr5_rcd_top ddr5_rcd_assertions ddr5_assertions_inst (
+    .clk(clk_i),
+    .rst_n(rst_n_i),
+    .ca_valid(ca_valid_i),
+    .ca_cmd(ca_cmd_i),
+    .ca_addr(ca_addr_i),
+    .dq_valid(dq_valid_o),
+    .parity_err(parity_err_o),
+    .alert_n(alert_n_o)
+  );
+  
+  //============================================================================
+  // Signal Monitoring and Debug
+  //============================================================================
+  
+  // Monitor critical errors
+  always @(posedge clk) begin
+    if (rst_n && ctrl_if.alert_n === 1'b0) begin
+      `uvm_warning("TB_TOP", $sformatf("ALERT signal asserted at time %0t", $time))
+    end
+    if (rst_n && ctrl_if.parity_err === 1'b1) begin
+      `uvm_warning("TB_TOP", $sformatf("Parity error detected at time %0t", $time))
+    end
+  end
+  
   //============================================================================
   // Simulation Control
   //============================================================================
-  initial begin
-    // Optional: Set timeout for simulation
-    #1000000; // 1ms timeout
-    `uvm_fatal("TB_TOP", "Simulation timeout reached!")
+  
+  // Finish simulation gracefully
+  final begin
+    `uvm_info("TB_TOP", "Simulation completed", UVM_LOW)
   end
-
+  
   //============================================================================
-  // Assertions Binding
+  // Coverage and Assertion Enables
   //============================================================================
-  // TODO: Bind assertion modules to DUT
-  // Example:
-  // bind ddr5_rcd_top ddr5_rcd_assertions assertions_inst (
-  //   .clk(clk),
-  //   .rst_n(rst_n)
-  //   // Connect other assertion ports
-  // );
-
+  
+  initial begin
+    // Enable assertion checking
+    $assertcontrol(1);
+    
+    // Configure coverage options
+    $coverage_control(1); // Enable coverage
+  end
+  
+  // Variable for waveform dump
+  string dump_file;
+  
 endmodule : ddr5_rcd_tb_top
 
-//==============================================================================
-// UVM Test Base Class
-//==============================================================================
-// TODO: Move this to separate file in tb/uvm/tests/
-class ddr5_rcd_base_test extends uvm_test;
-  `uvm_component_utils(ddr5_rcd_base_test)
+//============================================================================
+// Interface Definitions
+//============================================================================
 
-  // Environment instance
-  // ddr5_rcd_env env;
+// CA (Command/Address) Interface
+interface ddr5_rcd_ca_if(input logic clk, input logic rst_n);
+  logic        ca_valid;
+  logic [6:0]  ca_cmd;
+  logic [16:0] ca_addr;
+  logic [1:0]  ca_cs;
+  logic        ca_cke;
+  logic        ca_odt;
+  
+  // Clocking blocks for synchronous communication
+  clocking cb @(posedge clk);
+    default input #1step output #1ns;
+    output ca_valid, ca_cmd, ca_addr, ca_cs, ca_cke, ca_odt;
+  endclocking
+  
+  modport tb(clocking cb, input clk, rst_n);
+  modport dut(input ca_valid, ca_cmd, ca_addr, ca_cs, ca_cke, ca_odt, input clk, rst_n);
+endinterface : ddr5_rcd_ca_if
 
-  function new(string name = "ddr5_rcd_base_test", uvm_component parent = null);
-    super.new(name, parent);
-  endfunction
+// DQ (Data) Interface
+interface ddr5_rcd_dq_if(input logic clk, input logic rst_n);
+  logic         dq_valid;
+  logic [127:0] dq_data;
+  logic [15:0]  dq_mask;
+  logic         dq_strobe;
+  
+  clocking cb @(posedge clk);
+    default input #1step output #1ns;
+    input dq_valid, dq_data, dq_mask, dq_strobe;
+  endclocking
+  
+  modport tb(clocking cb, input clk, rst_n);
+  modport dut(output dq_valid, dq_data, dq_mask, dq_strobe, input clk, rst_n);
+endinterface : ddr5_rcd_dq_if
 
-  //============================================================================
-  // Build Phase
-  //============================================================================
-  virtual function void build_phase(uvm_phase phase);
-    super.build_phase(phase);
-    `uvm_info(get_type_name(), "Build phase", UVM_LOW)
-    
-    // Create environment
-    // env = ddr5_rcd_env::type_id::create("env", this);
-  endfunction
+// Control Interface
+interface ddr5_rcd_ctrl_if(input logic clk, input logic rst_n);
+  logic parity_err;
+  logic alert_n;
+  logic qca_valid;
+  logic qcs_valid;
+  
+  clocking cb @(posedge clk);
+    default input #1step output #1ns;
+    input parity_err, alert_n, qca_valid, qcs_valid;
+  endclocking
+  
+  modport tb(clocking cb, input clk, rst_n);
+  modport dut(output parity_err, alert_n, qca_valid, qcs_valid, input clk, rst_n);
+endinterface : ddr5_rcd_ctrl_if
 
-  //============================================================================
-  // Connect Phase
-  //============================================================================
-  virtual function void connect_phase(uvm_phase phase);
-    super.connect_phase(phase);
-    `uvm_info(get_type_name(), "Connect phase", UVM_LOW)
-    // Connect environment components
-  endfunction
-
-  //============================================================================
-  // End of Elaboration Phase
-  //============================================================================
-  virtual function void end_of_elaboration_phase(uvm_phase phase);
-    super.end_of_elaboration_phase(phase);
-    `uvm_info(get_type_name(), "End of elaboration phase", UVM_LOW)
-    // Print topology
-    // uvm_top.print_topology();
-  endfunction
-
-  //============================================================================
-  // Run Phase
-  //============================================================================
-  virtual task run_phase(uvm_phase phase);
-    super.run_phase(phase);
-    `uvm_info(get_type_name(), "Run phase started", UVM_LOW)
-    
-    phase.raise_objection(this);
-    // Test execution logic
-    #1000; // Placeholder delay
-    phase.drop_objection(this);
-    
-    `uvm_info(get_type_name(), "Run phase completed", UVM_LOW)
-  endtask
-
-  //============================================================================
-  // Extract Phase
-  //============================================================================
-  virtual function void extract_phase(uvm_phase phase);
-    super.extract_phase(phase);
-    `uvm_info(get_type_name(), "Extract phase", UVM_LOW)
-    // Extract simulation results
-  endfunction
-
-  //============================================================================
-  // Check Phase
-  //============================================================================
-  virtual function void check_phase(uvm_phase phase);
-    super.check_phase(phase);
-    `uvm_info(get_type_name(), "Check phase", UVM_LOW)
-    // Check for errors
-  endfunction
-
-  //============================================================================
-  // Report Phase
-  //============================================================================
-  virtual function void report_phase(uvm_phase phase);
-    super.report_phase(phase);
-    `uvm_info(get_type_name(), "Report phase", UVM_LOW)
-    // Generate test report
-  endfunction
-
-  //============================================================================
-  // Final Phase
-  //============================================================================
-  virtual function void final_phase(uvm_phase phase);
-    super.final_phase(phase);
-    `uvm_info(get_type_name(), "Final phase", UVM_LOW)
-  endfunction
-
-endclass : ddr5_rcd_base_test
+// I2C/I3C Configuration Interface
+interface ddr5_rcd_i2c_if(input logic clk, input logic rst_n);
+  logic scl;
+  wire  sda;
+  logic sda_out;
+  logic sda_oe;
+  
+  assign sda = sda_oe ? sda_out : 1'bz;
+  
+  clocking cb @(posedge clk);
+    default input #1step output #1ns;
+    output scl, sda_out, sda_oe;
+    input sda;
+  endclocking
+  
+  modport tb(clocking cb, input clk, rst_n);
+  modport dut(input scl, inout sda, input clk, rst_n);
+endinterface : ddr5_rcd_i2c_if
