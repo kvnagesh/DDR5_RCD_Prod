@@ -4,29 +4,29 @@
 //              Manages reset sequencing and synchronization for I3C slave
 //              controller and associated modules
 //============================================================================
-module reset_controller 
-(
+module reset_controller (
     // Clock Inputs
     input  logic        clk,           // System clock
     input  logic        i3c_clk,       // I3C bus clock (if separate)
-    
+
     // Reset Inputs
     input  logic        por_n,         // Power-On Reset (active low)
     input  logic        sys_rst_n,     // System Reset (active low)
     input  logic        sw_rst,        // Software Reset (active high)
     input  logic        i3c_rst_req,   // I3C reset request from bus
-    
+
     // Reset Outputs
     output logic        rst_n,         // Main synchronized reset
     output logic        i3c_rst_n,     // I3C domain reset
     output logic        reg_rst_n,     // Register domain reset
     output logic        async_rst_n,   // Asynchronous reset output
-    
+
     // Status Outputs
-    output logic        reset_active,
+    output logic        reset_active,  // Indicates a reset is active
     output logic [2:0]  reset_source,  // Indicates reset source
-    output logic        reset_done
+    output logic        reset_done     // Indicates reset is complete
 );
+
     //========================================================================
     // Reset Source Encoding
     //========================================================================
@@ -35,60 +35,51 @@ module reset_controller
     localparam RST_SRC_SYSTEM   = 3'b010;  // System Reset
     localparam RST_SRC_SOFTWARE = 3'b011;  // Software Reset
     localparam RST_SRC_I3C      = 3'b100;  // I3C Bus Reset
-    
+
     //========================================================================
     // Reset Sequencing Parameters
     //========================================================================
     localparam RESET_HOLD_CYCLES    = 16;   // Minimum reset assertion cycles
+    localparam RELEASE_DELAY_CYCLES = 8;    // Cycles between sequential release
     localparam SYNC_STAGES          = 3;    // Reset synchronizer stages
-    
+
     //========================================================================
-    // Debounce Parameters (Parameterized for synthesis)
+    // Debounce Parameters (Synthesizable)
     //========================================================================
     localparam DEBOUNCE_CYCLES      = 8;    // Debounce time in clock cycles
     localparam DEBOUNCE_WIDTH       = $clog2(DEBOUNCE_CYCLES + 1);
-    
+
     //========================================================================
-    // Internal Signals
+    // Internal Signals & FSM Declaration
     //========================================================================
-    
-    // Reset State Machine
     typedef enum logic [1:0] {
-        RESET_IDLE,
-        RESET_ASSERT,
-        RESET_HOLD,
-        RESET_RELEASE
+        RESET_IDLE,        // Awaiting reset request
+        RESET_ASSERT,      // Asserting resets
+        RESET_HOLD,        // Hold resets for minimum time
+        RESET_SEQ_RELEASE  // Sequentially releasing resets
     } reset_state_t;
-    
-    reset_state_t reset_state;
-    
-    // Reset request consolidation
-    logic        reset_req;
-    logic [2:0]  reset_source_next;
-    
-    // Synchronizer chains
+
+    reset_state_t reset_state, reset_state_next;
+    logic [4:0] reset_counter;  // Counter for assertion/hold/release
+    logic reset_req;
+    logic [2:0] reset_source_reg, reset_source_next;
+
+    // Synchronizers
     logic [SYNC_STAGES-1:0] rst_sync;
     logic [SYNC_STAGES-1:0] i3c_rst_sync;
-    
-    // Reset counter
-    logic [4:0] reset_counter;
-    
-    //========================================================================
-    // Debounce Signals (for sw_rst and i3c_rst_req)
-    //========================================================================
-    logic [DEBOUNCE_WIDTH-1:0] sw_rst_debounce_cnt;
-    logic [DEBOUNCE_WIDTH-1:0] i3c_rst_debounce_cnt;
-    logic sw_rst_debounced;
-    logic i3c_rst_req_debounced;
-    logic sw_rst_r, sw_rst_rr;              // 2-stage synchronizer for sw_rst
-    logic i3c_rst_req_r, i3c_rst_req_rr;    // 2-stage synchronizer for i3c_rst_req
+
+    // Debounce logic
+    logic [DEBOUNCE_WIDTH-1:0] sw_rst_debounce_cnt, i3c_rst_debounce_cnt;
+    logic sw_rst_r, sw_rst_rr, sw_rst_debounced;
+    logic i3c_rst_req_r, i3c_rst_req_rr, i3c_rst_req_debounced;
+
+    // Internal outputs for controlled reset assertion
+    logic rst_n_int, i3c_rst_n_int, reg_rst_n_int;
+    logic async_rst_n_int;
     
     //========================================================================
-    // Input Debouncing Logic (Synthesizable)
+    // Debouncing: Synchronize and Filter Glitchy/Async Inputs
     //========================================================================
-    
-    // Software Reset Debouncing
-    // Synchronize sw_rst to clock domain and debounce to filter glitches
     always_ff @(posedge clk or negedge por_n) begin
         if (!por_n) begin
             sw_rst_r  <= 1'b0;
@@ -96,26 +87,19 @@ module reset_controller
             sw_rst_debounce_cnt <= '0;
             sw_rst_debounced <= 1'b0;
         end else begin
-            // 2-stage synchronizer for metastability protection
             sw_rst_r  <= sw_rst;
             sw_rst_rr <= sw_rst_r;
-            
-            // Debounce counter: signal must be stable for DEBOUNCE_CYCLES
             if (sw_rst_rr) begin
-                if (sw_rst_debounce_cnt < DEBOUNCE_CYCLES) begin
+                if (sw_rst_debounce_cnt < DEBOUNCE_CYCLES)
                     sw_rst_debounce_cnt <= sw_rst_debounce_cnt + 1'b1;
-                end else begin
-                    sw_rst_debounced <= 1'b1;  // Signal is stable and valid
-                end
+                else
+                    sw_rst_debounced <= 1'b1;
             end else begin
                 sw_rst_debounce_cnt <= '0;
                 sw_rst_debounced <= 1'b0;
             end
         end
     end
-    
-    // I3C Reset Request Debouncing
-    // Synchronize i3c_rst_req to clock domain and debounce to filter bus glitches
     always_ff @(posedge clk or negedge por_n) begin
         if (!por_n) begin
             i3c_rst_req_r  <= 1'b0;
@@ -123,151 +107,163 @@ module reset_controller
             i3c_rst_debounce_cnt <= '0;
             i3c_rst_req_debounced <= 1'b0;
         end else begin
-            // 2-stage synchronizer for metastability protection
             i3c_rst_req_r  <= i3c_rst_req;
             i3c_rst_req_rr <= i3c_rst_req_r;
-            
-            // Debounce counter: signal must be stable for DEBOUNCE_CYCLES
             if (i3c_rst_req_rr) begin
-                if (i3c_rst_debounce_cnt < DEBOUNCE_CYCLES) begin
+                if (i3c_rst_debounce_cnt < DEBOUNCE_CYCLES)
                     i3c_rst_debounce_cnt <= i3c_rst_debounce_cnt + 1'b1;
-                end else begin
-                    i3c_rst_req_debounced <= 1'b1;  // Signal is stable and valid
-                end
+                else
+                    i3c_rst_req_debounced <= 1'b1;
             end else begin
                 i3c_rst_debounce_cnt <= '0;
                 i3c_rst_req_debounced <= 1'b0;
             end
         end
     end
-    
+
     //========================================================================
-    // Reset Request Monitoring and Routing Logic
+    // Consolidate Reset Requests (Priority: POR > SYS > SW > I3C)
     //========================================================================
-    // Priority-based reset request detection with debounced inputs
-    // Routes valid reset requests to the reset sequence handler
-    
     always_comb begin
-        // Default: no reset request
         reset_req = 1'b0;
         reset_source_next = RST_SRC_NONE;
-        
-        // Priority encoding for reset sources (highest to lowest priority)
         if (!por_n) begin
-            // Highest priority: Power-On Reset (asynchronous, no debouncing needed)
-            reset_req = 1'b1;
-            reset_source_next = RST_SRC_POR;
+            reset_req = 1'b1; reset_source_next = RST_SRC_POR;
         end else if (!sys_rst_n) begin
-            // Second priority: System Reset (asynchronous, no debouncing needed)
-            reset_req = 1'b1;
-            reset_source_next = RST_SRC_SYSTEM;
+            reset_req = 1'b1; reset_source_next = RST_SRC_SYSTEM;
         end else if (sw_rst_debounced) begin
-            // Third priority: Software Reset (debounced to filter glitches)
-            reset_req = 1'b1;
-            reset_source_next = RST_SRC_SOFTWARE;
+            reset_req = 1'b1; reset_source_next = RST_SRC_SOFTWARE;
         end else if (i3c_rst_req_debounced) begin
-            // Lowest priority: I3C Reset Request (debounced to filter bus glitches)
-            reset_req = 1'b1;
-            reset_source_next = RST_SRC_I3C;
+            reset_req = 1'b1; reset_source_next = RST_SRC_I3C;
         end
     end
-    
+
     //========================================================================
-    // Reset Synchronizer (for synchronous resets)
+    // FSM: Reset Assertion, Hold, and Sequenced Release
     //========================================================================
     always_ff @(posedge clk or negedge por_n) begin
         if (!por_n) begin
-            rst_sync <= '0;
+            reset_state     <= RESET_IDLE;
+            reset_state_next<= RESET_IDLE;
+            reset_counter   <= 0;
+            reset_source_reg<= RST_SRC_POR;
         end else if (!sys_rst_n) begin
-            rst_sync <= '0;
+            reset_state     <= RESET_IDLE;
+            reset_state_next<= RESET_IDLE;
+            reset_counter   <= 0;
+            reset_source_reg<= RST_SRC_SYSTEM;
         end else begin
+            reset_state <= reset_state_next;
+            if (reset_req && (reset_state == RESET_IDLE)) begin
+                reset_source_reg <= reset_source_next;
+            end
+            // Reset the counter when transitioning to new phase
+            if (reset_state != reset_state_next)
+                reset_counter <= 0;
+            else if ((reset_state == RESET_HOLD) || (reset_state == RESET_SEQ_RELEASE))
+                reset_counter <= reset_counter + 1;
+        end
+    end
+
+    always_comb begin
+        reset_state_next = reset_state;
+        case (reset_state)
+            RESET_IDLE: begin
+                if (reset_req)
+                    reset_state_next = RESET_ASSERT;
+            end
+            RESET_ASSERT: begin
+                reset_state_next = RESET_HOLD;
+            end
+            RESET_HOLD: begin
+                if (reset_counter >= RESET_HOLD_CYCLES-1)
+                    reset_state_next = RESET_SEQ_RELEASE;
+            end
+            RESET_SEQ_RELEASE: begin
+                if (reset_counter >= RELEASE_DELAY_CYCLES-1)
+                    reset_state_next = RESET_IDLE;
+            end
+        endcase
+    end
+
+    //========================================================================
+    // Reset Output Assertion Logic (Main/Reg/I3C/Async)
+    //========================================================================
+    always_comb begin
+        // Default: all resets de-asserted
+        rst_n_int      = 1'b1;
+        i3c_rst_n_int  = 1'b1;
+        reg_rst_n_int  = 1'b1;
+        async_rst_n_int= por_n & sys_rst_n;
+        reset_active   = 1'b0;
+        reset_done     = 1'b1;
+
+        case (reset_state)
+            RESET_ASSERT: begin
+                rst_n_int      = 1'b0; // Assert all resets
+                i3c_rst_n_int  = 1'b0;
+                reg_rst_n_int  = 1'b0;
+                reset_active   = 1'b1;
+                reset_done     = 1'b0;
+            end
+            RESET_HOLD: begin
+                rst_n_int      = 1'b0;
+                i3c_rst_n_int  = 1'b0;
+                reg_rst_n_int  = 1'b0;
+                reset_active   = 1'b1;
+                reset_done     = 1'b0;
+            end
+            RESET_SEQ_RELEASE: begin
+                rst_n_int      = 1'b1; // Release main/reset first
+                reg_rst_n_int  = 1'b1;
+                i3c_rst_n_int  = (reset_counter < (RELEASE_DELAY_CYCLES/2)) ? 1'b0 : 1'b1;
+                reset_active   = 1'b1;
+                reset_done     = 1'b0;
+            end
+            default: begin
+                // Resets deasserted, outputs reflect synchronizers
+                reset_active = 1'b0;
+                reset_done = 1'b1;
+            end
+        endcase
+    end
+
+    //========================================================================
+    // Reset Synchronizers
+    //========================================================================
+    always_ff @(posedge clk or negedge por_n) begin
+        if (!por_n)
+            rst_sync <= '0;
+        else if (!rst_n_int)
+            rst_sync <= '0;
+        else
             rst_sync <= {rst_sync[SYNC_STAGES-2:0], 1'b1};
-        end
     end
-    
     always_ff @(posedge i3c_clk or negedge por_n) begin
-        if (!por_n) begin
+        if (!por_n)
             i3c_rst_sync <= '0;
-        end else if (!sys_rst_n) begin
+        else if (!i3c_rst_n_int)
             i3c_rst_sync <= '0;
-        end else begin
+        else
             i3c_rst_sync <= {i3c_rst_sync[SYNC_STAGES-2:0], 1'b1};
-        end
     end
-    
-    //========================================================================
-    // Reset State Machine
-    //========================================================================
-    always_ff @(posedge clk or negedge por_n) begin
-        if (!por_n) begin
-            reset_state  <= RESET_IDLE;
-            reset_source <= RST_SRC_POR;
-        end else if (!sys_rst_n) begin
-            reset_state  <= RESET_IDLE;
-            reset_source <= RST_SRC_SYSTEM;
-        end else begin
-            if (reset_req)
-                reset_source <= reset_source_next;
-                
-            case (reset_state)
-                RESET_IDLE: begin
-                    // ================================================================
-                    // TODO IMPLEMENTATION: Monitor for reset requests
-                    // ================================================================
-                    // This section monitors all reset sources (debounced) and routes
-                    // valid reset requests to the reset sequence handler.
-                    //
-                    // Reset Request Monitoring:
-                    //   - reset_req: Consolidated signal from all reset sources
-                    //   - Debounced inputs: sw_rst_debounced, i3c_rst_req_debounced
-                    //   - Priority encoding ensures highest priority reset is serviced
-                    //
-                    // Routing Logic:
-                    //   - When valid reset detected, transition to RESET_ASSERT state
-                    //   - reset_source_next indicates which source triggered the reset
-                    //   - State machine then sequences through reset assertion/release
-                    // ================================================================
-                    reset_active <= 1'b0;
-                    reset_done   <= 1'b1;
-                    
-                    if (reset_req) begin
-                        reset_state  <= RESET_ASSERT;
-                        reset_active <= 1'b1;
-                        reset_done   <= 1'b0;
-                    end
-                end
-                
-                RESET_ASSERT: begin
-                    // TODO: Assert reset signals
-                    reset_counter <= '0;
-                    reset_state   <= RESET_HOLD;
-                end
-                
-                RESET_HOLD: begin
-                    // TODO: Hold reset for minimum duration
-                    if (reset_counter >= RESET_HOLD_CYCLES) begin
-                        reset_state <= RESET_RELEASE;
-                    end else begin
-                        reset_counter <= reset_counter + 1;
-                    end
-                end
-                
-                RESET_RELEASE: begin
-                    // TODO: Sequentially release resets
-                    reset_state <= RESET_IDLE;
-                end
-                
-                default: reset_state <= RESET_IDLE;
-            endcase
-        end
-    end
-    
-    //========================================================================
-    // Reset Output Generation
-    //========================================================================
-    // TODO: Generate synchronized reset outputs
+
+    // Assign output signals
     assign rst_n       = rst_sync[SYNC_STAGES-1];
     assign i3c_rst_n   = i3c_rst_sync[SYNC_STAGES-1];
-    assign reg_rst_n   = rst_sync[SYNC_STAGES-1];  // Same as main reset
-    assign async_rst_n = por_n & sys_rst_n;         // Async combination
+    assign reg_rst_n   = rst_sync[SYNC_STAGES-1];
+    assign async_rst_n = async_rst_n_int;
+    assign reset_source= reset_source_reg;
+
 endmodule
+
+// ---------------------------------------------------------------------
+// FSM States:
+//   - RESET_IDLE:    Await a consolidated reset event.
+//   - RESET_ASSERT:  Immediately assert all output resets.
+//   - RESET_HOLD:    Hold resets for RESET_HOLD_CYCLES.
+//   - RESET_SEQ_RELEASE: Sequential release (main+reg first, then i3c).
+//
+// All resets are passed through synchronizers for clock domain safety.
+// Inputs are debounced & synchronized where appropriate.
+// ---------------------------------------------------------------------
