@@ -1,0 +1,13 @@
+%Error: src/i3c/i3c_protocol_manager.sv:73:22: syntax error, unexpected ')', expecting TYPE-IDENTIFIER
+   73 |                 if ( ) next_state = GETPID;
+      |                      ^
+%Error: src/i3c/i3c_protocol_manager.sv:96:22: syntax error, unexpected ')', expecting TYPE-IDENTIFIER
+   96 |                 if ( ) begin
+      |                      ^
+%Error: src/i3c/i3c_protocol_manager.sv:101:17: syntax error, unexpected else, expecting endcase
+  101 |                 else begin
+      |                 ^~~~
+%Error: src/i3c/i3c_protocol_manager.sv:105:13: syntax error, unexpected end
+  105 |             end
+      |             ^~~
+%Error: Cannot continue

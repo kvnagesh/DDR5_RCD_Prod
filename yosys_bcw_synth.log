@@ -1,0 +1,341 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `synth_simple.ys' --
+
+1. Executing Verilog-2005 frontend: rtl/bcw_mgr.sv
+Parsing SystemVerilog input from `rtl/bcw_mgr.sv' to AST representation.
+Generating RTLIL representation for module `\bcw_mgr'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Finding top of design hierarchy..
+root of   0 design levels: bcw_mgr             
+Automatically selected bcw_mgr as design top module.
+
+2.2. Analyzing design hierarchy..
+Top module:  \bcw_mgr
+
+2.3. Analyzing design hierarchy..
+Top module:  \bcw_mgr
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$rtl/bcw_mgr.sv:110$19 in module bcw_mgr.
+Removed 1 dead cases from process $proc$rtl/bcw_mgr.sv:0$17 in module bcw_mgr.
+Marked 4 switch rules as full_case in process $proc$rtl/bcw_mgr.sv:0$17 in module bcw_mgr.
+Marked 2 switch rules as full_case in process $proc$rtl/bcw_mgr.sv:63$10 in module bcw_mgr.
+Removed a total of 1 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 2 redundant assignments.
+Promoted 1 assignment to connection.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\bcw_mgr.$proc$rtl/bcw_mgr.sv:110$19'.
+Found async reset \rst_n in `\bcw_mgr.$proc$rtl/bcw_mgr.sv:63$10'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~9 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\bcw_mgr.$proc$rtl/bcw_mgr.sv:110$19'.
+     1/1: $1\state[1:0]
+Creating decoders for process `\bcw_mgr.$proc$rtl/bcw_mgr.sv:0$17'.
+     1/4: $4\state_next[1:0]
+     2/4: $3\state_next[1:0]
+     3/4: $2\state_next[1:0]
+     4/4: $1\state_next[1:0]
+Creating decoders for process `\bcw_mgr.$proc$rtl/bcw_mgr.sv:63$10'.
+     1/4: $0\burst_mode[0:0]
+     2/4: $0\state[1:0]
+     3/4: $0\burst_cntr[2:0]
+     4/4: $0\reg_bcw[31:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\bcw_mgr.\state_next' from process `\bcw_mgr.$proc$rtl/bcw_mgr.sv:0$17'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\bcw_mgr.\state' using process `\bcw_mgr.$proc$rtl/bcw_mgr.sv:110$19'.
+  created $dff cell `$procdff$71' with positive edge clock.
+Creating register for signal `\bcw_mgr.\reg_bcw' using process `\bcw_mgr.$proc$rtl/bcw_mgr.sv:63$10'.
+  created $adff cell `$procdff$72' with positive edge clock and negative level reset.
+Creating register for signal `\bcw_mgr.\burst_cntr' using process `\bcw_mgr.$proc$rtl/bcw_mgr.sv:63$10'.
+  created $adff cell `$procdff$73' with positive edge clock and negative level reset.
+Creating register for signal `\bcw_mgr.\burst_mode' using process `\bcw_mgr.$proc$rtl/bcw_mgr.sv:63$10'.
+  created $adff cell `$procdff$74' with positive edge clock and negative level reset.
+Creating register for signal `\bcw_mgr.\state' using process `\bcw_mgr.$proc$rtl/bcw_mgr.sv:63$10'.
+  created $adff cell `$procdff$75' with positive edge clock and negative level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\bcw_mgr.$proc$rtl/bcw_mgr.sv:110$19'.
+Removing empty process `bcw_mgr.$proc$rtl/bcw_mgr.sv:110$19'.
+Found and cleaned up 4 empty switches in `\bcw_mgr.$proc$rtl/bcw_mgr.sv:0$17'.
+Removing empty process `bcw_mgr.$proc$rtl/bcw_mgr.sv:0$17'.
+Found and cleaned up 4 empty switches in `\bcw_mgr.$proc$rtl/bcw_mgr.sv:63$10'.
+Removing empty process `bcw_mgr.$proc$rtl/bcw_mgr.sv:63$10'.
+Cleaned up 9 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bcw_mgr.
+<suppressed ~3 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bcw_mgr.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bcw_mgr'.
+<suppressed ~33 debug messages>
+Removed a total of 11 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bcw_mgr..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$48.
+    dead port 2/2 on $mux $procmux$40.
+    dead port 2/2 on $mux $procmux$38.
+    dead port 2/2 on $mux $procmux$29.
+Removed 4 multiplexer ports.
+<suppressed ~5 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bcw_mgr.
+    New ctrl vector for $pmux cell $procmux$50: { $procmux$54_CMP $procmux$52_CMP $auto$opt_reduce.cc:134:opt_pmux$77 }
+  Optimizing cells in module \bcw_mgr.
+Performed a total of 1 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bcw_mgr'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$71 ($dff) from module bcw_mgr (D = 2'11, Q = \state).
+Adding EN signal on $procdff$73 ($adff) from module bcw_mgr (D = $procmux$60_Y, Q = \burst_cntr).
+Setting constant 1-bit at position 0 on $auto$ff.cc:266:slice$78 ($dffe) from module bcw_mgr.
+Setting constant 1-bit at position 1 on $auto$ff.cc:266:slice$78 ($dffe) from module bcw_mgr.
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bcw_mgr..
+Warning: Driver-driver conflict for \state [1] between cell $procdff$75.Q and constant 1'1 in bcw_mgr: Resolved using constant.
+Warning: Driver-driver conflict for \state [0] between cell $procdff$75.Q and constant 1'1 in bcw_mgr: Resolved using constant.
+Removed 6 unused cells and 47 unused wires.
+<suppressed ~8 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bcw_mgr.
+<suppressed ~8 debug messages>
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bcw_mgr..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$27.
+    dead port 2/2 on $mux $procmux$27.
+    dead port 1/2 on $mux $procmux$36.
+    dead port 2/2 on $mux $procmux$36.
+    dead port 1/2 on $mux $procmux$46.
+    dead port 2/2 on $mux $procmux$46.
+    dead port 2/4 on $pmux $procmux$50.
+    dead port 3/4 on $pmux $procmux$50.
+    dead port 4/4 on $pmux $procmux$50.
+Removed 9 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bcw_mgr.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bcw_mgr'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bcw_mgr..
+Removed 0 unused cells and 7 unused wires.
+<suppressed ~1 debug messages>
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bcw_mgr.
+<suppressed ~9 debug messages>
+
+4.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bcw_mgr..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$58.
+    dead port 2/2 on $mux $procmux$58.
+    dead port 1/2 on $mux $procmux$65.
+    dead port 2/2 on $mux $procmux$65.
+Removed 4 multiplexer ports.
+
+4.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bcw_mgr.
+Performed a total of 0 changes.
+
+4.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bcw_mgr'.
+Removed a total of 0 cells.
+
+4.20. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$81 ($adffe) from module bcw_mgr.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$81 ($adffe) from module bcw_mgr.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$81 ($adffe) from module bcw_mgr.
+
+4.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bcw_mgr..
+Removed 3 unused cells and 14 unused wires.
+<suppressed ~4 debug messages>
+
+4.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bcw_mgr.
+<suppressed ~1 debug messages>
+
+4.23. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bcw_mgr..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bcw_mgr.
+Performed a total of 0 changes.
+
+4.26. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bcw_mgr'.
+Removed a total of 0 cells.
+
+4.27. Executing OPT_DFF pass (perform DFF optimizations).
+Handling D = Q on $procdff$72 ($adff) from module bcw_mgr (removing D path).
+Setting constant 0-bit at position 0 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 1 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 2 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 3 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 4 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 5 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 6 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 7 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 8 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 9 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 10 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 11 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 12 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 13 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 14 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 15 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 16 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 17 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 18 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 19 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 20 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 21 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 22 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 23 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 24 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 25 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 26 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 27 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 28 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 29 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 30 on $procdff$72 ($dlatch) from module bcw_mgr.
+Setting constant 0-bit at position 31 on $procdff$72 ($dlatch) from module bcw_mgr.
+
+4.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bcw_mgr..
+
+4.29. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bcw_mgr.
+
+4.30. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.31. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \bcw_mgr..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.32. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \bcw_mgr.
+Performed a total of 0 changes.
+
+4.33. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\bcw_mgr'.
+Removed a total of 0 cells.
+
+4.34. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.35. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bcw_mgr..
+
+4.36. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bcw_mgr.
+
+4.37. Finished OPT passes. (There is nothing left to do.)
+
+5. Printing statistics.
+
+=== bcw_mgr ===
+
+   Number of wires:                 18
+   Number of wire bits:            119
+   Number of public wires:          17
+   Number of public wire bits:     118
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  3
+     $adff                           1
+     $logic_and                      1
+     $logic_not                      1
+
+6. Executing JSON backend.
+
+Warnings: 2 unique messages, 2 total
+End of script. Logfile hash: 1943f464fc, CPU: user 0.03s system 0.00s, MEM: 10.35 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 31% 7x opt_expr (0 sec), 20% 5x opt_clean (0 sec), ...

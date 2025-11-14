@@ -1,0 +1,60 @@
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:11:10: Cannot find include file: uvm_macros.svh
+   11 | `include "uvm_macros.svh"
+      |          ^~~~~~~~~~~~~~~~
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:11:10: This may be because there's no search path specified with -I<dir>.
+   11 | `include "uvm_macros.svh"
+      |          ^~~~~~~~~~~~~~~~
+        ... Looked in:
+             uvm_macros.svh
+             uvm_macros.svh.v
+             uvm_macros.svh.sv
+             obj_dir/uvm_macros.svh
+             obj_dir/uvm_macros.svh.v
+             obj_dir/uvm_macros.svh.sv
+%Error-PKGNODECL: tb/uvm/ddr5_rcd_tb_top.sv:12:8: Package/class 'uvm_pkg' not found, and needs to be predeclared (IEEE 1800-2017 26.3)
+   12 | import uvm_pkg::*;
+      |        ^~~~~~~
+                  ... For error description see https://verilator.org/warn/PKGNODECL?v=5.020
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:12:8: Importing from missing package 'uvm_pkg'
+   12 | import uvm_pkg::*;
+      |        ^~~~~~~
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:15:8: Importing from missing package 'ddr5_rcd_pkg'
+   15 | import ddr5_rcd_pkg::*;
+      |        ^~~~~~~~~~~~
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:109:5: Define or directive not defined: '`uvm_info'
+  109 |     `uvm_info("TB_TOP", "Reset de-asserted", UVM_MEDIUM)
+      |     ^~~~~~~~~
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:109:23: syntax error, unexpected ','
+  109 |     `uvm_info("TB_TOP", "Reset de-asserted", UVM_MEDIUM)
+      |                       ^
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:127:27: syntax error, unexpected IDENTIFIER
+  127 |     uvm_cmdline_processor clp;
+      |                           ^~~
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:146:5: Define or directive not defined: '`uvm_fatal'
+  146 |     `uvm_fatal("TB_TOP", "Watchdog timeout - simulation hung")
+      |     ^~~~~~~~~~
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:146:24: syntax error, unexpected ','
+  146 |     `uvm_fatal("TB_TOP", "Watchdog timeout - simulation hung")
+      |                        ^
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:171:7: Define or directive not defined: '`uvm_warning'
+  171 |       `uvm_warning("TB_TOP", $sformatf("ALERT signal asserted at time %0t", $time))
+      |       ^~~~~~~~~~~~
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:174:7: Define or directive not defined: '`uvm_warning'
+  174 |       `uvm_warning("TB_TOP", $sformatf("Parity error detected at time %0t", $time))
+      |       ^~~~~~~~~~~~
+%Error: tb/uvm/ddr5_rcd_tb_top.sv:184:5: Define or directive not defined: '`uvm_info'
+  184 |     `uvm_info("TB_TOP", "Simulation completed", UVM_LOW)
+      |     ^~~~~~~~~
+%Error-UNSUPPORTED: tb/uvm/ddr5_rcd_tb_top.sv:223:14: Unsupported: Modport clocking
+  223 |   modport tb(clocking cb, input clk, rst_n);
+      |              ^~~~~~~~
+%Error-UNSUPPORTED: tb/uvm/ddr5_rcd_tb_top.sv:239:14: Unsupported: Modport clocking
+  239 |   modport tb(clocking cb, input clk, rst_n);
+      |              ^~~~~~~~
+%Error-UNSUPPORTED: tb/uvm/ddr5_rcd_tb_top.sv:255:14: Unsupported: Modport clocking
+  255 |   modport tb(clocking cb, input clk, rst_n);
+      |              ^~~~~~~~
+%Error-UNSUPPORTED: tb/uvm/ddr5_rcd_tb_top.sv:274:14: Unsupported: Modport clocking
+  274 |   modport tb(clocking cb, input clk, rst_n);
+      |              ^~~~~~~~
+%Error: Exiting due to 17 error(s)

@@ -1,0 +1,49 @@
+%Error: src/ecc/ecc_decoder.sv:77:27: Too many digits for 72 bit number: 72'h15555_55555_55555_5555
+   77 |         check_matrix[0] = 72'h15555_55555_55555_5555;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_decoder.sv:78:27: Too many digits for 72 bit number: 72'h26666_66666_66666_6666
+   78 |         check_matrix[1] = 72'h26666_66666_66666_6666;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_decoder.sv:79:27: Too many digits for 72 bit number: 72'h38787_87878_78787_8787
+   79 |         check_matrix[2] = 72'h38787_87878_78787_8787;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_decoder.sv:80:27: Too many digits for 72 bit number: 72'h4F0F0_F0F0F_0F0F0_F0F0
+   80 |         check_matrix[3] = 72'h4F0F0_F0F0F_0F0F0_F0F0;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_decoder.sv:81:27: Too many digits for 72 bit number: 72'h5FF00_FF00F_F00FF_00FF
+   81 |         check_matrix[4] = 72'h5FF00_FF00F_F00FF_00FF;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_decoder.sv:82:27: Too many digits for 72 bit number: 72'h6FFF0_000FF_FF000_0FFF
+   82 |         check_matrix[5] = 72'h6FFF0_000FF_FF000_0FFF;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_decoder.sv:83:27: Too many digits for 72 bit number: 72'h7FFFF_FF000_00000_FFFF
+   83 |         check_matrix[6] = 72'h7FFFF_FF000_00000_FFFF;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_decoder.sv:84:27: Too many digits for 72 bit number: 72'hFFFFF_FFFFF_FFFFF_FFFF
+   84 |         check_matrix[7] = 72'hFFFFF_FFFFF_FFFFF_FFFF;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_encoder.sv:77:27: Too many digits for 72 bit number: 72'h15555_55555_55555_5555
+   77 |         check_matrix[0] = 72'h15555_55555_55555_5555;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_encoder.sv:80:27: Too many digits for 72 bit number: 72'h26666_66666_66666_6666
+   80 |         check_matrix[1] = 72'h26666_66666_66666_6666;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_encoder.sv:83:27: Too many digits for 72 bit number: 72'h38787_87878_78787_8787
+   83 |         check_matrix[2] = 72'h38787_87878_78787_8787;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_encoder.sv:86:27: Too many digits for 72 bit number: 72'h4F0F0_F0F0F_0F0F0_F0F0
+   86 |         check_matrix[3] = 72'h4F0F0_F0F0F_0F0F0_F0F0;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_encoder.sv:89:27: Too many digits for 72 bit number: 72'h5FF00_FF00F_F00FF_00FF
+   89 |         check_matrix[4] = 72'h5FF00_FF00F_F00FF_00FF;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_encoder.sv:92:27: Too many digits for 72 bit number: 72'h6FFF0_000FF_FF000_0FFF
+   92 |         check_matrix[5] = 72'h6FFF0_000FF_FF000_0FFF;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_encoder.sv:95:27: Too many digits for 72 bit number: 72'h7FFFF_FF000_00000_FFFF
+   95 |         check_matrix[6] = 72'h7FFFF_FF000_00000_FFFF;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: src/ecc/ecc_encoder.sv:98:27: Too many digits for 72 bit number: 72'hFFFFF_FFFFF_FFFFF_FFFF
+   98 |         check_matrix[7] = 72'hFFFFF_FFFFF_FFFFF_FFFF;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: Exiting due to 16 error(s)

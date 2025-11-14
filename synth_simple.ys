@@ -1,0 +1,6 @@
+# Simple synthesis demo for DDR5 RCD module
+read_verilog -sv rtl/bcw_mgr.sv
+hierarchy -check -auto-top
+proc; opt
+stat
+write_json bcw_mgr_synth.json

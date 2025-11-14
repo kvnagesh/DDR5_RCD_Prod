@@ -1,0 +1,4 @@
+%Error: rtl/ca_distributor.sv:185:41: syntax error, unexpected end of file
+  185 |   assign overflow_flag = overflow_flag_q;
+      |                                         ^
+%Error: Cannot continue

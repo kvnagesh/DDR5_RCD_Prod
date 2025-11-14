@@ -1,0 +1,8 @@
+# Yosys synthesis script for DDR5 RCD
+read_verilog -sv src/clocking/clock_gating.sv
+read_verilog -sv src/clocking/clock_mux.sv
+hierarchy -check -top clock_mux
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+stat
+write_json synth_out.json

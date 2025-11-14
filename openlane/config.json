@@ -1,0 +1,17 @@
+{
+  "DESIGN_NAME": "ddr5_rcd",
+  "VERILOG_FILES": [
+    "dir::../rtl/*.sv",
+    "dir::../src/*/*.sv"
+  ],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 1.25,
+  "FP_PDN_MULTILAYER": true,
+  "FP_SIZING": "absolute",
+  "DIE_AREA": "0 0 3000 3000",
+  "PL_TARGET_DENSITY": 0.55,
+  "FP_CORE_UTIL": 45,
+  "SYNTH_STRATEGY": "AREA 0",
+  "SYNTH_MAX_FANOUT": 6,
+  "DESIGN_IS_CORE": 1
+}
