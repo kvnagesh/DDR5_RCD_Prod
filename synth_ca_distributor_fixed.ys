@@ -1,0 +1,24 @@
+# Read with parameter overrides
+read_verilog -sv rtl/ca_distributor.sv
+
+# Set parameters explicitly (using defaults from the file)
+chparam -set CA_WIDTH 7 ca_distributor
+chparam -set RANK_BITS 2 ca_distributor  
+chparam -set ROW_BITS 9 ca_distributor
+chparam -set BANK_BITS 4 ca_distributor
+chparam -set COL_BITS 4 ca_distributor
+chparam -set CMD_BITS 3 ca_distributor
+chparam -set NUM_SUBCHANNELS 2 ca_distributor
+
+hierarchy -check -top ca_distributor
+
+# Synthesis flow
+proc; opt; fsm; opt; memory; opt
+techmap; opt  
+abc -g AND,OR,XOR; opt
+clean
+
+# Write outputs
+write_verilog netlists/ca_distributor_netlist.v
+write_json netlists/ca_distributor.json
+stat -top ca_distributor
