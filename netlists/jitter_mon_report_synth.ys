@@ -1,0 +1,9 @@
+read_verilog -sv rtl/jitter_mon_report.sv
+hierarchy -check -top jitter_mon_report
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/jitter_mon_report_netlist.v
+write_json netlists/jitter_mon_report.json
+stat -top jitter_mon_report

@@ -1,0 +1,1078 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `netlists/error_log_reg_synth.ys' --
+
+1. Executing Verilog-2005 frontend: rtl/error_log_reg.sv
+Parsing SystemVerilog input from `rtl/error_log_reg.sv' to AST representation.
+Generating RTLIL representation for module `\error_log_reg'.
+Generating RTLIL representation for module `\error_log_fifo'.
+Warning: Replacing memory \fifo_memory with list of registers. See rtl/error_log_reg.sv:264
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \error_log_reg
+
+2.2. Analyzing design hierarchy..
+Top module:  \error_log_reg
+Removing unused module `\error_log_fifo'.
+Removed 1 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$rtl/error_log_reg.sv:181$12 in module error_log_reg.
+Marked 2 switch rules as full_case in process $proc$rtl/error_log_reg.sv:156$10 in module error_log_reg.
+Marked 1 switch rules as full_case in process $proc$rtl/error_log_reg.sv:111$3 in module error_log_reg.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 11 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+Found async reset \rst_n in `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~15 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\error_log_reg.$proc$rtl/error_log_reg.sv:223$18'.
+Creating decoders for process `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+     1/9: $1\reg_int_status[31:0]
+     2/9: $0\reg_int_enable[31:0]
+     3/9: $0\reg_err_ctrl[31:0]
+     4/9: $1\reg_dbe_count[31:0]
+     5/9: $1\reg_sbe_count[31:0]
+     6/9: $1\reg_par_err_count[31:0]
+     7/9: $1\reg_crc_err_count[31:0]
+     8/9: $1\reg_ecc_err_count[31:0]
+     9/9: $1\reg_err_status[31:0]
+Creating decoders for process `\error_log_reg.$proc$rtl/error_log_reg.sv:156$10'.
+     1/3: $2\reg_read_data[31:0]
+     2/3: $1\reg_read_data[31:0]
+     3/3: $1\reg_read_valid[0:0]
+Creating decoders for process `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+     1/15: $0\reg_int_status[31:0] [31:3]
+     2/15: $0\reg_int_status[31:0] [2]
+     3/15: $0\reg_int_status[31:0] [1]
+     4/15: $0\reg_int_status[31:0] [0]
+     5/15: $0\reg_err_status[31:0] [23:3]
+     6/15: $0\reg_err_status[31:0] [2]
+     7/15: $0\reg_err_status[31:0] [1]
+     8/15: $0\reg_err_status[31:0] [0]
+     9/15: $0\reg_last_err_addr[31:0]
+    10/15: $0\reg_dbe_count[31:0]
+    11/15: $0\reg_sbe_count[31:0]
+    12/15: $0\reg_par_err_count[31:0]
+    13/15: $0\reg_crc_err_count[31:0]
+    14/15: $0\reg_ecc_err_count[31:0]
+    15/15: $0\reg_err_status[31:0] [31:24]
+Creating decoders for process `\error_log_reg.$proc$rtl/error_log_reg.sv:96$1'.
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\error_log_reg.\total_errors' from process `\error_log_reg.$proc$rtl/error_log_reg.sv:223$18'.
+No latch inferred for signal `\error_log_reg.\reg_read_data' from process `\error_log_reg.$proc$rtl/error_log_reg.sv:156$10'.
+No latch inferred for signal `\error_log_reg.\reg_read_valid' from process `\error_log_reg.$proc$rtl/error_log_reg.sv:156$10'.
+No latch inferred for signal `\error_log_reg.\any_error_detected' from process `\error_log_reg.$proc$rtl/error_log_reg.sv:96$1'.
+No latch inferred for signal `\error_log_reg.\error_type_flags' from process `\error_log_reg.$proc$rtl/error_log_reg.sv:96$1'.
+No latch inferred for signal `\error_log_reg.\reg_err_type_flags' from process `\error_log_reg.$proc$rtl/error_log_reg.sv:96$1'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\error_log_reg.\reg_err_status' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+  created $dff cell `$procdff$189' with positive edge clock.
+Creating register for signal `\error_log_reg.\reg_ecc_err_count' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+  created $dff cell `$procdff$192' with positive edge clock.
+Creating register for signal `\error_log_reg.\reg_crc_err_count' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+  created $dff cell `$procdff$195' with positive edge clock.
+Creating register for signal `\error_log_reg.\reg_par_err_count' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+  created $dff cell `$procdff$198' with positive edge clock.
+Creating register for signal `\error_log_reg.\reg_sbe_count' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+  created $dff cell `$procdff$201' with positive edge clock.
+Creating register for signal `\error_log_reg.\reg_dbe_count' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+  created $dff cell `$procdff$204' with positive edge clock.
+Creating register for signal `\error_log_reg.\reg_err_ctrl' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+  created $adff cell `$procdff$205' with positive edge clock and negative level reset.
+Creating register for signal `\error_log_reg.\reg_int_enable' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+  created $adff cell `$procdff$206' with positive edge clock and negative level reset.
+Creating register for signal `\error_log_reg.\reg_int_status' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+  created $dff cell `$procdff$209' with positive edge clock.
+Creating register for signal `\error_log_reg.\reg_err_status' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+  created $adff cell `$procdff$210' with positive edge clock and negative level reset.
+Creating register for signal `\error_log_reg.\reg_ecc_err_count' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+  created $adff cell `$procdff$211' with positive edge clock and negative level reset.
+Creating register for signal `\error_log_reg.\reg_crc_err_count' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+  created $adff cell `$procdff$212' with positive edge clock and negative level reset.
+Creating register for signal `\error_log_reg.\reg_par_err_count' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+  created $adff cell `$procdff$213' with positive edge clock and negative level reset.
+Creating register for signal `\error_log_reg.\reg_sbe_count' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+  created $adff cell `$procdff$214' with positive edge clock and negative level reset.
+Creating register for signal `\error_log_reg.\reg_dbe_count' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+  created $adff cell `$procdff$215' with positive edge clock and negative level reset.
+Creating register for signal `\error_log_reg.\reg_last_err_addr' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+  created $adff cell `$procdff$216' with positive edge clock and negative level reset.
+Creating register for signal `\error_log_reg.\reg_int_status' using process `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+  created $adff cell `$procdff$217' with positive edge clock and negative level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `error_log_reg.$proc$rtl/error_log_reg.sv:223$18'.
+Found and cleaned up 3 empty switches in `\error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+Removing empty process `error_log_reg.$proc$rtl/error_log_reg.sv:181$12'.
+Found and cleaned up 2 empty switches in `\error_log_reg.$proc$rtl/error_log_reg.sv:156$10'.
+Removing empty process `error_log_reg.$proc$rtl/error_log_reg.sv:156$10'.
+Found and cleaned up 10 empty switches in `\error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+Removing empty process `error_log_reg.$proc$rtl/error_log_reg.sv:111$3'.
+Removing empty process `error_log_reg.$proc$rtl/error_log_reg.sv:96$1'.
+Cleaned up 15 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+<suppressed ~5 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+<suppressed ~30 debug messages>
+Removed a total of 10 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \error_log_reg..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$123.
+Removed 1 multiplexer ports.
+<suppressed ~24 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \error_log_reg.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$209 ($dff) from module error_log_reg (D = $and$rtl/error_log_reg.sv:205$16_Y, Q = \reg_int_status).
+Adding EN signal on $procdff$210 ($adff) from module error_log_reg (D = 1'1, Q = \reg_err_status [2]).
+Adding EN signal on $procdff$210 ($adff) from module error_log_reg (D = 1'1, Q = \reg_err_status [1]).
+Adding EN signal on $procdff$210 ($adff) from module error_log_reg (D = 1'1, Q = \reg_err_status [0]).
+Adding EN signal on $procdff$210 ($adff) from module error_log_reg (D = \err_position_in, Q = \reg_err_status [31:24]).
+Adding EN signal on $procdff$210 ($adff) from module error_log_reg (D = \reg_err_status [23:3], Q = \reg_err_status [23:3]).
+Handling D = Q on $auto$ff.cc:266:slice$233 ($adffe) from module error_log_reg (removing D path).
+Adding EN signal on $procdff$211 ($adff) from module error_log_reg (D = { 16'0000000000000000 \ecc_err_cnt_in }, Q = \reg_ecc_err_count).
+Adding EN signal on $procdff$212 ($adff) from module error_log_reg (D = { 16'0000000000000000 \crc_err_cnt_in }, Q = \reg_crc_err_count).
+Adding EN signal on $procdff$213 ($adff) from module error_log_reg (D = { 16'0000000000000000 \par_err_cnt_in }, Q = \reg_par_err_count).
+Adding EN signal on $procdff$214 ($adff) from module error_log_reg (D = $add$rtl/error_log_reg.sv:126$5_Y, Q = \reg_sbe_count).
+Adding EN signal on $procdff$215 ($adff) from module error_log_reg (D = $add$rtl/error_log_reg.sv:127$6_Y, Q = \reg_dbe_count).
+Adding EN signal on $procdff$216 ($adff) from module error_log_reg (D = \err_addr_in, Q = \reg_last_err_addr).
+Adding EN signal on $procdff$217 ($adff) from module error_log_reg (D = 1'1, Q = \reg_int_status [2]).
+Adding EN signal on $procdff$217 ($adff) from module error_log_reg (D = 1'1, Q = \reg_int_status [1]).
+Adding EN signal on $procdff$217 ($adff) from module error_log_reg (D = 1'1, Q = \reg_int_status [0]).
+Adding EN signal on $procdff$217 ($adff) from module error_log_reg (D = \reg_int_status [31:3], Q = \reg_int_status [31:3]).
+Handling D = Q on $auto$ff.cc:266:slice$263 ($adffe) from module error_log_reg (removing D path).
+Adding EN signal on $procdff$206 ($adff) from module error_log_reg (D = \reg_write_data, Q = \reg_int_enable).
+Adding EN signal on $procdff$189 ($dff) from module error_log_reg (D = 0, Q = \reg_err_status).
+Adding EN signal on $procdff$192 ($dff) from module error_log_reg (D = 0, Q = \reg_ecc_err_count).
+Adding EN signal on $procdff$195 ($dff) from module error_log_reg (D = 0, Q = \reg_crc_err_count).
+Adding EN signal on $procdff$198 ($dff) from module error_log_reg (D = 0, Q = \reg_par_err_count).
+Adding EN signal on $procdff$201 ($dff) from module error_log_reg (D = 0, Q = \reg_sbe_count).
+Adding EN signal on $procdff$204 ($dff) from module error_log_reg (D = 0, Q = \reg_dbe_count).
+Adding EN signal on $procdff$205 ($adff) from module error_log_reg (D = \reg_write_data, Q = \reg_err_ctrl).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 3 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 4 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 5 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 6 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 7 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 8 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 9 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 10 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 11 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 12 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 13 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 14 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 15 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$263 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 3 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 4 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 5 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 6 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 7 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 8 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 9 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 10 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 11 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 12 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 13 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 14 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 15 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$233 ($dlatch) from module error_log_reg.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 3 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 4 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 5 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 6 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 7 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 8 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 9 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 10 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 11 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 12 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 13 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 14 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 15 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 29 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 30 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 31 on $auto$ff.cc:266:slice$284 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 3 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 4 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 5 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 6 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 7 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 8 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 9 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 10 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 11 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 12 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 13 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 14 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 15 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 29 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 30 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 31 on $auto$ff.cc:266:slice$281 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 3 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 4 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 5 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 6 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 7 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 8 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 9 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 10 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 11 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 12 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 13 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 14 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 15 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 29 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 30 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 31 on $auto$ff.cc:266:slice$278 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 3 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 4 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 5 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 6 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 7 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 8 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 9 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 10 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 11 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 12 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 13 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 14 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 15 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 29 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 30 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 31 on $auto$ff.cc:266:slice$275 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 3 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 4 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 5 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 6 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 7 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 8 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 9 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 10 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 11 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 12 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 13 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 14 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 15 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 29 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 30 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 31 on $auto$ff.cc:266:slice$272 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 2 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 3 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 4 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 5 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 6 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 7 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 8 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 9 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 10 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 11 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 12 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 13 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 14 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 15 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 29 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 30 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 31 on $auto$ff.cc:266:slice$269 ($dffe) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 29 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 30 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 31 on $auto$ff.cc:266:slice$242 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 29 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 30 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 31 on $auto$ff.cc:266:slice$239 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 29 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 30 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+Setting constant 0-bit at position 31 on $auto$ff.cc:266:slice$236 ($adffe) from module error_log_reg.
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+Warning: Driver-driver conflict for \reg_int_status [31] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [30] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [29] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [28] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [27] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [26] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [25] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [24] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [23] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [22] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [21] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [20] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [19] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [18] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [17] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [16] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [15] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [14] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [13] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [12] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [11] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [10] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [9] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [8] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [7] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [6] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [5] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [4] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_int_status [3] between cell $auto$ff.cc:266:slice$218.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [15] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [14] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [13] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [12] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [11] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [10] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [9] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [8] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [7] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [6] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [5] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [4] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [3] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [2] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [1] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_crc_err_count [0] between cell $auto$ff.cc:266:slice$291.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [15] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [14] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [13] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [12] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [11] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [10] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [9] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [8] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [7] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [6] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [5] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [4] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [3] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [2] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [1] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_par_err_count [0] between cell $auto$ff.cc:266:slice$290.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [31] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [30] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [29] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [28] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [27] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [26] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [25] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [24] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [23] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [22] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [21] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [20] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [19] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [18] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [17] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [16] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [15] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [14] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [13] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [12] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [11] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [10] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [9] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [8] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [7] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [6] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [5] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [4] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [3] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [2] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [1] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_sbe_count [0] between cell $auto$ff.cc:266:slice$245.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [31] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [30] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [29] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [28] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [27] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [26] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [25] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [24] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [23] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [22] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [21] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [20] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [19] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [18] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [17] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [16] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [15] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [14] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [13] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [12] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [11] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [10] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [9] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [8] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [7] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [6] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [5] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [4] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [3] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [2] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [1] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_dbe_count [0] between cell $auto$ff.cc:266:slice$248.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [2] between cell $auto$ff.cc:266:slice$221.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [1] between cell $auto$ff.cc:266:slice$224.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [0] between cell $auto$ff.cc:266:slice$227.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [31] between cell $auto$ff.cc:266:slice$230.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [30] between cell $auto$ff.cc:266:slice$230.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [29] between cell $auto$ff.cc:266:slice$230.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [28] between cell $auto$ff.cc:266:slice$230.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [27] between cell $auto$ff.cc:266:slice$230.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [26] between cell $auto$ff.cc:266:slice$230.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [25] between cell $auto$ff.cc:266:slice$230.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_err_status [24] between cell $auto$ff.cc:266:slice$230.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [15] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [14] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [13] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [12] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [11] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [10] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [9] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [8] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [7] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [6] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [5] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [4] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [3] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [2] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [1] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Warning: Driver-driver conflict for \reg_ecc_err_count [0] between cell $auto$ff.cc:266:slice$292.Q and constant 1'0 in error_log_reg: Resolved using constant.
+Removed 89 unused cells and 169 unused wires.
+<suppressed ~90 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+<suppressed ~3 debug messages>
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \error_log_reg..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \error_log_reg.
+    New input vector for $reduce_or cell $reduce_or$rtl/error_log_reg.sv:217$17: \reg_int_status [2:0]
+    New ctrl vector for $pmux cell $procmux$112: { $procmux$116_CMP $procmux$107_CMP $procmux$114_CMP $procmux$113_CMP }
+  Optimizing cells in module \error_log_reg.
+Performed a total of 2 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+Removed 6 unused cells and 7 unused wires.
+<suppressed ~7 debug messages>
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+4.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \error_log_reg..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \error_log_reg.
+Performed a total of 0 changes.
+
+4.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+4.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+
+4.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+4.23. Finished OPT passes. (There is nothing left to do.)
+
+5. Executing FSM pass (extract and optimize FSM).
+
+5.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+
+5.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \error_log_reg..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \error_log_reg.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+6.9. Finished OPT passes. (There is nothing left to do.)
+
+7. Executing MEMORY pass.
+
+7.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+7.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+7.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+7.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+7.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+
+7.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+7.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+7.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+
+7.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+7.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \error_log_reg..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \error_log_reg.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+8.9. Finished OPT passes. (There is nothing left to do.)
+
+9. Executing TECHMAP pass (map to technology primitives).
+
+9.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+9.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod$b098bc6f249c0ac91c4d6e19d54b23c285914115\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $adffe.
+No more expansions possible.
+<suppressed ~153 debug messages>
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+<suppressed ~107 debug messages>
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+<suppressed ~102 debug messages>
+Removed a total of 34 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \error_log_reg..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \error_log_reg.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+Handling D = Q on $auto$ff.cc:266:slice$590 ($_DFFE_PP_) from module error_log_reg (removing D path).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+Removed 29 unused cells and 130 unused wires.
+<suppressed ~30 debug messages>
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+10.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \error_log_reg..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \error_log_reg.
+Performed a total of 0 changes.
+
+10.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+10.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+
+10.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+10.16. Finished OPT passes. (There is nothing left to do.)
+
+11. Executing ABC pass (technology mapping using ABC).
+
+11.1. Extracting gate netlist of module `\error_log_reg' to `<abc-temp-dir>/input.blif'..
+Extracted 278 gates and 392 wires to a netlist network with 113 inputs and 45 outputs.
+
+11.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 7 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+11.1.2. Re-integrating ABC results.
+ABC RESULTS:               NOT cells:        9
+ABC RESULTS:                OR cells:       72
+ABC RESULTS:               AND cells:      157
+ABC RESULTS:        internal signals:      234
+ABC RESULTS:           input signals:      113
+ABC RESULTS:          output signals:       45
+Removing temp directory.
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \error_log_reg..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \error_log_reg.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+Removed 0 unused cells and 218 unused wires.
+<suppressed ~1 debug messages>
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+12.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \error_log_reg..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \error_log_reg.
+Performed a total of 0 changes.
+
+12.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\error_log_reg'.
+Removed a total of 0 cells.
+
+12.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \error_log_reg..
+
+12.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module error_log_reg.
+
+12.16. Finished OPT passes. (There is nothing left to do.)
+
+13. Executing Verilog backend.
+
+13.1. Executing BMUXMAP pass.
+
+13.2. Executing DEMUXMAP pass.
+Dumping module `\error_log_reg'.
+
+14. Executing JSON backend.
+
+15. Printing statistics.
+
+=== error_log_reg ===
+
+   Number of wires:                238
+   Number of wire bits:            741
+   Number of public wires:          35
+   Number of public wire bits:     538
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                340
+     $_AND_                        157
+     $_DFFE_PN0P_                   99
+     $_DFFE_PP_                      3
+     $_NOT_                          9
+     $_OR_                          72
+
+Warnings: 153 unique messages, 153 total
+End of script. Logfile hash: fee6b9f951, CPU: user 0.25s system 0.01s, MEM: 13.94 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 25% 1x abc (0 sec), 22% 15x opt_expr (0 sec), ...

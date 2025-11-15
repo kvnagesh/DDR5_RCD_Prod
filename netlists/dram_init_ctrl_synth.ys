@@ -1,0 +1,9 @@
+read_verilog -sv rtl/dram_init_ctrl.sv
+hierarchy -check -top dram_init_ctrl
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/dram_init_ctrl_netlist.v
+write_json netlists/dram_init_ctrl.json
+stat -top dram_init_ctrl

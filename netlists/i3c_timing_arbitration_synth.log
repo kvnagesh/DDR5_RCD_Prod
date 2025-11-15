@@ -1,0 +1,623 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `netlists/i3c_timing_arbitration_synth.ys' --
+
+1. Executing Verilog-2005 frontend: rtl/i3c_timing_arbitration.sv
+Parsing SystemVerilog input from `rtl/i3c_timing_arbitration.sv' to AST representation.
+Generating RTLIL representation for module `\i3c_timing_arbitration'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \i3c_timing_arbitration
+
+2.2. Analyzing design hierarchy..
+Top module:  \i3c_timing_arbitration
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 4 switch rules as full_case in process $proc$rtl/i3c_timing_arbitration.sv:131$33 in module i3c_timing_arbitration.
+Marked 2 switch rules as full_case in process $proc$rtl/i3c_timing_arbitration.sv:115$31 in module i3c_timing_arbitration.
+Marked 7 switch rules as full_case in process $proc$rtl/i3c_timing_arbitration.sv:64$13 in module i3c_timing_arbitration.
+Marked 1 switch rules as full_case in process $proc$rtl/i3c_timing_arbitration.sv:49$3 in module i3c_timing_arbitration.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 10 redundant assignments.
+Promoted 7 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:115$31'.
+Found async reset \rst_n in `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:64$13'.
+Found async reset \rst_n in `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:49$3'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~13 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:157$52'.
+Creating decoders for process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:131$33'.
+     1/13: $2\arbitration_status[7:0]
+     2/13: $2\arbitration_lost[0:0]
+     3/13: $2\gain_bus[1:0]
+     4/13: $3$unnamed_block$2.min_idx[31:0]$47
+     5/13: $3$unnamed_block$2.min_pri[31:0]$48
+     6/13: $2$unnamed_block$2.min_idx[31:0]$43
+     7/13: $2$unnamed_block$2.min_pri[31:0]$44
+     8/13: $1\arbitration_status[7:0]
+     9/13: $1\gain_bus[1:0]
+    10/13: $1\arbitration_lost[0:0]
+    11/13: $1$unnamed_block$2.i[31:0]$38
+    12/13: $1$unnamed_block$2.min_pri[31:0]$40
+    13/13: $1$unnamed_block$2.min_idx[31:0]$39
+Creating decoders for process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:115$31'.
+     1/2: $0\bus_clear[0:0]
+     2/2: $0\bus_error[0:0]
+Creating decoders for process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:64$13'.
+     1/6: $0\sda_hold_cnt[31:0]
+     2/6: $0\sda_setup_cnt[31:0]
+     3/6: $0\timing_fault[3:0]
+     4/6: $0\timing_violation[0:0]
+     5/6: $0\scl_low_cnt[31:0]
+     6/6: $0\scl_high_cnt[31:0]
+Creating decoders for process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:49$3'.
+     1/2: $0\sda_prev[0:0]
+     2/2: $0\scl_prev[0:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\i3c_timing_arbitration.\violation_capture' from process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:157$52'.
+No latch inferred for signal `\i3c_timing_arbitration.\arbitration_lost' from process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:131$33'.
+No latch inferred for signal `\i3c_timing_arbitration.\gain_bus' from process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:131$33'.
+No latch inferred for signal `\i3c_timing_arbitration.\arbitration_status' from process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:131$33'.
+Latch inferred for signal `\i3c_timing_arbitration.$unnamed_block$2.i' from process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:131$33': $auto$proc_dlatch.cc:427:proc_dlatch$172
+Latch inferred for signal `\i3c_timing_arbitration.$unnamed_block$2.min_idx' from process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:131$33': $auto$proc_dlatch.cc:427:proc_dlatch$175
+Latch inferred for signal `\i3c_timing_arbitration.$unnamed_block$2.min_pri' from process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:131$33': $auto$proc_dlatch.cc:427:proc_dlatch$178
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\i3c_timing_arbitration.\bus_error' using process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:115$31'.
+  created $adff cell `$procdff$179' with positive edge clock and negative level reset.
+Creating register for signal `\i3c_timing_arbitration.\bus_clear' using process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:115$31'.
+  created $adff cell `$procdff$180' with positive edge clock and negative level reset.
+Creating register for signal `\i3c_timing_arbitration.\timing_violation' using process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:64$13'.
+  created $adff cell `$procdff$181' with positive edge clock and negative level reset.
+Creating register for signal `\i3c_timing_arbitration.\timing_fault' using process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:64$13'.
+  created $adff cell `$procdff$182' with positive edge clock and negative level reset.
+Creating register for signal `\i3c_timing_arbitration.\scl_high_cnt' using process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:64$13'.
+  created $adff cell `$procdff$183' with positive edge clock and negative level reset.
+Creating register for signal `\i3c_timing_arbitration.\scl_low_cnt' using process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:64$13'.
+  created $adff cell `$procdff$184' with positive edge clock and negative level reset.
+Creating register for signal `\i3c_timing_arbitration.\sda_setup_cnt' using process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:64$13'.
+  created $adff cell `$procdff$185' with positive edge clock and negative level reset.
+Creating register for signal `\i3c_timing_arbitration.\sda_hold_cnt' using process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:64$13'.
+  created $adff cell `$procdff$186' with positive edge clock and negative level reset.
+Creating register for signal `\i3c_timing_arbitration.\scl_prev' using process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:49$3'.
+  created $adff cell `$procdff$187' with positive edge clock and negative level reset.
+Creating register for signal `\i3c_timing_arbitration.\sda_prev' using process `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:49$3'.
+  created $adff cell `$procdff$188' with positive edge clock and negative level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:157$52'.
+Found and cleaned up 4 empty switches in `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:131$33'.
+Removing empty process `i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:131$33'.
+Found and cleaned up 1 empty switch in `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:115$31'.
+Removing empty process `i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:115$31'.
+Found and cleaned up 8 empty switches in `\i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:64$13'.
+Removing empty process `i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:64$13'.
+Removing empty process `i3c_timing_arbitration.$proc$rtl/i3c_timing_arbitration.sv:49$3'.
+Cleaned up 13 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+<suppressed ~14 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+<suppressed ~4 debug messages>
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \i3c_timing_arbitration..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$69.
+    dead port 2/2 on $mux $procmux$63.
+    dead port 2/2 on $mux $procmux$57.
+Removed 3 multiplexer ports.
+<suppressed ~16 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \i3c_timing_arbitration.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 1-bit at position 1 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 2 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 3 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 4 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 5 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 6 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 7 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 8 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 9 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 10 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 11 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 12 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 13 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 14 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 15 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 16 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 17 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 18 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 19 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 20 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 21 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 22 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 23 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 24 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 25 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 26 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 27 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 28 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 29 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 30 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+Setting constant 0-bit at position 31 on $auto$proc_dlatch.cc:427:proc_dlatch$172 ($dlatch) from module i3c_timing_arbitration.
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+Removed 6 unused cells and 100 unused wires.
+<suppressed ~7 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \i3c_timing_arbitration..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~14 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \i3c_timing_arbitration.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+4.16. Finished OPT passes. (There is nothing left to do.)
+
+5. Executing FSM pass (extract and optimize FSM).
+
+5.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking i3c_timing_arbitration.timing_fault as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+
+5.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+
+5.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \i3c_timing_arbitration..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~14 debug messages>
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \i3c_timing_arbitration.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+6.9. Finished OPT passes. (There is nothing left to do.)
+
+7. Executing MEMORY pass.
+
+7.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+7.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+7.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+7.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+7.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+
+7.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+7.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+7.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+
+7.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+7.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+Removed a total of 0 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \i3c_timing_arbitration..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~14 debug messages>
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \i3c_timing_arbitration.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+Removed a total of 0 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+8.9. Finished OPT passes. (There is nothing left to do.)
+
+9. Executing TECHMAP pass (map to technology primitives).
+
+9.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+9.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $and.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=31:Y_WIDTH=31:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=31:Y_WIDTH=31:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=31:Y_WIDTH=31:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $reduce_or.
+Running "alumacc" on wrapper $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=1:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=1:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=1:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$constmap:abfe35ded68e19adad3a25ff8a50337f6df94537$paramod$1a9f128667226583ebcf3b88496dd70eb875d61c\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$constmap:9bf0b291813f3a5c4ba55038d9f7ae0336b57c10$paramod$bbf4b179f3f7f63a46da2d3d9d298d80dabfbcd8\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $adff.
+Using template $paramod$2653f68ddb8eab7b1907b4a20767b72a824a7a36\_90_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc.
+  add \scl_high_cnt * 31'0000000000000000000000000000101 (32x31 bits, signed)
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $xor.
+  add \scl_low_cnt * 31'0000000000000000000000000000101 (32x31 bits, signed)
+  add \sda_setup_cnt * 31'0000000000000000000000000000101 (32x31 bits, signed)
+  add \sda_hold_cnt * 31'0000000000000000000000000000101 (32x31 bits, signed)
+Using template $paramod$6a42b6fefed750f8a1c58eab59479d960557103c\_90_alu for cells of type $alu.
+Using template $paramod$91f82ead1edc61e0a1452110f15ef747116b421b\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000011111 for cells of type $fa.
+Using template $paramod$ebf89ea36a793f0f77858f212141d47c833068ad\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011111 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~4339 debug messages>
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+<suppressed ~23405 debug messages>
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+<suppressed ~483 debug messages>
+Removed a total of 161 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \i3c_timing_arbitration..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \i3c_timing_arbitration.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$1183 ($_DFF_PN0_) from module i3c_timing_arbitration.
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+Removed 529 unused cells and 3590 unused wires.
+<suppressed ~530 debug messages>
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+10.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \i3c_timing_arbitration..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \i3c_timing_arbitration.
+Performed a total of 0 changes.
+
+10.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+Removed a total of 0 cells.
+
+10.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+
+10.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+10.16. Finished OPT passes. (There is nothing left to do.)
+
+11. Executing ABC pass (technology mapping using ABC).
+
+11.1. Extracting gate netlist of module `\i3c_timing_arbitration' to `<abc-temp-dir>/input.blif'..
+Extracted 2826 gates and 2962 wires to a netlist network with 134 inputs and 133 outputs.
+
+11.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 7 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+11.1.2. Re-integrating ABC results.
+ABC RESULTS:                OR cells:      316
+ABC RESULTS:               NOT cells:      106
+ABC RESULTS:               XOR cells:      930
+ABC RESULTS:               AND cells:     1213
+ABC RESULTS:        internal signals:     2695
+ABC RESULTS:           input signals:      134
+ABC RESULTS:          output signals:      133
+Removing temp directory.
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \i3c_timing_arbitration..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \i3c_timing_arbitration.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+Removed 0 unused cells and 788 unused wires.
+<suppressed ~5 debug messages>
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+12.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \i3c_timing_arbitration..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \i3c_timing_arbitration.
+Performed a total of 0 changes.
+
+12.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\i3c_timing_arbitration'.
+Removed a total of 0 cells.
+
+12.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \i3c_timing_arbitration..
+
+12.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module i3c_timing_arbitration.
+
+12.16. Finished OPT passes. (There is nothing left to do.)
+
+13. Executing Verilog backend.
+
+13.1. Executing BMUXMAP pass.
+
+13.2. Executing DEMUXMAP pass.
+Dumping module `\i3c_timing_arbitration'.
+
+14. Executing JSON backend.
+
+15. Printing statistics.
+
+=== i3c_timing_arbitration ===
+
+   Number of wires:               2459
+   Number of wire bits:           2755
+   Number of public wires:          21
+   Number of public wire bits:     190
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               2696
+     $_AND_                       1213
+     $_DFF_PN0_                    131
+     $_NOT_                        106
+     $_OR_                         316
+     $_XOR_                        930
+
+End of script. Logfile hash: 0ed1ef01a2, CPU: user 1.74s system 0.04s, MEM: 84.82 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 28% 22x opt_expr (0 sec), 25% 1x abc (0 sec), ...

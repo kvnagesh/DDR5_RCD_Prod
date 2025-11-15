@@ -1,0 +1,9 @@
+read_verilog -sv rtl/clock_gate.sv
+hierarchy -check -top clock_gate
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog clock_gate_netlist.v
+write_json clock_gate.json
+stat

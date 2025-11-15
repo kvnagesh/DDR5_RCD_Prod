@@ -1,0 +1,9 @@
+read_verilog -sv rtl/register_map.sv
+hierarchy -check -top register_map
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/register_map_netlist.v
+write_json netlists/register_map.json
+stat -top register_map

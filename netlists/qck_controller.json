@@ -1,0 +1,2629 @@
+{
+  "creator": "Yosys 0.33 (git sha1 2584903a060)",
+  "modules": {
+    "qck_controller": {
+      "attributes": {
+        "dynports": "00000000000000000000000000000001",
+        "top": "00000000000000000000000000000001",
+        "src": "rtl/qck_controller.sv:27.1-107.10"
+      },
+      "parameter_default_values": {
+        "CHANNELS": "00000000000000000000000000001000",
+        "DELAY_WIDTH": "00000000000000000000000000000100",
+        "PIPELINE_DEPTH": "00000000000000000000000000000010"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "reset_n": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "ck_en": {
+          "direction": "input",
+          "bits": [ 4, 5, 6, 7, 8, 9, 10, 11 ]
+        },
+        "ca_ctrl": {
+          "direction": "input",
+          "bits": [ 12 ]
+        },
+        "qca_ctrl": {
+          "direction": "input",
+          "bits": [ 13 ]
+        },
+        "qck_mask": {
+          "direction": "input",
+          "bits": [ 14, 15, 16, 17, 18, 19, 20, 21 ]
+        },
+        "skip_req": {
+          "direction": "input",
+          "bits": [ 22, 23, 24, 25, 26, 27, 28, 29 ]
+        },
+        "prog_delay": {
+          "direction": "input",
+          "bits": [ 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61 ]
+        },
+        "ck_out": {
+          "direction": "output",
+          "bits": [ 62, 63, 64, 65, 66, 67, 68, 69 ]
+        },
+        "error": {
+          "direction": "output",
+          "bits": [ 70, 71, 72, 73, 74, 75, 76, 77 ]
+        }
+      },
+      "cells": {
+        "$abc$327$auto$blifparse.cc:386:parse_blif$328": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 78 ],
+            "Y": [ 79 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$329": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 80 ],
+            "Y": [ 81 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$330": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 82 ],
+            "Y": [ 83 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$331": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 84 ],
+            "Y": [ 85 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$332": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 86 ],
+            "Y": [ 87 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$333": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 88 ],
+            "Y": [ 89 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$334": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 90 ],
+            "Y": [ 91 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$335": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 92 ],
+            "Y": [ 93 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$336": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 94 ],
+            "Y": [ 95 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$337": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 96 ],
+            "Y": [ 97 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$338": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 98 ],
+            "Y": [ 99 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$339": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 100 ],
+            "Y": [ 101 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$340": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 102 ],
+            "Y": [ 103 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$341": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 104 ],
+            "Y": [ 105 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$342": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 106 ],
+            "Y": [ 107 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$343": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 108 ],
+            "Y": [ 109 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$344": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 109 ],
+            "B": [ 110 ],
+            "Y": [ 111 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$345": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 78 ],
+            "B": [ 111 ],
+            "Y": [ 112 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$346": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 107 ],
+            "B": [ 113 ],
+            "Y": [ 114 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$347": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 80 ],
+            "B": [ 114 ],
+            "Y": [ 115 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$348": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 105 ],
+            "B": [ 116 ],
+            "Y": [ 117 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$349": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 82 ],
+            "B": [ 117 ],
+            "Y": [ 118 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$350": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 103 ],
+            "B": [ 119 ],
+            "Y": [ 120 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$351": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 84 ],
+            "B": [ 120 ],
+            "Y": [ 121 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$352": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 101 ],
+            "B": [ 122 ],
+            "Y": [ 123 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$353": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 86 ],
+            "B": [ 123 ],
+            "Y": [ 124 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$354": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 99 ],
+            "B": [ 125 ],
+            "Y": [ 126 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$355": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 88 ],
+            "B": [ 126 ],
+            "Y": [ 127 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$356": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 97 ],
+            "B": [ 128 ],
+            "Y": [ 129 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$357": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 90 ],
+            "B": [ 129 ],
+            "Y": [ 130 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$358": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 95 ],
+            "B": [ 131 ],
+            "Y": [ 132 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$359": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 92 ],
+            "B": [ 132 ],
+            "Y": [ 133 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$360": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 93 ],
+            "B": [ 94 ],
+            "Y": [ 134 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$361": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 131 ],
+            "B": [ 134 ],
+            "Y": [ 135 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$362": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 91 ],
+            "B": [ 96 ],
+            "Y": [ 136 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$363": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 128 ],
+            "B": [ 136 ],
+            "Y": [ 137 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$364": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 89 ],
+            "B": [ 98 ],
+            "Y": [ 138 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$365": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 125 ],
+            "B": [ 138 ],
+            "Y": [ 139 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$366": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 87 ],
+            "B": [ 100 ],
+            "Y": [ 140 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$367": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 122 ],
+            "B": [ 140 ],
+            "Y": [ 141 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$368": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 85 ],
+            "B": [ 102 ],
+            "Y": [ 142 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$369": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 119 ],
+            "B": [ 142 ],
+            "Y": [ 143 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$370": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 83 ],
+            "B": [ 104 ],
+            "Y": [ 144 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$371": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 116 ],
+            "B": [ 144 ],
+            "Y": [ 145 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$372": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 81 ],
+            "B": [ 106 ],
+            "Y": [ 146 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$373": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 113 ],
+            "B": [ 146 ],
+            "Y": [ 147 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$374": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 79 ],
+            "B": [ 108 ],
+            "Y": [ 148 ]
+          }
+        },
+        "$abc$327$auto$blifparse.cc:386:parse_blif$375": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 110 ],
+            "B": [ 148 ],
+            "Y": [ 149 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$263": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 133 ],
+            "Q": [ 62 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$264": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 130 ],
+            "Q": [ 63 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$265": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 127 ],
+            "Q": [ 64 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$266": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 124 ],
+            "Q": [ 65 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$267": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 121 ],
+            "Q": [ 66 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$268": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 118 ],
+            "Q": [ 67 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$269": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 115 ],
+            "Q": [ 68 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$270": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 112 ],
+            "Q": [ 69 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$271": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 135 ],
+            "Q": [ 70 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$272": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 137 ],
+            "Q": [ 71 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$273": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 139 ],
+            "Q": [ 72 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$274": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 141 ],
+            "Q": [ 73 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$275": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 143 ],
+            "Q": [ 74 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$276": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 145 ],
+            "Q": [ 75 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$277": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 147 ],
+            "Q": [ 76 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$278": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 149 ],
+            "Q": [ 77 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$279": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 4 ],
+            "Q": [ 150 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$280": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 5 ],
+            "Q": [ 151 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$281": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 6 ],
+            "Q": [ 152 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$282": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 7 ],
+            "Q": [ 153 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$283": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 8 ],
+            "Q": [ 154 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$284": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 9 ],
+            "Q": [ 155 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$285": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 10 ],
+            "Q": [ 156 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$286": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 11 ],
+            "Q": [ 157 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$287": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 150 ],
+            "Q": [ 131 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$288": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 151 ],
+            "Q": [ 128 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$289": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 152 ],
+            "Q": [ 125 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$290": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 153 ],
+            "Q": [ 122 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$291": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 154 ],
+            "Q": [ 119 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$292": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 155 ],
+            "Q": [ 116 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$293": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 156 ],
+            "Q": [ 113 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$294": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 157 ],
+            "Q": [ 110 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$295": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 14 ],
+            "Q": [ 158 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$296": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 15 ],
+            "Q": [ 159 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$297": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 16 ],
+            "Q": [ 160 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$298": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 17 ],
+            "Q": [ 161 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$299": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 18 ],
+            "Q": [ 162 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$300": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 19 ],
+            "Q": [ 163 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$301": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 20 ],
+            "Q": [ 164 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$302": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 21 ],
+            "Q": [ 165 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$303": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 158 ],
+            "Q": [ 94 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$304": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 159 ],
+            "Q": [ 96 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$305": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 160 ],
+            "Q": [ 98 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$306": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 161 ],
+            "Q": [ 100 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$307": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 162 ],
+            "Q": [ 102 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$308": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 163 ],
+            "Q": [ 104 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$309": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 164 ],
+            "Q": [ 106 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$310": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 165 ],
+            "Q": [ 108 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$311": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 22 ],
+            "Q": [ 166 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$312": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 23 ],
+            "Q": [ 167 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$313": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 24 ],
+            "Q": [ 168 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$314": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 25 ],
+            "Q": [ 169 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$315": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 26 ],
+            "Q": [ 170 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$316": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 27 ],
+            "Q": [ 171 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$317": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 28 ],
+            "Q": [ 172 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$318": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 29 ],
+            "Q": [ 173 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$319": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 166 ],
+            "Q": [ 92 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$320": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 167 ],
+            "Q": [ 90 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$321": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 168 ],
+            "Q": [ 88 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$322": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 169 ],
+            "Q": [ 86 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$323": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 170 ],
+            "Q": [ 84 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$324": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 171 ],
+            "Q": [ 82 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$325": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 172 ],
+            "Q": [ 80 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$326": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 173 ],
+            "Q": [ 78 ],
+            "R": [ 3 ]
+          }
+        }
+      },
+      "netnames": {
+        "$0\\ck_out[7:0]": {
+          "hide_name": 1,
+          "bits": [ 133, 130, 127, 124, 121, 118, 115, 112 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          }
+        },
+        "$0\\err_detect[7:0]": {
+          "hide_name": 1,
+          "bits": [ 135, 137, 139, 141, 143, 145, 147, 149 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:54.5-86.8"
+          }
+        },
+        "$abc$327$new_n41_": {
+          "hide_name": 1,
+          "bits": [ 79 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n42_": {
+          "hide_name": 1,
+          "bits": [ 81 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n43_": {
+          "hide_name": 1,
+          "bits": [ 83 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n44_": {
+          "hide_name": 1,
+          "bits": [ 85 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n45_": {
+          "hide_name": 1,
+          "bits": [ 87 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n46_": {
+          "hide_name": 1,
+          "bits": [ 89 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n47_": {
+          "hide_name": 1,
+          "bits": [ 91 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n48_": {
+          "hide_name": 1,
+          "bits": [ 93 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n49_": {
+          "hide_name": 1,
+          "bits": [ 95 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n50_": {
+          "hide_name": 1,
+          "bits": [ 97 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n51_": {
+          "hide_name": 1,
+          "bits": [ 99 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n52_": {
+          "hide_name": 1,
+          "bits": [ 101 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n53_": {
+          "hide_name": 1,
+          "bits": [ 103 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n54_": {
+          "hide_name": 1,
+          "bits": [ 105 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n55_": {
+          "hide_name": 1,
+          "bits": [ 107 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n56_": {
+          "hide_name": 1,
+          "bits": [ 109 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n57_": {
+          "hide_name": 1,
+          "bits": [ 111 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n59_": {
+          "hide_name": 1,
+          "bits": [ 114 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n61_": {
+          "hide_name": 1,
+          "bits": [ 117 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n63_": {
+          "hide_name": 1,
+          "bits": [ 120 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n65_": {
+          "hide_name": 1,
+          "bits": [ 123 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n67_": {
+          "hide_name": 1,
+          "bits": [ 126 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n69_": {
+          "hide_name": 1,
+          "bits": [ 129 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n71_": {
+          "hide_name": 1,
+          "bits": [ 132 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n73_": {
+          "hide_name": 1,
+          "bits": [ 134 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n75_": {
+          "hide_name": 1,
+          "bits": [ 136 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n77_": {
+          "hide_name": 1,
+          "bits": [ 138 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n79_": {
+          "hide_name": 1,
+          "bits": [ 140 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n81_": {
+          "hide_name": 1,
+          "bits": [ 142 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n83_": {
+          "hide_name": 1,
+          "bits": [ 144 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n85_": {
+          "hide_name": 1,
+          "bits": [ 146 ],
+          "attributes": {
+          }
+        },
+        "$abc$327$new_n87_": {
+          "hide_name": 1,
+          "bits": [ 148 ],
+          "attributes": {
+          }
+        },
+        "ca_ctrl": {
+          "hide_name": 0,
+          "bits": [ 12 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:35.41-35.48"
+          }
+        },
+        "ck_en": {
+          "hide_name": 0,
+          "bits": [ 4, 5, 6, 7, 8, 9, 10, 11 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:34.41-34.46"
+          }
+        },
+        "ck_out": {
+          "hide_name": 0,
+          "bits": [ 62, 63, 64, 65, 66, 67, 68, 69 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:40.41-40.47"
+          }
+        },
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:32.41-32.44"
+          }
+        },
+        "en_pipe[0]": {
+          "hide_name": 0,
+          "bits": [ 150, 151, 152, 153, 154, 155, 156, 157 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:45.33-45.40"
+          }
+        },
+        "en_pipe[1]": {
+          "hide_name": 0,
+          "bits": [ 131, 128, 125, 122, 119, 116, 113, 110 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:45.33-45.40"
+          }
+        },
+        "error": {
+          "hide_name": 0,
+          "bits": [ 70, 71, 72, 73, 74, 75, 76, 77 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:41.41-41.46"
+          }
+        },
+        "i": {
+          "hide_name": 0,
+          "bits": [ "0", "0", "0", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+          "signed": 1,
+          "attributes": {
+            "src": "rtl/qck_controller.sv:53.13-53.14"
+          }
+        },
+        "mask_pipe[0]": {
+          "hide_name": 0,
+          "bits": [ 158, 159, 160, 161, 162, 163, 164, 165 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:46.33-46.42"
+          }
+        },
+        "mask_pipe[1]": {
+          "hide_name": 0,
+          "bits": [ 94, 96, 98, 100, 102, 104, 106, 108 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:46.33-46.42"
+          }
+        },
+        "prog_delay": {
+          "hide_name": 0,
+          "bits": [ 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:39.45-39.55"
+          }
+        },
+        "qca_ctrl": {
+          "hide_name": 0,
+          "bits": [ 13 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:36.41-36.49"
+          }
+        },
+        "qck_mask": {
+          "hide_name": 0,
+          "bits": [ 14, 15, 16, 17, 18, 19, 20, 21 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:37.41-37.49"
+          }
+        },
+        "reset_n": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:33.41-33.48"
+          }
+        },
+        "skip_pipe[0]": {
+          "hide_name": 0,
+          "bits": [ 166, 167, 168, 169, 170, 171, 172, 173 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:47.33-47.42"
+          }
+        },
+        "skip_pipe[1]": {
+          "hide_name": 0,
+          "bits": [ 92, 90, 88, 86, 84, 82, 80, 78 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:47.33-47.42"
+          }
+        },
+        "skip_req": {
+          "hide_name": 0,
+          "bits": [ 22, 23, 24, 25, 26, 27, 28, 29 ],
+          "attributes": {
+            "src": "rtl/qck_controller.sv:38.41-38.49"
+          }
+        }
+      }
+    }
+  }
+}

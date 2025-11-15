@@ -1,0 +1,9 @@
+read_verilog -sv rtl/i3c_timing_arbitration.sv
+hierarchy -check -top i3c_timing_arbitration
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/i3c_timing_arbitration_netlist.v
+write_json netlists/i3c_timing_arbitration.json
+stat -top i3c_timing_arbitration

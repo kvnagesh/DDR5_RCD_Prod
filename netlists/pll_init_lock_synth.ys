@@ -1,0 +1,9 @@
+read_verilog -sv rtl/pll_init_lock.sv
+hierarchy -check -top pll_init_lock
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/pll_init_lock_netlist.v
+write_json netlists/pll_init_lock.json
+stat -top pll_init_lock

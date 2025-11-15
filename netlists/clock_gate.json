@@ -1,0 +1,218 @@
+{
+  "creator": "Yosys 0.33 (git sha1 2584903a060)",
+  "modules": {
+    "clock_gate": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "rtl/clock_gate.sv:13.1-237.23"
+      },
+      "parameter_default_values": {
+        "ASYNC_RESET": "0",
+        "SAFE_ENABLE": "1",
+        "USE_LATCH": "1"
+      },
+      "ports": {
+        "clk_in": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "rst_n": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "enable": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "test_mode": {
+          "direction": "input",
+          "bits": [ 5 ]
+        },
+        "clk_out": {
+          "direction": "output",
+          "bits": [ 6 ]
+        }
+      },
+      "cells": {
+        "$abc$113$auto$blifparse.cc:386:parse_blif$114": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 5 ],
+            "B": [ 7 ],
+            "Y": [ 8 ]
+          }
+        },
+        "$abc$113$auto$blifparse.cc:386:parse_blif$115": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 2 ],
+            "B": [ 9 ],
+            "Y": [ 6 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$110": {
+          "hide_name": 1,
+          "type": "$_SDFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/clock_gate.sv:68.9-76.12"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 10 ],
+            "Q": [ 7 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$111": {
+          "hide_name": 1,
+          "type": "$_DLATCH_N_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "rtl/clock_gate.sv:0.0-0.0"
+          },
+          "port_directions": {
+            "D": "input",
+            "E": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "D": [ 8 ],
+            "E": [ 2 ],
+            "Q": [ 9 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$112": {
+          "hide_name": 1,
+          "type": "$_SDFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/clock_gate.sv:68.9-76.12"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 4 ],
+            "Q": [ 10 ],
+            "R": [ 3 ]
+          }
+        }
+      },
+      "netnames": {
+        "clk_gate_en": {
+          "hide_name": 0,
+          "bits": [ 8 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:45.9-45.20"
+          }
+        },
+        "clk_in": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:23.16-23.22"
+          }
+        },
+        "clk_out": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:35.16-35.23"
+          }
+        },
+        "enable": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:29.16-29.22"
+          }
+        },
+        "enable_latched": {
+          "hide_name": 0,
+          "bits": [ 9 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:43.9-43.23"
+          }
+        },
+        "enable_sync": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:42.9-42.20"
+          }
+        },
+        "gen_safe_enable.enable_sync_q1": {
+          "hide_name": 0,
+          "bits": [ 10 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:55.13-55.27"
+          }
+        },
+        "gen_safe_enable.enable_sync_q2": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:55.29-55.43"
+          }
+        },
+        "rst_n": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:24.16-24.21"
+          }
+        },
+        "test_mode": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:30.16-30.25"
+          }
+        },
+        "test_mode_active": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "rtl/clock_gate.sv:46.9-46.25"
+          }
+        }
+      }
+    }
+  }
+}

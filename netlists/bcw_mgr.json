@@ -1,0 +1,331 @@
+{
+  "creator": "Yosys 0.33 (git sha1 2584903a060)",
+  "modules": {
+    "bcw_mgr": {
+      "attributes": {
+        "dynports": "00000000000000000000000000000001",
+        "top": "00000000000000000000000000000001",
+        "src": "rtl/bcw_mgr.sv:20.1-127.10"
+      },
+      "parameter_default_values": {
+        "BCW_WIDTH": "00000000000000000000000000100000",
+        "BURST_MAX": "00000000000000000000000000000100"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "rst_n": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "update_req": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "bcw_reg_in": {
+          "direction": "input",
+          "bits": [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
+        },
+        "update_req_burst": {
+          "direction": "input",
+          "bits": [ 37 ]
+        },
+        "burst_len": {
+          "direction": "input",
+          "bits": [ 38, 39, 40 ]
+        },
+        "update_ack": {
+          "direction": "output",
+          "bits": [ 41 ]
+        },
+        "bcw_reg_out": {
+          "direction": "output",
+          "bits": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ]
+        },
+        "bcw_valid": {
+          "direction": "output",
+          "bits": [ "0" ]
+        },
+        "error": {
+          "direction": "output",
+          "bits": [ "1" ]
+        },
+        "busy": {
+          "direction": "output",
+          "bits": [ "0" ]
+        },
+        "processed_count": {
+          "direction": "output",
+          "bits": [ "0", "0", "0" ]
+        }
+      },
+      "cells": {
+        "$abc$172$auto$blifparse.cc:386:parse_blif$173": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 40 ],
+            "Y": [ 42 ]
+          }
+        },
+        "$abc$172$auto$blifparse.cc:386:parse_blif$174": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 38 ],
+            "B": [ 39 ],
+            "Y": [ 43 ]
+          }
+        },
+        "$abc$172$auto$blifparse.cc:386:parse_blif$175": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 43 ],
+            "Y": [ 44 ]
+          }
+        },
+        "$abc$172$auto$blifparse.cc:386:parse_blif$176": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 42 ],
+            "B": [ 45 ],
+            "Y": [ 46 ]
+          }
+        },
+        "$abc$172$auto$blifparse.cc:386:parse_blif$177": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 44 ],
+            "B": [ 46 ],
+            "Y": [ 41 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$171": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/bcw_mgr.sv:63.5-84.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 37 ],
+            "Q": [ 45 ],
+            "R": [ 3 ]
+          }
+        }
+      },
+      "netnames": {
+        "$abc$172$new_n6_": {
+          "hide_name": 1,
+          "bits": [ 42 ],
+          "attributes": {
+          }
+        },
+        "$abc$172$new_n7_": {
+          "hide_name": 1,
+          "bits": [ 43 ],
+          "attributes": {
+          }
+        },
+        "$abc$172$new_n8_": {
+          "hide_name": 1,
+          "bits": [ 44 ],
+          "attributes": {
+          }
+        },
+        "$abc$172$new_n9_": {
+          "hide_name": 1,
+          "bits": [ 46 ],
+          "attributes": {
+          }
+        },
+        "bcw_reg_in": {
+          "hide_name": 0,
+          "bits": [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:29.39-29.49"
+          }
+        },
+        "bcw_reg_out": {
+          "hide_name": 0,
+          "bits": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:35.39-35.50"
+          }
+        },
+        "bcw_valid": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:36.39-36.48"
+          }
+        },
+        "burst_cntr": {
+          "hide_name": 0,
+          "bits": [ "0", "0", "0" ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:46.33-46.43"
+          }
+        },
+        "burst_len": {
+          "hide_name": 0,
+          "bits": [ 38, 39, 40 ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:31.39-31.48"
+          }
+        },
+        "burst_mode": {
+          "hide_name": 0,
+          "bits": [ 45 ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:47.11-47.21"
+          }
+        },
+        "busy": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:40.39-40.43"
+          }
+        },
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:24.39-24.42"
+          }
+        },
+        "error": {
+          "hide_name": 0,
+          "bits": [ "1" ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:39.39-39.44"
+          }
+        },
+        "processed_count": {
+          "hide_name": 0,
+          "bits": [ "0", "0", "0" ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:41.39-41.54"
+          }
+        },
+        "reg_bcw": {
+          "hide_name": 0,
+          "bits": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:45.31-45.38"
+          }
+        },
+        "rst_n": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:25.39-25.44"
+          }
+        },
+        "state": {
+          "hide_name": 0,
+          "bits": [ "1", "1" ],
+          "attributes": {
+            "enum_value_00": "\\IDLE",
+            "enum_value_01": "\\UPDATE",
+            "enum_value_10": "\\BURST",
+            "enum_value_11": "\\ERROR",
+            "src": "rtl/bcw_mgr.sv:52.13-52.18",
+            "wiretype": "\\state_t"
+          }
+        },
+        "state_next": {
+          "hide_name": 0,
+          "bits": [ "0", "0" ],
+          "attributes": {
+            "enum_value_00": "\\IDLE",
+            "enum_value_01": "\\UPDATE",
+            "enum_value_10": "\\BURST",
+            "enum_value_11": "\\ERROR",
+            "src": "rtl/bcw_mgr.sv:52.20-52.30",
+            "wiretype": "\\state_t"
+          }
+        },
+        "update_ack": {
+          "hide_name": 0,
+          "bits": [ 41 ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:32.39-32.49"
+          }
+        },
+        "update_req": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:28.39-28.49"
+          }
+        },
+        "update_req_burst": {
+          "hide_name": 0,
+          "bits": [ 37 ],
+          "attributes": {
+            "src": "rtl/bcw_mgr.sv:30.39-30.55"
+          }
+        }
+      }
+    }
+  }
+}

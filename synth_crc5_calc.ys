@@ -1,0 +1,9 @@
+read_verilog -sv rtl/crc5_calc.sv
+hierarchy -check -top crc5_calc
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog crc5_calc_netlist.v
+write_json crc5_calc.json
+stat

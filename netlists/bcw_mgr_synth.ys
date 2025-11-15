@@ -1,0 +1,9 @@
+read_verilog -sv rtl/bcw_mgr.sv
+hierarchy -check -top bcw_mgr
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/bcw_mgr_netlist.v
+write_json netlists/bcw_mgr.json
+stat -top bcw_mgr

@@ -1,0 +1,462 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `netlists/clock_gate_synth.ys' --
+
+1. Executing Verilog-2005 frontend: rtl/clock_gate.sv
+Parsing SystemVerilog input from `rtl/clock_gate.sv' to AST representation.
+Generating RTLIL representation for module `\clock_gate'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \clock_gate
+
+2.2. Analyzing design hierarchy..
+Top module:  \clock_gate
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$rtl/clock_gate.sv:0$4 in module clock_gate.
+Marked 1 switch rules as full_case in process $proc$rtl/clock_gate.sv:68$2 in module clock_gate.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 2 redundant assignments.
+Promoted 1 assignment to connection.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~2 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\clock_gate.$proc$rtl/clock_gate.sv:0$4'.
+     1/1: $1\enable_latched[0:0]
+Creating decoders for process `\clock_gate.$proc$rtl/clock_gate.sv:68$2'.
+     1/2: $0\gen_safe_enable.enable_sync_q2[0:0]
+     2/2: $0\gen_safe_enable.enable_sync_q1[0:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+Latch inferred for signal `\clock_gate.\enable_latched' from process `\clock_gate.$proc$rtl/clock_gate.sv:0$4': $auto$proc_dlatch.cc:427:proc_dlatch$26
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\clock_gate.\gen_safe_enable.enable_sync_q1' using process `\clock_gate.$proc$rtl/clock_gate.sv:68$2'.
+  created $dff cell `$procdff$27' with positive edge clock.
+Creating register for signal `\clock_gate.\gen_safe_enable.enable_sync_q2' using process `\clock_gate.$proc$rtl/clock_gate.sv:68$2'.
+  created $dff cell `$procdff$28' with positive edge clock.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\clock_gate.$proc$rtl/clock_gate.sv:0$4'.
+Removing empty process `clock_gate.$proc$rtl/clock_gate.sv:0$4'.
+Found and cleaned up 1 empty switch in `\clock_gate.$proc$rtl/clock_gate.sv:68$2'.
+Removing empty process `clock_gate.$proc$rtl/clock_gate.sv:68$2'.
+Cleaned up 2 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+<suppressed ~9 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clock_gate..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clock_gate.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$28 ($dff) from module clock_gate (D = \gen_safe_enable.enable_sync_q1, Q = \gen_safe_enable.enable_sync_q2, rval = 1'0).
+Adding SRST signal on $procdff$27 ($dff) from module clock_gate (D = \enable, Q = \gen_safe_enable.enable_sync_q1, rval = 1'0).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clock_gate..
+Removed 5 unused cells and 20 unused wires.
+<suppressed ~7 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clock_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clock_gate.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clock_gate..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+4.16. Finished OPT passes. (There is nothing left to do.)
+
+5. Executing FSM pass (extract and optimize FSM).
+
+5.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clock_gate..
+
+5.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clock_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clock_gate.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clock_gate..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+6.9. Finished OPT passes. (There is nothing left to do.)
+
+7. Executing MEMORY pass.
+
+7.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+7.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+7.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+7.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+7.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clock_gate..
+
+7.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+7.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+7.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clock_gate..
+
+7.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+7.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clock_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clock_gate.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clock_gate..
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+8.9. Finished OPT passes. (There is nothing left to do.)
+
+9. Executing TECHMAP pass (map to technology primitives).
+
+9.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+9.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $dlatch.
+No more expansions possible.
+<suppressed ~78 debug messages>
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clock_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clock_gate.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clock_gate..
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+10.9. Finished OPT passes. (There is nothing left to do.)
+
+11. Executing ABC pass (technology mapping using ABC).
+
+11.1. Extracting gate netlist of module `\clock_gate' to `<abc-temp-dir>/input.blif'..
+Extracted 2 gates and 6 wires to a netlist network with 4 inputs and 2 outputs.
+
+11.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 7 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+11.1.2. Re-integrating ABC results.
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:               AND cells:        1
+ABC RESULTS:        internal signals:        0
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        2
+Removing temp directory.
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clock_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clock_gate.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clock_gate..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+12.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \clock_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \clock_gate.
+Performed a total of 0 changes.
+
+12.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\clock_gate'.
+Removed a total of 0 cells.
+
+12.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \clock_gate..
+
+12.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module clock_gate.
+
+12.16. Finished OPT passes. (There is nothing left to do.)
+
+13. Executing Verilog backend.
+
+13.1. Executing BMUXMAP pass.
+
+13.2. Executing DEMUXMAP pass.
+Dumping module `\clock_gate'.
+
+14. Executing JSON backend.
+
+15. Printing statistics.
+
+=== clock_gate ===
+
+   Number of wires:                 11
+   Number of wire bits:             11
+   Number of public wires:          11
+   Number of public wire bits:      11
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  5
+     $_AND_                          1
+     $_DLATCH_N_                     1
+     $_OR_                           1
+     $_SDFF_PN0_                     2
+
+End of script. Logfile hash: 020197ef5b, CPU: user 0.05s system 0.01s, MEM: 12.75 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 38% 1x abc (0 sec), 18% 3x read_verilog (0 sec), ...

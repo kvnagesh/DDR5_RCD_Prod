@@ -1,0 +1,9 @@
+read_verilog -sv rtl/sec_reg_lock.sv
+hierarchy -check -top sec_reg_lock
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/sec_reg_lock_netlist.v
+write_json netlists/sec_reg_lock.json
+stat -top sec_reg_lock

@@ -1,0 +1,9 @@
+read_verilog -sv rtl/error_log_reg.sv
+hierarchy -check -top error_log_reg
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/error_log_reg_netlist.v
+write_json netlists/error_log_reg.json
+stat -top error_log_reg

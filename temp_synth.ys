@@ -1,0 +1,7 @@
+read_verilog -sv rtl/timing_check_agg.sv
+hierarchy -check -top timing_check_agg
+proc; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+stat

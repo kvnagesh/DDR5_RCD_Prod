@@ -1,0 +1,9 @@
+read_verilog -sv rtl/i3c_hotjoin_addr_clkstr.sv
+hierarchy -check -top i3c_hotjoin_addr_clkstr
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/i3c_hotjoin_addr_clkstr_netlist.v
+write_json netlists/i3c_hotjoin_addr_clkstr.json
+stat -top i3c_hotjoin_addr_clkstr

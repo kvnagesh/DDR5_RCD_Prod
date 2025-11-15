@@ -1,0 +1,9 @@
+read_verilog -sv rtl/qca_qck_gating.sv
+hierarchy -check -top qca_qck_gating
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog qca_qck_gating_netlist.v
+write_json qca_qck_gating.json
+stat

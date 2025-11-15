@@ -1,0 +1,71 @@
+# DDR5 RCD Complete Design Synthesis
+# All 45 modules
+
+# Read all RTL files
+read_verilog -sv rtl/bcw_mgr.sv
+read_verilog -sv rtl/ca_distributor.sv
+read_verilog -sv rtl/ca_field_compare_fn.sv
+read_verilog -sv rtl/cdc_gray_sync.sv
+read_verilog -sv rtl/clk_failover_ctrl.sv
+read_verilog -sv rtl/clock_gate.sv
+read_verilog -sv rtl/cmd_latency_ctrl.sv
+read_verilog -sv rtl/crc5_calc.sv
+read_verilog -sv rtl/dcalcsr_calibrator.sv
+read_verilog -sv rtl/dck_phase_calib.sv
+read_verilog -sv rtl/dcs_buffer_ctrl.sv
+read_verilog -sv rtl/dcs_distributor.sv
+read_verilog -sv rtl/dcs_to_dq_mapper.sv
+read_verilog -sv rtl/dfe_ctrl.sv
+read_verilog -sv rtl/dqs_buffer.sv
+read_verilog -sv rtl/error_logging.sv
+read_verilog -sv rtl/i3c_slave.sv
+read_verilog -sv rtl/margin_ctrl.sv
+read_verilog -sv rtl/parity_gen.sv
+read_verilog -sv rtl/pll_ctrl.sv
+read_verilog -sv rtl/power_mgmt_fsm.sv
+read_verilog -sv rtl/qca_buffer_ctrl.sv
+read_verilog -sv rtl/qca_qck_gating.sv
+read_verilog -sv rtl/qck_phase_delay.sv
+read_verilog -sv rtl/rd_dqs_training.sv
+read_verilog -sv rtl/register_array.sv
+read_verilog -sv rtl/rtt_ctrl_logic.sv
+read_verilog -sv rtl/sideband_if.sv
+read_verilog -sv rtl/slew_rate_ctrl.sv
+read_verilog -sv rtl/soc_if.sv
+read_verilog -sv rtl/swing_ctrl.sv
+read_verilog -sv rtl/temp_monitor.sv
+read_verilog -sv rtl/training_fsm.sv
+read_verilog -sv rtl/vdd_monitor.sv
+read_verilog -sv rtl/verf_ctrl.sv
+read_verilog -sv rtl/vrefca_dac.sv
+read_verilog -sv rtl/vrefdq_dac.sv
+read_verilog -sv rtl/wr_dqs_training.sv
+read_verilog -sv rtl/wr_lvl_fsm.sv
+read_verilog -sv rtl/ca_parity_error_ctrl.sv
+read_verilog -sv rtl/ddr5_rcd.sv
+read_verilog -sv rtl/qcs_buffer_ctrl.sv
+read_verilog -sv rtl/rcd_i3c_target.sv
+read_verilog -sv rtl/timing_ctrl.sv
+
+# Hierarchy with ca_distributor as top
+hierarchy -check -top ca_distributor
+
+# High-level synthesis
+proc; opt; fsm; opt; memory; opt
+
+# Technology mapping (generic for now, can add -liberty later)
+techmap; opt
+
+# ABC optimization
+abc -g AND,OR,XOR; opt
+
+# Clean up
+clean
+
+# Write outputs
+write_verilog ddr5_rcd_netlist.v
+write_json ddr5_rcd.json
+
+# Statistics
+stat
+

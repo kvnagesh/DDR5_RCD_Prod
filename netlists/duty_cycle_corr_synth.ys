@@ -1,0 +1,9 @@
+read_verilog -sv rtl/duty_cycle_corr.sv
+hierarchy -check -top duty_cycle_corr
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/duty_cycle_corr_netlist.v
+write_json netlists/duty_cycle_corr.json
+stat -top duty_cycle_corr

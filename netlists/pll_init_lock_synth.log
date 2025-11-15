@@ -1,0 +1,742 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `netlists/pll_init_lock_synth.ys' --
+
+1. Executing Verilog-2005 frontend: rtl/pll_init_lock.sv
+Parsing SystemVerilog input from `rtl/pll_init_lock.sv' to AST representation.
+Generating RTLIL representation for module `\pll_init_lock'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \pll_init_lock
+
+2.2. Analyzing design hierarchy..
+Top module:  \pll_init_lock
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$rtl/pll_init_lock.sv:116$12 in module pll_init_lock.
+Marked 7 switch rules as full_case in process $proc$rtl/pll_init_lock.sv:75$9 in module pll_init_lock.
+Marked 3 switch rules as full_case in process $proc$rtl/pll_init_lock.sv:45$1 in module pll_init_lock.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 3 redundant assignments.
+Promoted 1 assignment to connection.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\pll_init_lock.$proc$rtl/pll_init_lock.sv:116$12'.
+Found async reset \rst_n in `\pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~15 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:116$12'.
+     1/3: $0\internal_fault[0:0]
+     2/3: $0\internal_locked[0:0]
+     3/3: $1\powerup_cnt[15:0]
+Creating decoders for process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:75$9'.
+     1/7: $7\state_next[3:0]
+     2/7: $6\state_next[3:0]
+     3/7: $5\state_next[3:0]
+     4/7: $4\state_next[3:0]
+     5/7: $3\state_next[3:0]
+     6/7: $2\state_next[3:0]
+     7/7: $1\state_next[3:0]
+Creating decoders for process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+     1/7: $0\pll_lock_pulse[0:0]
+     2/7: $0\state_dbg[3:0]
+     3/7: $0\state[3:0]
+     4/7: $0\powerup_cnt[15:0]
+     5/7: $0\ddr_clk_hook[0:0]
+     6/7: $0\pll_fault[0:0]
+     7/7: $0\pll_locked[0:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\pll_init_lock.\state_next' from process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:75$9'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\pll_init_lock.\powerup_cnt' using process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:116$12'.
+  created $adff cell `$procdff$113' with positive edge clock and negative level reset.
+Creating register for signal `\pll_init_lock.\internal_locked' using process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:116$12'.
+  created $adff cell `$procdff$114' with positive edge clock and negative level reset.
+Creating register for signal `\pll_init_lock.\internal_fault' using process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:116$12'.
+  created $adff cell `$procdff$115' with positive edge clock and negative level reset.
+Creating register for signal `\pll_init_lock.\pll_locked' using process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+  created $adff cell `$procdff$116' with positive edge clock and negative level reset.
+Creating register for signal `\pll_init_lock.\pll_lock_pulse' using process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+  created $adff cell `$procdff$117' with positive edge clock and negative level reset.
+Creating register for signal `\pll_init_lock.\pll_fault' using process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+  created $adff cell `$procdff$118' with positive edge clock and negative level reset.
+Creating register for signal `\pll_init_lock.\state_dbg' using process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+  created $adff cell `$procdff$119' with positive edge clock and negative level reset.
+Creating register for signal `\pll_init_lock.\ddr_clk_hook' using process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+  created $adff cell `$procdff$120' with positive edge clock and negative level reset.
+Creating register for signal `\pll_init_lock.\state' using process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+  created $adff cell `$procdff$121' with positive edge clock and negative level reset.
+Creating register for signal `\pll_init_lock.\powerup_cnt' using process `\pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+  created $adff cell `$procdff$122' with positive edge clock and negative level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 4 empty switches in `\pll_init_lock.$proc$rtl/pll_init_lock.sv:116$12'.
+Removing empty process `pll_init_lock.$proc$rtl/pll_init_lock.sv:116$12'.
+Found and cleaned up 7 empty switches in `\pll_init_lock.$proc$rtl/pll_init_lock.sv:75$9'.
+Removing empty process `pll_init_lock.$proc$rtl/pll_init_lock.sv:75$9'.
+Found and cleaned up 4 empty switches in `\pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+Removing empty process `pll_init_lock.$proc$rtl/pll_init_lock.sv:45$1'.
+Cleaned up 15 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+<suppressed ~4 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+<suppressed ~39 debug messages>
+Removed a total of 13 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$87.
+    dead port 2/2 on $mux $procmux$76.
+    dead port 2/2 on $mux $procmux$66.
+    dead port 2/2 on $mux $procmux$57.
+    dead port 2/2 on $mux $procmux$49.
+    dead port 1/2 on $mux $procmux$47.
+    dead port 2/2 on $mux $procmux$38.
+Removed 7 multiplexer ports.
+<suppressed ~8 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$113 ($adff) from module pll_init_lock (D = $add$rtl/pll_init_lock.sv:125$15_Y [15:0], Q = \powerup_cnt).
+Adding EN signal on $procdff$114 ($adff) from module pll_init_lock (D = 1'1, Q = \internal_locked).
+Adding EN signal on $procdff$115 ($adff) from module pll_init_lock (D = 1'1, Q = \internal_fault).
+Adding EN signal on $procdff$116 ($adff) from module pll_init_lock (D = 1'1, Q = \pll_locked).
+Adding EN signal on $procdff$118 ($adff) from module pll_init_lock (D = $procmux$108_Y, Q = \pll_fault).
+Handling D = Q on $procdff$122 ($adff) from module pll_init_lock (removing D path).
+Adding EN signal on $procdff$120 ($adff) from module pll_init_lock (D = $procmux$103_Y, Q = \ddr_clk_hook).
+Setting constant 0-bit at position 0 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 1 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 2 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 3 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 4 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 5 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 6 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 7 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 8 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 9 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 10 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 11 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 12 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 13 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 14 on $procdff$122 ($dlatch) from module pll_init_lock.
+Setting constant 0-bit at position 15 on $procdff$122 ($dlatch) from module pll_init_lock.
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+Warning: Driver-driver conflict for \powerup_cnt [15] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [14] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [13] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [12] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [11] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [10] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [9] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [8] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [7] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [6] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [5] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [4] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [3] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [2] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [1] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Warning: Driver-driver conflict for \powerup_cnt [0] between cell $auto$ff.cc:266:slice$123.Q and constant 1'0 in pll_init_lock: Resolved using constant.
+Removed 11 unused cells and 64 unused wires.
+<suppressed ~12 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+<suppressed ~7 debug messages>
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+Handling never-active EN on $auto$ff.cc:266:slice$126 ($adffe) from module pll_init_lock (removing D path).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$126 ($dlatch) from module pll_init_lock.
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+Removed 1 unused cells and 6 unused wires.
+<suppressed ~2 debug messages>
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+<suppressed ~2 debug messages>
+
+4.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+    New ctrl vector for $pmux cell $procmux$90: { $procmux$88_CMP $procmux$32_CMP $procmux$67_CMP $procmux$23_CMP $auto$opt_reduce.cc:134:opt_pmux$140 }
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 1 changes.
+
+4.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+4.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+4.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+4.23. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+4.26. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+4.27. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+
+4.29. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+4.30. Finished OPT passes. (There is nothing left to do.)
+
+5. Executing FSM pass (extract and optimize FSM).
+
+5.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking pll_init_lock.state as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+
+5.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+
+5.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+6.9. Finished OPT passes. (There is nothing left to do.)
+
+7. Executing MEMORY pass.
+
+7.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+7.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+7.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+7.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+7.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+
+7.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+7.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+7.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+
+7.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+7.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+8.9. Finished OPT passes. (There is nothing left to do.)
+
+9. Executing TECHMAP pass (map to technology primitives).
+
+9.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+9.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$95ab7b964273918a033d1324366ecc612d202989\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $and.
+No more expansions possible.
+<suppressed ~129 debug messages>
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+<suppressed ~57 debug messages>
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+<suppressed ~66 debug messages>
+Removed a total of 22 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+Removed 0 unused cells and 69 unused wires.
+<suppressed ~1 debug messages>
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+<suppressed ~1 debug messages>
+
+10.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+10.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+10.13. Executing OPT_DFF pass (perform DFF optimizations).
+Removing always-active EN on $auto$ff.cc:266:slice$413 ($_DFFE_PN0P_) from module pll_init_lock.
+
+10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+Removed 1 unused cells and 2 unused wires.
+<suppressed ~2 debug messages>
+
+10.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+10.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+10.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+10.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+10.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+
+10.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+10.23. Finished OPT passes. (There is nothing left to do.)
+
+11. Executing ABC pass (technology mapping using ABC).
+
+11.1. Extracting gate netlist of module `\pll_init_lock' to `<abc-temp-dir>/input.blif'..
+Extracted 90 gates and 117 wires to a netlist network with 24 inputs and 9 outputs.
+
+11.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 7 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+11.1.2. Re-integrating ABC results.
+ABC RESULTS:                OR cells:       21
+ABC RESULTS:               NOT cells:        5
+ABC RESULTS:               AND cells:       11
+ABC RESULTS:               ONE cells:        1
+ABC RESULTS:              ZERO cells:        2
+ABC RESULTS:               BUF cells:        1
+ABC RESULTS:        internal signals:       84
+ABC RESULTS:           input signals:       24
+ABC RESULTS:          output signals:        9
+Removing temp directory.
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+Removing always-active EN on $auto$ff.cc:266:slice$415 ($_DFFE_PN0P_) from module pll_init_lock.
+Handling never-active EN on $auto$ff.cc:266:slice$412 ($_DFFE_PN0P_) from module pll_init_lock (removing D path).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$412 ($_DLATCH_N_) from module pll_init_lock.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$415 ($_DFF_PN0_) from module pll_init_lock.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$414 ($_DFF_PN0_) from module pll_init_lock.
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+Removed 0 unused cells and 78 unused wires.
+<suppressed ~1 debug messages>
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+12.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+12.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+12.13. Executing OPT_DFF pass (perform DFF optimizations).
+Handling D = Q on $auto$ff.cc:266:slice$419 ($_DFF_PN0_) from module pll_init_lock (removing D path).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$419 ($_DLATCH_N_) from module pll_init_lock.
+
+12.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+
+12.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+<suppressed ~3 debug messages>
+
+12.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+12.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+12.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+12.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+12.23. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pll_init_lock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pll_init_lock.
+Performed a total of 0 changes.
+
+12.26. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pll_init_lock'.
+Removed a total of 0 cells.
+
+12.27. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pll_init_lock..
+
+12.29. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pll_init_lock.
+
+12.30. Finished OPT passes. (There is nothing left to do.)
+
+13. Executing Verilog backend.
+
+13.1. Executing BMUXMAP pass.
+
+13.2. Executing DEMUXMAP pass.
+Dumping module `\pll_init_lock'.
+
+14. Executing JSON backend.
+
+15. Printing statistics.
+
+=== pll_init_lock ===
+
+   Number of wires:                 45
+   Number of wire bits:             84
+   Number of public wires:          14
+   Number of public wire bits:      53
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 39
+     $_AND_                          9
+     $_DFFE_PN0P_                    1
+     $_DFF_PN0_                      4
+     $_NOT_                          4
+     $_OR_                          21
+
+Warnings: 16 unique messages, 16 total
+End of script. Logfile hash: 5b6f0c7af9, CPU: user 0.12s system 0.01s, MEM: 13.00 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 41% 1x abc (0 sec), 18% 19x opt_expr (0 sec), ...

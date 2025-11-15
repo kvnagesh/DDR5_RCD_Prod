@@ -1,0 +1,263 @@
+{
+  "creator": "Yosys 0.33 (git sha1 2584903a060)",
+  "modules": {
+    "i3c_hotjoin_addr_clkstr": {
+      "attributes": {
+        "dynports": "00000000000000000000000000000001",
+        "top": "00000000000000000000000000000001",
+        "src": "rtl/i3c_hotjoin_addr_clkstr.sv:15.1-176.10"
+      },
+      "parameter_default_values": {
+        "ADDR_WIDTH": "00000000000000000000000000000111"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "rst_n": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "scl": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "sda": {
+          "direction": "input",
+          "bits": [ 5 ]
+        },
+        "sda_oe": {
+          "direction": "output",
+          "bits": [ 6 ]
+        },
+        "scl_oe": {
+          "direction": "output",
+          "bits": [ 7 ]
+        },
+        "hj_event_req": {
+          "direction": "input",
+          "bits": [ 8 ]
+        },
+        "hj_notify_host": {
+          "direction": "output",
+          "bits": [ "0" ]
+        },
+        "da_assign_req": {
+          "direction": "input",
+          "bits": [ 9 ]
+        },
+        "new_da": {
+          "direction": "input",
+          "bits": [ 10, 11, 12, 13, 14, 15, 16 ]
+        },
+        "curr_da": {
+          "direction": "output",
+          "bits": [ "0", "0", "0", "0", "0", "0", "0" ]
+        },
+        "da_assigned": {
+          "direction": "output",
+          "bits": [ "1" ]
+        },
+        "cmd_rstdaa": {
+          "direction": "output",
+          "bits": [ "0" ]
+        },
+        "cmd_enec": {
+          "direction": "output",
+          "bits": [ "0" ]
+        },
+        "cmd_disec": {
+          "direction": "output",
+          "bits": [ "0" ]
+        },
+        "cmd_setdasa": {
+          "direction": "output",
+          "bits": [ "0" ]
+        },
+        "proto_err": {
+          "direction": "input",
+          "bits": [ 17 ]
+        },
+        "clock_stretching": {
+          "direction": "output",
+          "bits": [ 7 ]
+        }
+      },
+      "cells": {
+        "$auto$ff.cc:266:slice$337": {
+          "hide_name": 1,
+          "type": "$_DFF_PN0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:149.1-169.4"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 17 ],
+            "Q": [ 7 ],
+            "R": [ 3 ]
+          }
+        }
+      },
+      "netnames": {
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:19.28-19.31"
+          }
+        },
+        "clock_stretching": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:46.28-46.44"
+          }
+        },
+        "cmd_disec": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:41.28-41.37"
+          }
+        },
+        "cmd_enec": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:40.28-40.36"
+          }
+        },
+        "cmd_rstdaa": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:39.28-39.38"
+          }
+        },
+        "cmd_setdasa": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:42.28-42.39"
+          }
+        },
+        "curr_da": {
+          "hide_name": 0,
+          "bits": [ "0", "0", "0", "0", "0", "0", "0" ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:35.35-35.42"
+          }
+        },
+        "da_assign_req": {
+          "hide_name": 0,
+          "bits": [ 9 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:33.28-33.41"
+          }
+        },
+        "da_assigned": {
+          "hide_name": 0,
+          "bits": [ "1" ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:36.28-36.39"
+          }
+        },
+        "da_shadow": {
+          "hide_name": 0,
+          "bits": [ "0", "0", "0", "0", "0", "0", "0" ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:59.24-59.33"
+          }
+        },
+        "hj_event_req": {
+          "hide_name": 0,
+          "bits": [ 8 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:29.28-29.40"
+          }
+        },
+        "hj_notify_host": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:30.28-30.42"
+          }
+        },
+        "new_da": {
+          "hide_name": 0,
+          "bits": [ 10, 11, 12, 13, 14, 15, 16 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:34.35-34.41"
+          }
+        },
+        "proto_err": {
+          "hide_name": 0,
+          "bits": [ 17 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:45.28-45.37"
+          }
+        },
+        "rst_n": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:20.28-20.33"
+          }
+        },
+        "scl": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:23.28-23.31"
+          }
+        },
+        "scl_oe": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:26.28-26.34"
+          }
+        },
+        "sda": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:24.28-24.31"
+          }
+        },
+        "sda_oe": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:25.28-25.34"
+          }
+        },
+        "state": {
+          "hide_name": 0,
+          "bits": [ "0", "1", "1" ],
+          "attributes": {
+            "enum_value_000": "\\IDLE",
+            "enum_value_001": "\\HJ_WAIT",
+            "enum_value_010": "\\HJ_NOTIFY",
+            "enum_value_011": "\\DA_WAIT_REQ",
+            "enum_value_100": "\\DA_ASSIGN",
+            "enum_value_101": "\\DA_DONE",
+            "enum_value_110": "\\STRETCH",
+            "src": "rtl/i3c_hotjoin_addr_clkstr.sv:57.9-57.14",
+            "wiretype": "\\state_t"
+          }
+        }
+      }
+    }
+  }
+}

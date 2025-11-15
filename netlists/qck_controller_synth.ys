@@ -1,0 +1,9 @@
+read_verilog -sv rtl/qck_controller.sv
+hierarchy -check -top qck_controller
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -g AND,OR,XOR; opt
+clean
+write_verilog netlists/qck_controller_netlist.v
+write_json netlists/qck_controller.json
+stat -top qck_controller
