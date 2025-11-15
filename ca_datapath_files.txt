@@ -1,0 +1,5 @@
+rtl/ca_distributor.sv
+rtl/src/data_path/ca_packetizer.sv  
+rtl/src/data_path/subchannel_controller.sv
+rtl/clock_gate.sv
+rtl/cdc_gray_sync.sv
