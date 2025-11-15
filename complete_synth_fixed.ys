@@ -1,0 +1,34 @@
+# Complete DDR5 RCD Synthesis Flow with SystemVerilog support
+
+# Read core RTL modules with -sv flag
+read_verilog -sv rtl/ca_distributor.sv
+read_verilog -sv rtl/ca_field_compare_fh.sv
+read_verilog -sv rtl/cdc_gray_sync.sv
+read_verilog -sv rtl/clk_failover_ctrl.sv
+read_verilog -sv rtl/cmd_latency_ctrl.sv
+read_verilog -sv rtl/crc3_calc.sv
+
+# Read clocking subsystem  
+read_verilog -sv src/clocking/clk_distributor.sv
+read_verilog -sv src/clocking/qca_qck_gating.sv
+
+# Setup hierarchy
+hierarchy -check -auto-top
+
+# Synthesis passes
+procs
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+opt -full
+
+# Write outputs
+write_verilog -noattr -noexpr synth_output.v
+write_json synth_output.json
+
+# Statistics
+tee -o synth_stats.txt stat

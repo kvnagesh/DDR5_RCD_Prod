@@ -1,0 +1,1455 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `final_synth_v2.ys' --
+
+1. Executing Verilog-2005 frontend: src/clocking/clock_distributor_flat.sv
+Parsing SystemVerilog input from `src/clocking/clock_distributor_flat.sv' to AST representation.
+Generating RTLIL representation for module `\clock_distributor'.
+Warning: Replacing memory \clk_gated with list of registers. See src/clocking/clock_distributor_flat.sv:78
+Warning: Replacing memory \div_counter with list of registers. See src/clocking/clock_distributor_flat.sv:62
+Warning: Replacing memory \clk_buffered with list of registers. See src/clocking/clock_distributor_flat.sv:54
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: src/clocking/qca_qck_gating_flat.sv
+Parsing SystemVerilog input from `src/clocking/qca_qck_gating_flat.sv' to AST representation.
+Generating RTLIL representation for module `\qca_qck_gating'.
+Warning: Replacing memory \delay_chain_qca with list of registers. See src/clocking/qca_qck_gating_flat.sv:180
+Warning: Replacing memory \delay_chain_qck with list of registers. See src/clocking/qca_qck_gating_flat.sv:173
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Finding top of design hierarchy..
+root of   0 design levels: qca_qck_gating      
+root of   0 design levels: clock_distributor   
+Automatically selected qca_qck_gating as design top module.
+
+3.2. Analyzing design hierarchy..
+Top module:  \qca_qck_gating
+
+3.3. Analyzing design hierarchy..
+Top module:  \qca_qck_gating
+Removing unused module `\clock_distributor'.
+Removed 1 unused modules.
+
+4. Executing PROC pass (convert processes to netlists).
+
+4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$src/clocking/qca_qck_gating_flat.sv:0$261 in module qca_qck_gating.
+Marked 2 switch rules as full_case in process $proc$src/clocking/qca_qck_gating_flat.sv:0$258 in module qca_qck_gating.
+Marked 2 switch rules as full_case in process $proc$src/clocking/qca_qck_gating_flat.sv:0$255 in module qca_qck_gating.
+Marked 2 switch rules as full_case in process $proc$src/clocking/qca_qck_gating_flat.sv:0$252 in module qca_qck_gating.
+Marked 2 switch rules as full_case in process $proc$src/clocking/qca_qck_gating_flat.sv:0$249 in module qca_qck_gating.
+Marked 2 switch rules as full_case in process $proc$src/clocking/qca_qck_gating_flat.sv:0$246 in module qca_qck_gating.
+Marked 2 switch rules as full_case in process $proc$src/clocking/qca_qck_gating_flat.sv:0$243 in module qca_qck_gating.
+Removed 8 dead cases from process $proc$src/clocking/qca_qck_gating_flat.sv:0$233 in module qca_qck_gating.
+Marked 8 switch rules as full_case in process $proc$src/clocking/qca_qck_gating_flat.sv:0$233 in module qca_qck_gating.
+Marked 4 switch rules as full_case in process $proc$src/clocking/qca_qck_gating_flat.sv:114$212 in module qca_qck_gating.
+Marked 2 switch rules as full_case in process $proc$src/clocking/qca_qck_gating_flat.sv:0$209 in module qca_qck_gating.
+Removed a total of 8 dead cases.
+
+4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 91 assignments to connections.
+
+4.4. Executing PROC_INIT pass (extract init attributes).
+
+4.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:114$212'.
+
+4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~30 debug messages>
+
+4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$261'.
+     1/2: $2\qca_gate[6:6]
+     2/2: $1\qca_gate[6:6]
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$258'.
+     1/2: $2\qca_gate[5:5]
+     2/2: $1\qca_gate[5:5]
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$255'.
+     1/2: $2\qca_gate[4:4]
+     2/2: $1\qca_gate[4:4]
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$252'.
+     1/2: $2\qca_gate[3:3]
+     2/2: $1\qca_gate[3:3]
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$249'.
+     1/2: $2\qca_gate[2:2]
+     2/2: $1\qca_gate[2:2]
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$246'.
+     1/2: $2\qca_gate[1:1]
+     2/2: $1\qca_gate[1:1]
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$243'.
+     1/2: $2\qca_gate[0:0]
+     2/2: $1\qca_gate[0:0]
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$233'.
+     1/8: $7\qca_delayed[6:6]
+     2/8: $6\qca_delayed[5:5]
+     3/8: $5\qca_delayed[4:4]
+     4/8: $4\qca_delayed[3:3]
+     5/8: $3\qca_delayed[2:2]
+     6/8: $2\qca_delayed[1:1]
+     7/8: $1\qca_delayed[0:0]
+     8/8: $1\qck_delayed[0:0]
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:114$212'.
+     1/6: $0\phase_locked[0:0]
+     2/6: $0\lock_counter[7:0]
+     3/6: $0\phase_adjust[7:0]
+     4/6: $0\cal_counter[15:0]
+     5/6: $0\calibration_active[0:0]
+     6/6: $0\cal_done[0:0]
+Creating decoders for process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$209'.
+     1/4: $2\qck_n_gate[0:0]
+     2/4: $2\qck_gate[0:0]
+     3/4: $1\qck_n_gate[0:0]
+     4/4: $1\qck_gate[0:0]
+
+4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\qca_qck_gating.\qca_gate [6]' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$261'.
+No latch inferred for signal `\qca_qck_gating.\qca_gate [5]' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$258'.
+No latch inferred for signal `\qca_qck_gating.\qca_gate [4]' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$255'.
+No latch inferred for signal `\qca_qck_gating.\qca_gate [3]' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$252'.
+No latch inferred for signal `\qca_qck_gating.\qca_gate [2]' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$249'.
+No latch inferred for signal `\qca_qck_gating.\qca_gate [1]' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$246'.
+No latch inferred for signal `\qca_qck_gating.\qca_gate [0]' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$243'.
+No latch inferred for signal `\qca_qck_gating.\qck_delayed' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$233'.
+No latch inferred for signal `\qca_qck_gating.\qca_delayed' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$233'.
+No latch inferred for signal `\qca_qck_gating.$fordecl_block$207.i' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$233'.
+No latch inferred for signal `\qca_qck_gating.\qck_gate' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$209'.
+No latch inferred for signal `\qca_qck_gating.\qck_n_gate' from process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$209'.
+
+4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\qca_qck_gating.$fordecl_block$201.j' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$474' with positive edge clock.
+Creating register for signal `\qca_qck_gating.$fordecl_block$203.i' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$475' with positive edge clock.
+Creating register for signal `\qca_qck_gating.$fordecl_block$203.$for_loop$204[0].$fordecl_block$205.j' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$476' with positive edge clock.
+Creating register for signal `\qca_qck_gating.$fordecl_block$203.$for_loop$204[1].$fordecl_block$205.j' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$477' with positive edge clock.
+Creating register for signal `\qca_qck_gating.$fordecl_block$203.$for_loop$204[2].$fordecl_block$205.j' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$478' with positive edge clock.
+Creating register for signal `\qca_qck_gating.$fordecl_block$203.$for_loop$204[3].$fordecl_block$205.j' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$479' with positive edge clock.
+Creating register for signal `\qca_qck_gating.$fordecl_block$203.$for_loop$204[4].$fordecl_block$205.j' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$480' with positive edge clock.
+Creating register for signal `\qca_qck_gating.$fordecl_block$203.$for_loop$204[5].$fordecl_block$205.j' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$481' with positive edge clock.
+Creating register for signal `\qca_qck_gating.$fordecl_block$203.$for_loop$204[6].$fordecl_block$205.j' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$482' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qck[0]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$483' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qck[1]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$484' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qck[2]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$485' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qck[3]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$486' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qck[4]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$487' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qck[5]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$488' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qck[6]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$489' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qck[7]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$490' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[0]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$491' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[1]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$492' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[2]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$493' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[3]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$494' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[4]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$495' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[5]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$496' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[6]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$497' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[7]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$498' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[8]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$499' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[9]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$500' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[10]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$501' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[11]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$502' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[12]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$503' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[13]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$504' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[14]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$505' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[15]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$506' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[16]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$507' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[17]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$508' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[18]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$509' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[19]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$510' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[20]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$511' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[21]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$512' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[22]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$513' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[23]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$514' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[24]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$515' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[25]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$516' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[26]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$517' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[27]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$518' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[28]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$519' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[29]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$520' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[30]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$521' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[31]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$522' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[32]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$523' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[33]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$524' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[34]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$525' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[35]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$526' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[36]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$527' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[37]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$528' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[38]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$529' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[39]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$530' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[40]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$531' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[41]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$532' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[42]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$533' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[43]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$534' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[44]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$535' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[45]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$536' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[46]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$537' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[47]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$538' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[48]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$539' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[49]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$540' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[50]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$541' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[51]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$542' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[52]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$543' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[53]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$544' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[54]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$545' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\delay_chain_qca[55]' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+  created $dff cell `$procdff$546' with positive edge clock.
+Creating register for signal `\qca_qck_gating.\cal_done' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:114$212'.
+  created $adff cell `$procdff$547' with positive edge clock and negative level reset.
+Creating register for signal `\qca_qck_gating.\calibration_active' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:114$212'.
+  created $adff cell `$procdff$548' with positive edge clock and negative level reset.
+Creating register for signal `\qca_qck_gating.\cal_counter' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:114$212'.
+  created $adff cell `$procdff$549' with positive edge clock and negative level reset.
+Creating register for signal `\qca_qck_gating.\phase_adjust' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:114$212'.
+  created $adff cell `$procdff$550' with positive edge clock and negative level reset.
+Creating register for signal `\qca_qck_gating.\lock_counter' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:114$212'.
+  created $adff cell `$procdff$551' with positive edge clock and negative level reset.
+Creating register for signal `\qca_qck_gating.\phase_locked' using process `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:114$212'.
+  created $adff cell `$procdff$552' with positive edge clock and negative level reset.
+
+4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$261'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$261'.
+Found and cleaned up 2 empty switches in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$258'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$258'.
+Found and cleaned up 2 empty switches in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$255'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$255'.
+Found and cleaned up 2 empty switches in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$252'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$252'.
+Found and cleaned up 2 empty switches in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$249'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$249'.
+Found and cleaned up 2 empty switches in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$246'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$246'.
+Found and cleaned up 2 empty switches in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$243'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$243'.
+Found and cleaned up 8 empty switches in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$233'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$233'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:171$223'.
+Found and cleaned up 6 empty switches in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:114$212'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:114$212'.
+Found and cleaned up 2 empty switches in `\qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$209'.
+Removing empty process `qca_qck_gating.$proc$src/clocking/qca_qck_gating_flat.sv:0$209'.
+Cleaned up 30 empty switches.
+
+4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+<suppressed ~10 debug messages>
+
+5. Executing OPT pass (performing simple optimizations).
+
+5.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+5.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+<suppressed ~189 debug messages>
+Removed a total of 63 cells.
+
+5.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$466.
+    dead port 1/2 on $mux $procmux$461.
+    dead port 1/2 on $mux $procmux$315.
+    dead port 1/2 on $mux $procmux$307.
+    dead port 1/2 on $mux $procmux$299.
+    dead port 1/2 on $mux $procmux$291.
+    dead port 1/2 on $mux $procmux$283.
+    dead port 1/2 on $mux $procmux$275.
+    dead port 1/2 on $mux $procmux$267.
+Removed 9 multiplexer ports.
+<suppressed ~21 debug messages>
+
+5.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+5.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+5.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$549 ($adff) from module qca_qck_gating (D = $procmux$426_Y, Q = \cal_counter).
+Adding EN signal on $procdff$550 ($adff) from module qca_qck_gating (D = $procmux$420_Y, Q = \phase_adjust).
+Adding EN signal on $procdff$551 ($adff) from module qca_qck_gating (D = $procmux$412_Y, Q = \lock_counter).
+Setting constant 1-bit at position 0 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 1-bit at position 1 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 1-bit at position 2 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 8 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 9 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 10 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 11 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 12 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 13 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 14 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 15 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 16 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 17 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 18 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 19 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 20 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 21 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 22 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 23 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 24 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 25 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 26 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 27 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 28 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 29 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 30 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 31 on $procdff$475 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$539 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$539 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$539 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$539 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$539 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$539 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$539 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$531 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$531 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$531 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$531 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$531 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$531 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$531 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$523 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$523 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$523 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$523 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$523 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$523 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$523 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$515 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$515 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$515 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$515 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$515 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$515 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$515 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$507 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$507 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$507 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$507 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$507 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$507 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$507 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$499 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$499 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$499 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$499 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$499 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$499 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$499 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$491 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$491 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$491 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$491 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$491 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$491 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$491 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$483 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$483 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$483 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$483 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$483 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$483 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$483 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 0 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 1-bit at position 3 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 8 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 9 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 10 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 11 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 12 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 13 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 14 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 15 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 16 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 17 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 18 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 19 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 20 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 21 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 22 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 23 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 24 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 25 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 26 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 27 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 28 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 29 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 30 on $procdff$482 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 31 on $procdff$482 ($dff) from module qca_qck_gating.
+
+5.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+Removed 3 unused cells and 261 unused wires.
+<suppressed ~4 debug messages>
+
+5.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+<suppressed ~3 debug messages>
+
+5.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~21 debug messages>
+
+5.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+5.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+5.13. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 1 on $procdff$484 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$484 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$484 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$484 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$484 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$484 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$484 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$492 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$492 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$492 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$492 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$492 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$492 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$492 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$500 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$500 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$500 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$500 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$500 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$500 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$500 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$508 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$508 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$508 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$508 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$508 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$508 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$508 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$516 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$516 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$516 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$516 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$516 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$516 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$516 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$524 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$524 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$524 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$524 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$524 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$524 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$524 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$532 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$532 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$532 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$532 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$532 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$532 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$532 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$540 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$540 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$540 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$540 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$540 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$540 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$540 ($dff) from module qca_qck_gating.
+
+5.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+5.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+5.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~21 debug messages>
+
+5.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+5.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+5.20. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 1 on $procdff$485 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$485 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$485 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$485 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$485 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$485 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$485 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$493 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$493 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$493 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$493 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$493 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$493 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$493 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$501 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$501 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$501 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$501 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$501 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$501 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$501 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$509 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$509 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$509 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$509 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$509 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$509 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$509 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$517 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$517 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$517 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$517 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$517 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$517 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$517 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$525 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$525 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$525 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$525 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$525 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$525 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$525 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$533 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$533 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$533 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$533 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$533 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$533 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$533 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$541 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$541 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$541 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$541 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$541 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$541 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$541 ($dff) from module qca_qck_gating.
+
+5.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+5.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+5.23. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~21 debug messages>
+
+5.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+5.26. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+5.27. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 1 on $procdff$486 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$486 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$486 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$486 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$486 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$486 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$486 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$494 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$494 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$494 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$494 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$494 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$494 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$494 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$502 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$502 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$502 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$502 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$502 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$502 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$502 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$510 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$510 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$510 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$510 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$510 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$510 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$510 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$518 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$518 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$518 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$518 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$518 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$518 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$518 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$526 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$526 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$526 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$526 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$526 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$526 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$526 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$534 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$534 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$534 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$534 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$534 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$534 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$534 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$542 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$542 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$542 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$542 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$542 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$542 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$542 ($dff) from module qca_qck_gating.
+
+5.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+5.29. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+5.30. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.31. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~21 debug messages>
+
+5.32. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+5.33. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+5.34. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 1 on $procdff$487 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$487 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$487 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$487 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$487 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$487 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$487 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$495 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$495 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$495 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$495 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$495 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$495 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$495 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$503 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$503 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$503 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$503 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$503 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$503 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$503 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$511 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$511 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$511 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$511 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$511 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$511 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$511 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$519 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$519 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$519 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$519 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$519 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$519 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$519 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$527 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$527 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$527 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$527 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$527 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$527 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$527 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$535 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$535 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$535 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$535 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$535 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$535 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$535 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$543 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$543 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$543 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$543 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$543 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$543 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$543 ($dff) from module qca_qck_gating.
+
+5.35. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+5.36. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+5.37. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.38. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~21 debug messages>
+
+5.39. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+5.40. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+5.41. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 1 on $procdff$488 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$488 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$488 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$488 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$488 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$488 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$488 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$496 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$496 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$496 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$496 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$496 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$496 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$496 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$504 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$504 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$504 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$504 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$504 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$504 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$504 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$512 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$512 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$512 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$512 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$512 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$512 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$512 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$520 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$520 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$520 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$520 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$520 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$520 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$520 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$528 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$528 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$528 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$528 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$528 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$528 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$528 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$536 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$536 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$536 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$536 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$536 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$536 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$536 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$544 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$544 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$544 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$544 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$544 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$544 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$544 ($dff) from module qca_qck_gating.
+
+5.42. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+5.43. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+5.44. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.45. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~21 debug messages>
+
+5.46. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+5.47. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+5.48. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 1 on $procdff$489 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$489 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$489 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$489 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$489 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$489 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$489 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$497 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$497 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$497 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$497 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$497 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$497 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$497 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$505 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$505 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$505 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$505 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$505 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$505 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$505 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$513 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$513 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$513 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$513 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$513 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$513 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$513 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$521 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$521 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$521 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$521 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$521 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$521 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$521 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$529 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$529 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$529 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$529 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$529 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$529 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$529 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$537 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$537 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$537 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$537 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$537 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$537 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$537 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$545 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$545 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$545 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$545 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$545 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$545 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$545 ($dff) from module qca_qck_gating.
+
+5.49. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+5.50. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+5.51. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.52. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~21 debug messages>
+
+5.53. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+5.54. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+5.55. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 1 on $procdff$490 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$490 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$490 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$490 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$490 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$490 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$490 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$498 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$498 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$498 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$498 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$498 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$498 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$498 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$506 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$506 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$506 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$506 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$506 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$506 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$506 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$514 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$514 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$514 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$514 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$514 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$514 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$514 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$522 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$522 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$522 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$522 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$522 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$522 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$522 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$530 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$530 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$530 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$530 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$530 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$530 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$530 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$538 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$538 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$538 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$538 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$538 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$538 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$538 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 1 on $procdff$546 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 2 on $procdff$546 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 3 on $procdff$546 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 4 on $procdff$546 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 5 on $procdff$546 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 6 on $procdff$546 ($dff) from module qca_qck_gating.
+Setting constant 0-bit at position 7 on $procdff$546 ($dff) from module qca_qck_gating.
+
+5.56. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+5.57. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+5.58. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.59. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~21 debug messages>
+
+5.60. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+5.61. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+5.62. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.63. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+5.64. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+5.65. Finished OPT passes. (There is nothing left to do.)
+
+6. Executing FSM pass (extract and optimize FSM).
+
+6.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+6.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+6.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+6.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+6.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+6.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+6.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+6.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+7. Executing OPT pass (performing simple optimizations).
+
+7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~21 debug messages>
+
+7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+7.9. Finished OPT passes. (There is nothing left to do.)
+
+8. Executing MEMORY pass.
+
+8.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+8.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+8.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+8.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+8.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+8.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+8.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+8.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+8.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+8.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+9. Executing OPT pass (performing simple optimizations).
+
+9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~21 debug messages>
+
+9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+9.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+9.9. Finished OPT passes. (There is nothing left to do.)
+
+10. Executing TECHMAP pass (map to technology primitives).
+
+10.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+10.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$aa21a8cfcdb2d038c61c16c25c37cdf209d597be\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $logic_and.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=8:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=8:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=8:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=8:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=8:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=8:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod$2bd81f420048247ff6903399c560fe0f8bd48ccc\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using template $paramod$91f82ead1edc61e0a1452110f15ef747116b421b\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~1437 debug messages>
+
+11. Executing OPT pass (performing simple optimizations).
+
+11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+<suppressed ~1256 debug messages>
+
+11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+<suppressed ~582 debug messages>
+Removed a total of 194 cells.
+
+11.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+11.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+11.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+11.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+Removed 44 unused cells and 918 unused wires.
+<suppressed ~45 debug messages>
+
+11.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+11.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+11.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+11.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+11.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+11.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+11.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+11.16. Finished OPT passes. (There is nothing left to do.)
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+<suppressed ~46 debug messages>
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_SHARE pass.
+    Found cells that share an operand and can be merged by moving the $_MUX_ $auto$simplemap.cc:267:simplemap_mux$766 in front of them:
+        $auto$simplemap.cc:75:simplemap_bitop$2020
+        $auto$simplemap.cc:75:simplemap_bitop$1818
+
+12.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+Removed 7 unused cells and 15 unused wires.
+<suppressed ~8 debug messages>
+
+12.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+<suppressed ~17 debug messages>
+
+12.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \qca_qck_gating..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~1 debug messages>
+
+12.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \qca_qck_gating.
+Performed a total of 0 changes.
+
+12.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\qca_qck_gating'.
+Removed a total of 0 cells.
+
+12.14. Executing OPT_SHARE pass.
+
+12.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \qca_qck_gating..
+
+12.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module qca_qck_gating.
+
+12.18. Finished OPT passes. (There is nothing left to do.)
+
+13. Executing Verilog backend.
+Dumping module `\qca_qck_gating'.
+
+14. Executing JSON backend.
+
+15. Printing statistics.
+
+=== qca_qck_gating ===
+
+   Number of wires:                273
+   Number of wire bits:           1359
+   Number of public wires:          97
+   Number of public wire bits:     647
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                540
+     $_AND_                        180
+     $_DFFE_PN0P_                   32
+     $_DFF_PN0_                      3
+     $_DFF_P_                       64
+     $_MUX_                         37
+     $_NOT_                         54
+     $_OR_                         126
+     $_XOR_                         43
+     $mux                            1
+
+Warnings: 5 unique messages, 5 total
+End of script. Logfile hash: ee874dca8e, CPU: user 0.71s system 0.02s, MEM: 21.47 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 30% 25x opt_expr (0 sec), 14% 22x opt_merge (0 sec), ...

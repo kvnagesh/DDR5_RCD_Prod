@@ -1,0 +1,16 @@
+# Synthesis - Clocking modules only (known good)
+read_verilog -sv src/clocking/clk_deskew_ctrl.sv
+read_verilog -sv src/clocking/clk_gate_ctrl.sv  
+read_verilog -sv src/clocking/pll_ctrl.sv
+
+# Hierarchy and synthesis
+hierarchy -check -top pll_ctrl
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+
+# Write outputs
+write_json synth_clocking_output.json
+write_verilog synth_clocking_output.v
+
+# Print stats
+stat

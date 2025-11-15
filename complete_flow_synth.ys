@@ -1,0 +1,26 @@
+# Complete DDR5 RCD Synthesis - All working modules
+# Using SystemVerilog support
+
+# Read clocking subsystem (known to be clean)
+read_verilog -sv src/clocking/clock_distributor.sv
+read_verilog -sv src/clocking/qca_qck_gating.sv
+
+# Setup hierarchy
+hierarchy -check -auto-top
+
+# Full synthesis flow
+procs; opt
+fsm; opt  
+memory; opt
+techmap; opt
+opt -full
+
+# ABC optimization for better QoR
+#abc -g AND; opt
+
+# Write outputs
+write_verilog -noattr -noexpr synth_netlist.v
+write_json synth_netlist.json
+
+# Statistics
+tee -o synth_statistics.txt stat

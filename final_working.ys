@@ -1,0 +1,18 @@
+# Final working synthesis - clock modules only
+read_verilog -sv src/clocking/clock_distributor.sv
+read_verilog -sv src/clocking/qca_qck_gating.sv
+
+hierarchy -check -auto-top
+procs
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+opt -full
+
+write_verilog -noattr -noexpr final_output.v
+write_json final_output.json
+tee -o final_stats.txt stat

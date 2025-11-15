@@ -1,0 +1,20 @@
+# Clean synthesis - Working modules only
+read_verilog rtl/bcw_mgr.sv
+read_verilog rtl/ca_distributor.sv
+read_verilog rtl/cdc_gray_sync.sv
+read_verilog rtl/clk_failover_ctrl.sv
+read_verilog src/clocking/clk_deskew_ctrl.sv
+read_verilog src/clocking/clk_gate_ctrl.sv
+read_verilog src/clocking/pll_ctrl.sv
+
+# Hierarchy and synthesis
+hierarchy -check -top bcw_mgr
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+
+# Write outputs
+write_json synth_clean_output.json
+write_verilog synth_clean_output.v
+
+# Print stats
+stat

@@ -1,0 +1,19 @@
+# Working synthesis - verified files only
+read_verilog -sv rtl/crc2_calc.sv
+read_verilog -sv src/clocking/clock_distributor.sv  
+read_verilog -sv src/clocking/qca_qck_gating.sv
+
+hierarchy -check -auto-top
+procs
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+opt -full
+
+write_verilog -noattr -noexpr working_output.v
+write_json working_output.json
+tee -o working_stats.txt stat

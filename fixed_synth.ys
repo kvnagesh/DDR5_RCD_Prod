@@ -1,0 +1,23 @@
+# Synthesis using parameter-expanded files
+read_verilog -sv -I src/clocking src/clocking/clock_distributor_fixed.sv
+read_verilog -sv -I src/clocking src/clocking/qca_qck_gating_fixed.sv
+
+# Setup hierarchy
+hierarchy -check -auto-top
+
+# Full synthesis flow
+procs; opt
+fsm; opt
+memory; opt
+techmap; opt
+opt -full
+
+# ABC optimization
+#abc -g AND; opt
+
+# Write outputs
+write_verilog -noattr -noexpr synth_netlist.v
+write_json synth_netlist.json
+
+# Statistics
+tee -o synth_statistics.txt stat

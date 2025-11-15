@@ -1,0 +1,24 @@
+# Final synthesis with parameter-expanded AND flattened files
+read_verilog -sv -I src/clocking src/clocking/clock_distributor_flat.sv
+read_verilog -sv -I src/clocking src/clocking/qca_qck_gating_flat.sv
+
+# Setup hierarchy
+hierarchy -check -auto-top
+
+# Full synthesis flow
+proc
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+opt -full
+
+# Write outputs
+write_verilog -noattr -noexpr synth_netlist.v
+write_json synth_netlist.json
+
+# Statistics
+tee -o synth_statistics.txt stat

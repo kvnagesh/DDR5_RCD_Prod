@@ -1,0 +1,19 @@
+# Minimal synthesis - only simple working modules
+read_verilog -sv rtl/crc3_calc.sv
+read_verilog -sv src/clocking/clk_distributor.sv
+read_verilog -sv src/clocking/qca_qck_gating.sv
+
+hierarchy -check -auto-top
+procs
+opt
+fsm
+opt
+memory
+opt  
+techmap
+opt
+opt -full
+
+write_verilog -noattr -noexpr minimal_output.v
+write_json minimal_output.json
+tee -o minimal_stats.txt stat

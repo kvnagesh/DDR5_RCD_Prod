@@ -1,0 +1,23 @@
+
+15. Printing statistics.
+
+=== qca_qck_gating ===
+
+   Number of wires:                273
+   Number of wire bits:           1359
+   Number of public wires:          97
+   Number of public wire bits:     647
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                540
+     $_AND_                        180
+     $_DFFE_PN0P_                   32
+     $_DFF_PN0_                      3
+     $_DFF_P_                       64
+     $_MUX_                         37
+     $_NOT_                         54
+     $_OR_                         126
+     $_XOR_                         43
+     $mux                            1
+

@@ -1,0 +1,127 @@
+%Warning-MULTITOP: src/clocking/qca_qck_gating.sv:12:8: Multiple top level modules
+                                                      : ... Suggest see manual; fix the duplicates, or use --top-module to select top.
+                   ... For warning description see https://verilator.org/warn/MULTITOP?v=5.020
+                   ... Use "/* verilator lint_off MULTITOP */" and lint_on around source to disable this message.
+                                                      : ... Top module 'clock_distributor'
+    5 | module clock_distributor #(
+      |        ^~~~~~~~~~~~~~~~~
+                                                      : ... Top module 'qca_qck_gating'
+   12 | module qca_qck_gating #(
+      |        ^~~~~~~~~~~~~~
+%Warning-VARHIDDEN: src/clocking/qca_qck_gating.sv:179:14: Declaration of signal hides declaration in upper scope: 'i'
+  179 |     for (int i = 0; i < NUM_CA_LANES; i++) begin
+      |              ^
+                    src/clocking/qca_qck_gating.sv:94:8: ... Location of original declaration
+   94 | genvar i;
+      |        ^
+%Warning-VARHIDDEN: src/clocking/qca_qck_gating.sv:200:14: Declaration of signal hides declaration in upper scope: 'i'
+  200 |     for (int i = 0; i < NUM_CA_LANES; i++) begin
+      |              ^
+                    src/clocking/qca_qck_gating.sv:94:8: ... Location of original declaration
+   94 | genvar i;
+      |        ^
+%Warning-WIDTHEXPAND: src/clocking/qca_qck_gating.sv:173:24: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's VARREF 'qck_gate' generates 1 bits.
+                                                           : ... note: In instance 'qca_qck_gating'
+  173 |     delay_chain_qck[0] <= qck_gate;
+      |                        ^~
+%Warning-WIDTHEXPAND: src/clocking/qca_qck_gating.sv:180:31: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's SEL generates 1 bits.
+                                                           : ... note: In instance 'qca_qck_gating'
+  180 |         delay_chain_qca[i][0] <= qca_gate[i];
+      |                               ^~
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:190:29: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  190 |         3'b000: qck_delayed = delay_chain_qck[0];
+      |                             ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:191:29: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  191 |         3'b001: qck_delayed = delay_chain_qck[1];
+      |                             ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:192:29: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  192 |         3'b010: qck_delayed = delay_chain_qck[2];
+      |                             ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:193:29: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  193 |         3'b011: qck_delayed = delay_chain_qck[3];
+      |                             ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:194:29: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  194 |         3'b100: qck_delayed = delay_chain_qck[4];
+      |                             ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:195:29: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  195 |         3'b101: qck_delayed = delay_chain_qck[5];
+      |                             ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:196:29: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  196 |         3'b110: qck_delayed = delay_chain_qck[6];
+      |                             ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:197:29: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  197 |         3'b111: qck_delayed = delay_chain_qck[7];
+      |                             ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:202:36: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  202 |             3'b000: qca_delayed[i] = delay_chain_qca[i][0];
+      |                                    ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:203:36: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  203 |             3'b001: qca_delayed[i] = delay_chain_qca[i][1];
+      |                                    ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:204:36: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  204 |             3'b010: qca_delayed[i] = delay_chain_qca[i][2];
+      |                                    ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:205:36: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  205 |             3'b011: qca_delayed[i] = delay_chain_qca[i][3];
+      |                                    ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:206:36: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  206 |             3'b100: qca_delayed[i] = delay_chain_qca[i][4];
+      |                                    ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:207:36: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  207 |             3'b101: qca_delayed[i] = delay_chain_qca[i][5];
+      |                                    ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:208:36: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  208 |             3'b110: qca_delayed[i] = delay_chain_qca[i][6];
+      |                                    ^
+%Warning-WIDTHTRUNC: src/clocking/qca_qck_gating.sv:209:36: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 8 bits.
+                                                          : ... note: In instance 'qca_qck_gating'
+  209 |             3'b111: qca_delayed[i] = delay_chain_qca[i][7];
+      |                                    ^
+%Warning-WIDTHEXPAND: src/clocking/clock_distributor.sv:102:35: Operator GT expects 32 bits on the LHS, but LHS's VARREF 'jitter_count' generates 16 bits.
+                                                              : ... note: In instance 'clock_distributor'
+  102 |     jitter_alarm <= (jitter_count > JITTER_THRESHOLD);
+      |                                   ^
+%Warning-UNUSEDPARAM: src/clocking/clock_distributor.sv:6:17: Parameter is not used: 'NUM_CLOCK_DOMAINS'
+                                                            : ... note: In instance 'clock_distributor'
+    6 |   parameter int NUM_CLOCK_DOMAINS = 4,
+      |                 ^~~~~~~~~~~~~~~~~
+%Warning-UNUSEDSIGNAL: src/clocking/clock_distributor.sv:44:7: Signal is not driven, nor used: 'duty_measured'
+                                                             : ... note: In instance 'clock_distributor'
+   44 | logic duty_measured;
+      |       ^~~~~~~~~~~~~
+%Warning-UNUSEDPARAM: src/clocking/qca_qck_gating.sv:14:19: Parameter is not used: 'PHASE_RESOLUTION'
+                                                          : ... note: In instance 'qca_qck_gating'
+   14 |     parameter int PHASE_RESOLUTION = 128, 
+      |                   ^~~~~~~~~~~~~~~~
+%Warning-UNUSEDSIGNAL: src/clocking/qca_qck_gating.sv:27:37: Bits of signal are not used: 'bcw_qck_enable'[7:1]
+                                                           : ... note: In instance 'qca_qck_gating'
+   27 |     input  logic [7:0]              bcw_qck_enable,
+      |                                     ^~~~~~~~~~~~~~
+%Warning-UNUSEDSIGNAL: src/clocking/qca_qck_gating.sv:28:37: Bits of signal are not used: 'bcw_qca_enable'[7]
+                                                           : ... note: In instance 'qca_qck_gating'
+   28 |     input  logic [7:0]              bcw_qca_enable,
+      |                                     ^~~~~~~~~~~~~~
+%Warning-UNUSEDSIGNAL: src/clocking/qca_qck_gating.sv:29:37: Signal is not used: 'bcw_gate_mode'
+                                                           : ... note: In instance 'qca_qck_gating'
+   29 |     input  logic [7:0]              bcw_gate_mode,
+      |                                     ^~~~~~~~~~~~~
+%Warning-UNUSEDSIGNAL: src/clocking/qca_qck_gating.sv:30:37: Signal is not used: 'bcw_cal_mode'
+                                                           : ... note: In instance 'qca_qck_gating'
+   30 |     input  logic [7:0]              bcw_cal_mode,
+      |                                     ^~~~~~~~~~~~
+%Error: Exiting due to 29 warning(s)

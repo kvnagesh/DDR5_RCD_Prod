@@ -1,0 +1,18 @@
+# Simple synthesis using Yosys with proper SystemVerilog support
+read_verilog -sv -I src/clocking src/clocking/clock_distributor.sv
+read_verilog -sv -I src/clocking src/clocking/qca_qck_gating.sv
+
+# Hierarchy check
+hierarchy -check -auto-top
+
+# Basic synthesis
+procs; opt
+fsm; opt
+memory; opt
+techmap; opt
+
+# Write outputs
+write_verilog -noattr -noexpr synth_simple.v
+write_json synth_simple.json
+
+stat

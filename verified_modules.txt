@@ -1,0 +1,8 @@
+rtl/ca_distributor.sv
+rtl/ca_field_compare_fh.sv
+rtl/cdc_gray_sync.sv
+rtl/clk_failover_ctrl.sv
+rtl/cmd_latency_ctrl.sv
+rtl/crc3_calc.sv
+src/clocking/clk_distributor.sv
+src/clocking/qca_qck_gating.sv

@@ -1,0 +1,3 @@
+ERROR: Command syntax error: Unexpected argument.
+> echo "Reading RTL files with SystemVerilog support..."
+>      ^
