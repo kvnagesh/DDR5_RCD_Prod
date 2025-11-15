@@ -54,7 +54,7 @@ module error_inject_ctrl #(
   localparam ERR_CNT_REG = 7'h18;        // Error count register
   
   // Error injection payload generation
-  always @(*) begin
+  always_comb begin
     case (inject_type)
       4'h0: begin // ECC Single-bit error (Hamming code)
         error_payload = {ERROR_WIDTH-1{1'b0}};
@@ -137,7 +137,7 @@ module error_inject_ctrl #(
   end
   
   // Configuration read logic
-  always @(*) begin
+  always_comb begin
     case (cfg_addr[6:2])
       5'h00: cfg_rd_data = {31'h0, inject_enable}; // Control
       5'h01: cfg_rd_data = {28'h0, inject_type};   // Error type

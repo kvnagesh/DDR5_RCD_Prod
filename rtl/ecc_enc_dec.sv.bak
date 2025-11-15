@@ -113,7 +113,7 @@ module ecc_enc_dec #(
   logic [DWIDTH-1:0] corrected_data;
   
   // ECC Encoding
-  always @(*) begin
+  always_comb begin
     if (ECC_MODE == "ENCODE" || ECC_MODE == "BOTH") begin
       ecc_calculated = calc_secded_ecc(data_in);
       ecc_out = ecc_calculated;
@@ -123,7 +123,7 @@ module ecc_enc_dec #(
   end
   
   // ECC Decoding & Error Correction
-  always @(*) begin
+  always_comb begin
     syndrome = calc_secded_syndrome(data_recv, ecc_recv);
     error_position = syndrome[7:0];
     

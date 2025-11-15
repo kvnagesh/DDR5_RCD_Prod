@@ -72,7 +72,7 @@ module pll_init_lock #(
         end
     end
 
-    always @(*) begin
+    always_comb begin
         state_next = state;
         case (state)
             S_IDLE: begin

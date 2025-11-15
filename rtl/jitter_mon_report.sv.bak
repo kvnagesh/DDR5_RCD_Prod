@@ -204,7 +204,7 @@ module jitter_mon_report #(
   //============================================================================
   // Window Size Calculation
   //============================================================================
-  always @(*) begin
+  always_comb begin
     window_size = 1 << cfg_window; // 2^cfg_window
   end
 
@@ -256,7 +256,7 @@ module jitter_mon_report #(
   //============================================================================
   // Average Calculation
   //============================================================================
-  always @(*) begin
+  always_comb begin
     if (sample_count_reg > 0) begin
       jitter_avg_calc = jitter_sum / sample_count_reg;
     end else begin

@@ -143,7 +143,7 @@ module ecc_err_type_ctrl #(
   end
   
   // Error correction logic
-  always @(*) begin
+  always_comb begin
     data_corrected = data_reg;
     correction_done = 1'b0;
     
@@ -161,7 +161,7 @@ module ecc_err_type_ctrl #(
   end
   
   // Error severity assignment
-  always @(*) begin
+  always_comb begin
     case ({error_detected, is_correctable, is_uncorrectable})
       3'b000: error_severity = 3'h0; // No error
       3'b110: begin                   // Correctable error

@@ -92,7 +92,7 @@ module crc5_calc #(
   // ===================================================================
   logic [4:0] crc_calc;
   
-  always @(*) begin
+  always_comb begin
     // Calculate CRC based on data width and mode
     if (DWIDTH == 8) begin
       crc_calc = calc_crc5_8bit(data_in[7:0], '0);
@@ -108,7 +108,7 @@ module crc5_calc #(
   // ===================================================================
   // CRC Verification
   // ===================================================================
-  always @(*) begin
+  always_comb begin
     crc_match = (crc_calc == crc_expected);
   end
   
@@ -159,7 +159,7 @@ module crc5_serial #(
 
   logic [4:0] crc_reg, crc_next;
   
-  always @(*) begin
+  always_comb begin
     crc_next = crc_reg;
     
     // Galois LFSR implementation for CRC-5

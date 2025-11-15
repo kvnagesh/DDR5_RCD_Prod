@@ -128,7 +128,7 @@ module i3c_timing_arbitration #(
     end
     // --- Arbitration Logic (priority-based, multi-master) ---
     // Simple example: grant to requesting master with lowest arb_priority vector, break ties using m_nack
-    always @(*) begin
+    always_comb begin
         arbitration_lost   = 0;
         gain_bus          = '0;
         arbitration_status = 0;
@@ -154,7 +154,7 @@ module i3c_timing_arbitration #(
         end
     end
     // --- Violation Debug Capture ---
-    always @(*) begin
+    always_comb begin
         violation_capture = {28'd0, timing_fault};
     end
 endmodule

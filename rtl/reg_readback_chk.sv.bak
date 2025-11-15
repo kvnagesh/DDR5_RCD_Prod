@@ -205,7 +205,7 @@ module reg_readback_chk #(
   // =========================================================================
   
   // Aggregate error flags
-  always @(*) begin
+  always_comb begin
     error_detected = |reg_error_flag;
     alert_critical = error_detected && (stuck_at_error || bit_flip_error);
     alert_warning = error_detected && ~alert_critical;

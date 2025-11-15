@@ -84,7 +84,7 @@ module bcw_mgr #(
     end
 
     // Next state logic
-    always @(*) begin
+    always_comb begin
         state_next = state;
         case (state)
             IDLE: begin

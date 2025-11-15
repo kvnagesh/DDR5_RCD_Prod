@@ -41,7 +41,7 @@ module clock_distributor #(
 
   // Select source clock
   logic clk_sel;
-  always @(*) begin
+  always_comb begin
     unique case (sel_src_i)
       0: clk_sel = clk_ref;
       1: clk_sel = clk_div2;

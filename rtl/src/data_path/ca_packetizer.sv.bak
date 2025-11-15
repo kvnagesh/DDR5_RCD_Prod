@@ -82,7 +82,7 @@ module ca_packetizer #(
   assign mapped = map_fields(addr_cmd_i);
 
   // Build 40-bit with ECC in upper bits
-  always @(*) begin
+  always_comb begin
     beat_data = '0;
     beat_data[31:0]  = mapped;
     beat_data[39:32] = INCLUDE_ECC ? ecc8(mapped) : 8'h00;
@@ -91,7 +91,7 @@ module ca_packetizer #(
   // FSM Controls
   assign take = in_valid_i & in_ready_o;
 
-  always @(*) begin
+  always_comb begin
     state_d     = state_q;
     in_ready_o  = 1'b0;
     out_valid_d = 1'b0;

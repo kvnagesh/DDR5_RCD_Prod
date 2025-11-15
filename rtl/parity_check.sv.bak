@@ -52,7 +52,7 @@ module parity_check #(
       
       // Calculate XOR of all data bits
       logic calc_parity;
-      always @(*) begin
+      always_comb begin
         calc_parity = 1'b0;
         for (j = 0; j < DWIDTH; j = j + 1) begin
           calc_parity = calc_parity ^ bus_in[i][j];
@@ -62,7 +62,7 @@ module parity_check #(
       assign parity_calc[i] = calc_parity;
       
       // Determine parity error based on EVEN/ODD configuration
-      always @(*) begin
+      always_comb begin
         if (cfg_parity_type == 1'b0) begin
           // EVEN parity: calc_parity ^ received_parity should be 0
           parity_check_result[i] = parity_calc[i] ^ parity_received[i];
@@ -79,7 +79,7 @@ module parity_check #(
   // ===================================================================
   // Combined Error Signals
   // ===================================================================
-  always @(*) begin
+  always_comb begin
     parity_err_vector = parity_check_result;
     any_parity_err = |parity_check_result;
   end
@@ -87,7 +87,7 @@ module parity_check #(
   // ===================================================================
   // First Error Priority Encoder
   // ===================================================================
-  always @(*) begin
+  always_comb begin
     error_bus_id = 8'h00;
     for (int k = 0; k < NUM_BUSES; k = k + 1) begin
       if (parity_check_result[k]) begin
@@ -136,7 +136,7 @@ module parity_gen #(
 
   logic calc_parity;
   
-  always @(*) begin
+  always_comb begin
     calc_parity = ^data_in; // Calculate parity
     
     if (PARITY_TYPE == "EVEN") begin
@@ -177,7 +177,7 @@ module parity_monitor #(
     for (m = 0; m < NUM_MONITORS; m = m + 1) begin : gen_monitor
       logic parity_calc, parity_recv;
       
-      always @(*) begin
+      always_comb begin
         parity_recv = bus_data[m][DWIDTH];
         parity_calc = ^bus_data[m][DWIDTH-1:0];
         

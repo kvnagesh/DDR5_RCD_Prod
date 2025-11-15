@@ -141,7 +141,7 @@ module qca_gate #(
     end
 
     // Read from buffer
-    always @(*) begin
+    always_comb begin
         if (!buffer_empty_int) begin
             masked_cmd = buffer_data[rd_ptr];
         end else begin
@@ -152,7 +152,7 @@ module qca_gate #(
     // ====== GATING LOGIC ======
 
     // Apply gating mask to command
-    always @(*) begin
+    always_comb begin
         // Check if any masked bit is set (command is blocked)
         cmd_gated = |(qca_cmd_in & gating_mask);
     end
@@ -201,7 +201,7 @@ module qca_gate #(
     // ====== OUTPUT ASSIGNMENT ======
 
     // Output from final pipeline stage
-    always @(*) begin
+    always_comb begin
         if (active_gating_depth == '0) begin
             // Bypass mode: direct from buffer
             qca_cmd_out   = masked_cmd;
@@ -218,7 +218,7 @@ module qca_gate #(
     assign ca_valid = qca_valid_out && gating_enable;
 
     // Pipeline ready control
-    always @(*) begin
+    always_comb begin
         if (active_gating_depth == '0) begin
             // Bypass mode
             qca_ready_out = ca_ready && !cmd_gated && gating_enable;

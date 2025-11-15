@@ -129,7 +129,7 @@ module shadow_reg_sync #(
     assign update_err = 1'b0; // Can extend for error signaling
 
     // Export for config logic
-    always @(*) begin
+    always_comb begin
         foreach (rd_data[i]) rd_data[i] = active_reg_cfg[i];
     end
 

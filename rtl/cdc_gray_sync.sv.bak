@@ -40,7 +40,7 @@ module cdc_gray_sync #(
     
     // Optional handshake signals
     output logic                 src_ack,     
-    input  logic                 dst_req)  //  Request from source (for handshake
+    input  logic                 dst_req      // Request from source (for handshake)
 );
 
     // Gray code intermediate signals

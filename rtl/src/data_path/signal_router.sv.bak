@@ -51,7 +51,7 @@ module signal_router #(
   end
 
   // Simple handshake routing: backpressure only to selected input
-  always @(*) begin
+  always_comb begin
     in_ready_o  = '0;
   end
 

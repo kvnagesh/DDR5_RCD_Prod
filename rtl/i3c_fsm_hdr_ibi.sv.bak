@@ -98,7 +98,7 @@ always_ff @(posedge clk or negedge rst_n) begin
 end
 
 // Next State Logic
-always @(*) begin
+always_comb begin
     next_state = state;
     proto_error = 1'b0;
     case(state)

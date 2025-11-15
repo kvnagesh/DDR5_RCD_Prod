@@ -105,7 +105,7 @@ module ca_distributor #(
 //=============================================================================
 // Field Decoding: Fully Parameterized Mapping (Future-Proofed)
 //=============================================================================
-  always_comb begin
+  always @(*) begin
     bank      = ca_pipe[PIPELINE_DEPTH][CA_WIDTH-1 -: BANK_BITS];
     rank      = ca_pipe[PIPELINE_DEPTH][CA_WIDTH-1-BANK_BITS -: RANK_BITS];
     row       = ca_pipe[PIPELINE_DEPTH][CA_WIDTH-1-BANK_BITS-RANK_BITS -: ROW_BITS];
@@ -116,7 +116,7 @@ module ca_distributor #(
 //=============================================================================
 // Routing: Bus/Port Distribution Logic (Seamless Integration)
 //=============================================================================
-  always_comb begin
+  always @(*) begin
     subchannel_enable = '0;
     routing_valid     = ca_valid_pipe[PIPELINE_DEPTH] && enable;
     case (routing_mode)
@@ -153,7 +153,7 @@ module ca_distributor #(
       assign output_ready[sc] = ca_ready_in[sc] || !ca_valid_out[sc];
     end
   endgenerate
-  always_comb begin
+  always @(*) begin
     internal_ready = 1'b1;
     for (int i = 0; i < NUM_SUBCHANNELS; i++) begin
       if (subchannel_enable[i])

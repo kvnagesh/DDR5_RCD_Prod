@@ -100,7 +100,7 @@ module register_map #(
   end
   //-----------------------
   // Combinational logic for Read Data
-  always @(*) begin
+  always_comb begin
     rd_data_next = register_file[reg_addr];
     case (reg_addr)
       REG_STATUS:   rd_data_next = {status_flags, 4'h0};
@@ -118,7 +118,7 @@ module register_map #(
   end
   //-----------------------
   // Ack/Error
-  always @(*) begin
+  always_comb begin
     ack_o = 1'b0;
     if      ((reg_rd_req | reg_wr_req) & ~valid_addr)         ack_o = 1'b0;
     else if (simultaneous_access & (reg_addr == addr_curr))   ack_o = 1'b0;
@@ -128,7 +128,7 @@ module register_map #(
     else if ((reg_rd_req | reg_wr_req) & valid_addr & ~hazard_detected) ack_o = 1'b1;
   end
 
-  always @(*) begin
+  always_comb begin
     err_o = 1'b0;
     if      (~valid_addr)                err_o = 1'b1;
     else if (simultaneous_access)        err_o = 1'b1;
@@ -136,7 +136,7 @@ module register_map #(
     else if (reg_wr_req & (reg_addr == REG_STATUS)) err_o = 1'b1;
   end
   //-----------------------
-  always @(*) begin
+  always_comb begin
     addr_next   = addr_curr;
     rd_req_next = rd_req_curr;
     wr_req_next = wr_req_curr;
@@ -152,7 +152,7 @@ module register_map #(
   end
   //-----------------------
   // Expanded Bit/Bus Mapping for Full-Width Support
-  always @(*) begin
+  always_comb begin
     ctrl_enable    = register_file[REG_CTRL][0];
     interrupt_mask = register_file[REG_INT_MASK][0];
     mode_config    = register_file[REG_MODE][DATA_WIDTH-1:0];
@@ -166,7 +166,7 @@ module register_map #(
     cmd_bus_o       = register_file[REG_CMD][CMD_WIDTH-1:0]; // full command field mapping
   end
   //-----------------------
-  always @(*) begin
+  always_comb begin
     wb_valid = 1'b0;
     wb_addr  = '0;
     wb_data  = '0;

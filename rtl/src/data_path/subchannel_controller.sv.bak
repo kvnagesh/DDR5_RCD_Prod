@@ -199,7 +199,7 @@ module subchannel_controller #(
   sc_bus_t sc[2];
 
   // Map inputs
-  always @(*) begin
+  always_comb begin
     sc[0].data_i  = sc0_data_i;
     sc[0].valid_i = sc0_valid_i;
     sc[0].ready_i = sc0_ready_i;

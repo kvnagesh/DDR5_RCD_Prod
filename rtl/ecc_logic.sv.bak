@@ -67,7 +67,7 @@ module ecc_logic
 
   // Compute parity bits p[6:0]
   logic [6:0] p_ham;
-  always @(*) begin
+  always_comb begin
     p_ham[0] = parity_reduce(data_in, P_MASK[0]);
     p_ham[1] = parity_reduce(data_in, P_MASK[1]);
     p_ham[2] = parity_reduce(data_in, P_MASK[2]);
@@ -79,7 +79,7 @@ module ecc_logic
 
   // Overall parity over data and Hamming bits
   logic p_overall;
-  always @(*) begin
+  always_comb begin
     p_overall = ^{data_in, p_ham};
   end
 
@@ -118,7 +118,7 @@ module ecc_logic
 
   // Recompute parity from received data
   logic [6:0] p_ham_dec;
-  always @(*) begin
+  always_comb begin
     p_ham_dec[0] = parity_reduce(data_in_dec, P_MASK[0]);
     p_ham_dec[1] = parity_reduce(data_in_dec, P_MASK[1]);
     p_ham_dec[2] = parity_reduce(data_in_dec, P_MASK[2]);
@@ -129,7 +129,7 @@ module ecc_logic
   end
 
   logic p_overall_dec;
-  always @(*) begin
+  always_comb begin
     p_overall_dec = ^{data_in_dec, p_ham_dec};
   end
 
@@ -168,7 +168,7 @@ module ecc_logic
   logic [DATA_WIDTH-1:0] corrected_data;
   logic                  se_flag, de_flag;
 
-  always @(*) begin
+  always_comb begin
     corrected_data = data_in_dec;
     se_flag = 1'b0;
     de_flag = 1'b0;
